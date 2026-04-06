@@ -1,3 +1,4 @@
+import ShaderBackground from "./ShaderBackground";
 import { useState, useEffect } from "react";
 
 const C = {
@@ -283,7 +284,7 @@ export default function App(){
   const T={apis:APIS.length,tools:APIS.reduce((s,a)=>s+a.ep,0),calls:APIS.reduce((s,a)=>s+a.c,0),rev:APIS.reduce((s,a)=>s+a.r,0)};
 
   return <div style={{minHeight:"100vh",background:C.bg,color:C.t,fontFamily:F,position:"relative",overflow:"hidden"}}>
-    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/><ShaderBackground height="500px" opacity={0.5} />
     <div style={{position:"absolute",width:600,height:600,borderRadius:"50%",background:`radial-gradient(circle,${C.ac} 0%,transparent 70%)`,opacity:0.025,top:-250,left:-150,pointerEvents:"none",filter:"blur(80px)"}}/>
 
     {/* Header */}
