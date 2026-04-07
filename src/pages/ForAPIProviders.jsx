@@ -5,7 +5,7 @@ export default function ForAPIProviders() {
     <AudienceTemplate
       seo={{
         title: 'List Your API, Keep 97% — PayAPI Market for Providers',
-        description: 'Monetize your API on the agent economy. Get paid per request in USDC, no API keys, no contracts. Free to list. Keep 97% of every dollar.',
+        description: 'Monetise your API on the agent economy. Get paid per request in USDC, no API keys, no contracts. Free to list. Keep 97% of every dollar.',
         path: '/for/api-providers',
       }}
       eyebrow="For API Providers"

@@ -1,6 +1,6 @@
 ## AI agent economics in 2026
 
-**AI agent economics in 2026 looks like a small but fast-growing economy in which autonomous software earns, holds and spends stablecoins to call APIs, run compute, and pay other agents.** A typical agent today operates from a wallet funded by its owner or by upstream agent payments, makes hundreds to millions of API calls per task using per-request stablecoin payments (predominantly USDC on Base), and pays fractions of a cent per request. The shift away from monthly subscriptions toward per-call payments is the single largest change in API monetization since the introduction of OAuth.
+**AI agent economics in 2026 looks like a small but fast-growing economy in which autonomous software earns, holds and spends stablecoins to call APIs, run compute, and pay other agents.** A typical agent today operates from a wallet funded by its owner or by upstream agent payments, makes hundreds to millions of API calls per task using per-request stablecoin payments (predominantly USDC on Base), and pays fractions of a cent per request. The shift away from monthly subscriptions toward per-call payments is the single largest change in API monetisation since the introduction of OAuth.
 
 ## Where agents get money
 

@@ -21,7 +21,7 @@ export default function ForDevelopers() {
       sections={[
         {
           title: 'Why this matters now',
-          body: `For 20 years the only way to monetize your domain expertise was: build a SaaS, get customers, support customers. The agent economy collapses that loop. You wrap your knowledge in an API, list it once, and every AI agent on the network is a potential customer — without you ever talking to them.\n\nPayAPI Market is the distribution layer. We handle discovery (MCP), payments (x402), and analytics. You handle what you're good at: shipping the API.`,
+          body: `For 20 years the only way to monetise your domain expertise was: build a SaaS, get customers, support customers. The agent economy collapses that loop. You wrap your knowledge in an API, list it once, and every AI agent on the network is a potential customer — without you ever talking to them.\n\nPayAPI Market is the distribution layer. We handle discovery (MCP), payments (x402), and analytics. You handle what you're good at: shipping the API.`,
         },
         {
           title: 'Things that work well as paid APIs',

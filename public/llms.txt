@@ -12,7 +12,7 @@ PayAPI Market is a curated marketplace of paid APIs designed for AI agents. Ever
 - Featured tier: $49/mo, 2.5% fee, 97.5% kept
 
 ## Who it's for
-- API providers monetizing for the agent economy
+- API providers monetising for the agent economy
 - AI agents (Claude Desktop, Cursor, custom agents) that need real-time data
 - Developers turning expertise into passive USDC revenue
 

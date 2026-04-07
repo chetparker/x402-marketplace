@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { C, F, M } from '../theme';
 
 export default function EmailCapture({
-  headline = 'Get the API Monetization Playbook',
+  headline = 'Get the API Monetisation Playbook',
   subhead = 'How to list, price and earn from your API on the agent economy. One email a week. No spam.',
   source = 'inline',
   compact = false,

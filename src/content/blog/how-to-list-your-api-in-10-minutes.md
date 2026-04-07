@@ -15,7 +15,7 @@ PayAPI Market maintains a starter template that wraps any HTTP API in an MCP ser
 
 ## Step 2 — Add your endpoints
 
-Edit the `endpoints.json` file to list each endpoint you want to monetize. For each one, set:
+Edit the `endpoints.json` file to list each endpoint you want to monetise. For each one, set:
 
 - The path on your existing API
 - A short description (used by agents to discover the tool)

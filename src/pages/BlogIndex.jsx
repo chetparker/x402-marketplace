@@ -16,7 +16,7 @@ export default function BlogIndex() {
             x402, MCP & the agent economy
           </h1>
           <p style={{ margin: '0 0 40px', fontSize: 17, color: C.tM, lineHeight: 1.55 }}>
-            Guides, tutorials and analysis on building, listing and monetizing APIs for AI agents.
+            Guides, tutorials and analysis on building, listing and monetising APIs for AI agents.
           </p>
 
           <div style={{ display: 'grid', gap: 16 }}>

@@ -86,7 +86,7 @@ export default function AboutPage() {
           PayAPI Market is what the rails should look like: open, low-fee, agent-native.
         </P>
         <P>
-          If you've built an MCP server or run an API and want to monetize it for AI agents — this is the
+          If you've built an MCP server or run an API and want to monetise it for AI agents — this is the
           fastest way to start.
         </P>
 
