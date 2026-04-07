@@ -1,12 +1,37 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HelmetProvider } from 'react-helmet-async'
 import App from './App.jsx'
+import AboutPage from './pages/AboutPage.jsx'
+import PricingPage from './pages/PricingPage.jsx'
+import CalculatorPage from './pages/CalculatorPage.jsx'
+import BlogIndex from './pages/BlogIndex.jsx'
+import BlogPost from './pages/BlogPost.jsx'
+import ForAPIProviders from './pages/ForAPIProviders.jsx'
+import ForAIAgents from './pages/ForAIAgents.jsx'
+import ForDevelopers from './pages/ForDevelopers.jsx'
 
 document.body.style.margin = '0'
 document.body.style.padding = '0'
+document.body.style.background = '#06080D'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/calculator" element={<CalculatorPage />} />
+          <Route path="/blog" element={<BlogIndex />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/for/api-providers" element={<ForAPIProviders />} />
+          <Route path="/for/ai-agents" element={<ForAIAgents />} />
+          <Route path="/for/developers" element={<ForDevelopers />} />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   </React.StrictMode>,
 )

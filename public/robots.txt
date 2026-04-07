@@ -1,0 +1,38 @@
+# PayAPI Market — robots.txt
+# We welcome AI crawlers. The whole point is to be discoverable by agents.
+
+User-agent: *
+Allow: /
+
+# AI / LLM crawlers — explicitly allowed
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://payapi.market/sitemap.xml

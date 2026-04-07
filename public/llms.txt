@@ -1,0 +1,44 @@
+# PayAPI Market
+
+> The marketplace for x402 APIs. AI agents discover and pay for paid APIs per request in USDC, no API keys, no subscriptions. Providers list once and keep 97% of revenue.
+
+PayAPI Market is a curated marketplace of paid APIs designed for AI agents. Every listed API is exposed via the Model Context Protocol (MCP) and accepts payment via the x402 protocol — a per-request stablecoin payment scheme that revives HTTP 402.
+
+## What it is
+- A marketplace for APIs, where the buyers are autonomous AI agents
+- Discovery via MCP (a single SSE endpoint exposes every listed API)
+- Payment via x402 (USDC settlement on Base, ~400ms finality)
+- Free listing, 3% platform fee on the free tier, 97% revenue kept by providers
+- Featured tier: $49/mo, 2.5% fee, 97.5% kept
+
+## Who it's for
+- API providers monetizing for the agent economy
+- AI agents (Claude Desktop, Cursor, custom agents) that need real-time data
+- Developers turning expertise into passive USDC revenue
+
+## Key URLs
+- Marketplace: https://payapi.market/
+- About: https://payapi.market/about
+- Pricing: https://payapi.market/pricing
+- Revenue calculator: https://payapi.market/calculator
+- Blog: https://payapi.market/blog
+- For API providers: https://payapi.market/for/api-providers
+- For AI agents: https://payapi.market/for/ai-agents
+- For developers: https://payapi.market/for/developers
+- MCP SSE endpoint: https://web-production-18a32.up.railway.app/mcp/sse
+
+## Currently listed APIs (launch)
+- UK Data API — 24 endpoints (Land Registry, EPC, Companies House, DVLA, Bank of England, weather, crime, flood risk)
+- Crypto Oracle — 15 endpoints (prices, DEX pools, whale tracking)
+- Global Weather — 8 endpoints (forecasts, alerts, marine, historical)
+- EU Compliance Check — 10 endpoints (GDPR, PSD2, MiCA, sanctions)
+- Geospatial Intel — 12 endpoints (geocoding, isochrones, demographics)
+
+## Founder
+Built by Chet Parker. Launched 2026.
+
+## How AI agents connect
+Add this to a Claude Desktop or compatible MCP client config:
+"mcpServers": { "payapi": { "url": "https://web-production-18a32.up.railway.app/mcp/sse" } }
+
+After connecting, agents auto-discover every listed tool and can call any of them with x402 payments — no API keys, no signup.

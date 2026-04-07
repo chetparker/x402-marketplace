@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "PayAPI Market",
+  "name_for_model": "payapi_market",
+  "description_for_human": "Marketplace of paid APIs for AI agents. Discover and pay per request in USDC via the x402 protocol — no API keys, no subscriptions.",
+  "description_for_model": "PayAPI Market exposes a curated catalog of paid APIs that accept x402 (per-request USDC) payments and are reachable over MCP. Use this plugin to list available APIs, look up endpoints, and connect agents to the marketplace MCP SSE endpoint at https://web-production-18a32.up.railway.app/mcp/sse. Providers keep 97% of revenue. Listing is free.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "mcp",
+    "url": "https://web-production-18a32.up.railway.app/mcp/sse",
+    "is_user_authenticated": false
+  },
+  "logo_url": "https://payapi.market/favicon.svg",
+  "contact_email": "hello@payapi.market",
+  "legal_info_url": "https://payapi.market/about"
+}
