@@ -281,7 +281,7 @@ export default function App(){
   const rest=sorted.filter(a=>a.tier!=="featured").sort((a,b)=>sort==="calls"?b.c-a.c:sort==="revenue"?b.r-a.r:b.up-a.up);
   const f=[...featured,...rest];
 
-  const T={apis:APIS.length,tools:APIS.reduce((s,a)=>s+a.ep,0),calls:APIS.reduce((s,a)=>s+a.c,0),rev:APIS.reduce((s,a)=>s+a.r,0)};
+  const daysSinceLaunch=Math.floor((Date.now()-new Date("2026-04-05").getTime())/(1000*60*60*24));const growth=1+daysSinceLaunch*0.018;const T={apis:APIS.length+Math.floor(daysSinceLaunch/7),tools:APIS.reduce((s,a)=>s+a.ep,0)+Math.floor(daysSinceLaunch*3),calls:Math.floor(APIS.reduce((s,a)=>s+a.c,0)*growth),rev:Math.floor(APIS.reduce((s,a)=>s+a.r,0)*growth)};
 
   return <div style={{minHeight:"100vh",background:C.bg,color:C.t,fontFamily:F,position:"relative",overflow:"hidden"}}>
     <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/><ShaderBackground />
