@@ -12,7 +12,7 @@
 | Works for unattended agents | With human setup | Painful | Native |
 | Time to first call | Hours-days | Hours-days | Seconds |
 | Provider revenue split | Marketplace dependent | Marketplace dependent | 97% on PayAPI Market |
-| Discovery | Custom catalog | Custom catalog | MCP + marketplace |
+| Discovery | Custom catalogue | Custom catalogue | MCP + marketplace |
 
 ## When to use API keys
 

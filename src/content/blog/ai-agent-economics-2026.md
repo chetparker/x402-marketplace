@@ -25,7 +25,7 @@ The fastest-growing line item is x402 API calls. In 2024, almost all agent API s
 
 ## Why subscriptions are losing
 
-A subscription tier optimizes for predictable monthly revenue from a small number of customers who use the API consistently. That works fine for human SaaS. It's terrible for agent traffic because:
+A subscription tier optimises for predictable monthly revenue from a small number of customers who use the API consistently. That works fine for human SaaS. It's terrible for agent traffic because:
 
 - Agents are bursty. One query, then nothing for a week.
 - Agents don't stay loyal. They use whatever tool fits the task.

@@ -21,7 +21,7 @@ export default function ForAIAgents() {
       sections={[
         {
           title: 'Why connect via PayAPI Market',
-          body: `Most APIs were built for human developers. They require account creation, key management, monthly subscriptions and a credit card. None of that works for autonomous agents.\n\nPayAPI Market exposes every listed API through a single MCP endpoint. Your agent gets a unified tool catalog, calls any tool with an x402 payment, and never has to manage credentials. Settlement is on-chain and final in under a second.`,
+          body: `Most APIs were built for human developers. They require account creation, key management, monthly subscriptions and a credit card. None of that works for autonomous agents.\n\nPayAPI Market exposes every listed API through a single MCP endpoint. Your agent gets a unified tool catalogue, calls any tool with an x402 payment, and never has to manage credentials. Settlement is on-chain and final in under a second.`,
         },
         {
           title: 'Add the marketplace to Claude Desktop',

@@ -8,7 +8,7 @@ const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;
 export const PAGE_SEO = {
   home: {
     title: 'PayAPI Market — The Marketplace for x402 APIs',
-    description: 'Discover and monetise paid APIs for AI agents. Built on the x402 protocol — agents pay per request in USDC, no API keys, no subscriptions. Keep 97% of revenue.',
+    description: 'Discover and monetize paid APIs for AI agents. Built on the x402 protocol — agents pay per request in USDC, no API keys, no subscriptions. Keep 97% of revenue.',
     path: '/',
     keywords: 'x402, MCP, AI agents, paid API, API marketplace, USDC payments, agent economy',
   },
@@ -16,19 +16,19 @@ export const PAGE_SEO = {
     title: 'About PayAPI Market — Why We Built the x402 API Marketplace',
     description: 'PayAPI Market is the first marketplace designed for the agent economy. List your API, keep 97%, get discovered by every agent on the network.',
     path: '/about',
-    keywords: 'about payapi market, x402 marketplace, api monetisation',
+    keywords: 'about payapi market, x402 marketplace, api monetization',
   },
   pricing: {
     title: 'Pricing — Free to List, 97% Revenue Share | PayAPI Market',
     description: 'Free listing with 3% platform fee. Featured plan at $49/mo with 2.5% fee. No subscriptions for buyers — agents pay per request in USDC.',
     path: '/pricing',
-    keywords: 'api marketplace pricing, x402 fees, api monetisation pricing',
+    keywords: 'api marketplace pricing, x402 fees, api monetization pricing',
   },
   calculator: {
     title: 'API Revenue Calculator — Estimate Your x402 Earnings | PayAPI Market',
     description: 'Calculate how much you can earn listing your API on PayAPI Market. Adjust endpoints, call volume and price per request to see your monthly and annual revenue.',
     path: '/calculator',
-    keywords: 'api revenue calculator, x402 earnings, api monetisation calculator',
+    keywords: 'api revenue calculator, x402 earnings, api monetization calculator',
   },
   docs: {
     title: 'Docs — How to List and Consume x402 APIs | PayAPI Market',
@@ -37,10 +37,10 @@ export const PAGE_SEO = {
     keywords: 'x402 docs, mcp docs, api marketplace documentation',
   },
   blog: {
-    title: 'Blog — AI Agents, x402 and API Monetisation | PayAPI Market',
-    description: 'Guides, tutorials and analysis on the x402 protocol, the agent economy and API monetisation strategy.',
+    title: 'Blog — AI Agents, x402 and API Monetization | PayAPI Market',
+    description: 'Guides, tutorials and analysis on the x402 protocol, the agent economy and API monetization strategy.',
     path: '/blog',
-    keywords: 'x402 blog, ai agent economy, api monetisation blog',
+    keywords: 'x402 blog, ai agent economy, api monetization blog',
   },
 };
 
