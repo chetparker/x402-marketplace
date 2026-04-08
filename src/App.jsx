@@ -23,6 +23,10 @@ const APIS=[
   {id:"io.github.chetparker/uk-data-api",name:"UK Data API",by:"chetparker",tag:"Property, weather, companies, vehicles, finance — 24 UK government and public data endpoints in one MCP server.",desc:"24 UK data endpoints — Land Registry sold prices, rental yields, stamp duty, EPC, crime, flood risk, planning, council tax, weather, air quality, Companies House, DVLA, MOT, BoE rates, exchange rates, inflation, mortgage calculator. All paid per-request via x402.",ep:24,pr:"$0.001–0.002",net:"Base",cat:"Data",tags:["property","uk","government","companies","vehicles","finance"],st:"live",vf:true,ft:false,tier:"free",url:"https://web-production-18a32.up.railway.app",sse:"https://web-production-18a32.up.railway.app/mcp/sse",c:12847,r:284,up:99.7,ms:142},
   {id:"io.github.chetparker/email-verify-api",name:"Email Verification API",by:"chetparker",tag:"Verify email addresses in real-time. Syntax, MX, SMTP, disposable detection, catch-all, role-based, quality scoring. 8x cheaper than ZeroBounce.",desc:"4 endpoints for real-time email verification — single verify, bulk verify (up to 100), domain check, MX lookup. Each call runs syntax validation, MX resolution, SMTP RCPT probe, catch-all detection, disposable check against 3500+ domains, role-based pattern detection (45+ patterns), free provider classification, typo suggestion, and a 0–100 quality score. Verdict: valid / invalid / risky / unknown.",ep:4,pr:"$0.001",net:"Base",cat:"Verification",tags:["email","verification","smtp","mx","disposable","deliverability"],st:"live",vf:true,ft:false,tier:"free",url:"https://email-verify-api-production-d262.up.railway.app",sse:"https://email-verify-api-production-d262.up.railway.app/mcp/sse",c:0,r:0,up:99.9,ms:120},
   {id:"io.github.chetparker/company-enrich-api",name:"Company Enrichment API",by:"chetparker",tag:"Domain intelligence, tech stack detection, Companies House lookup, officer data, email patterns. 124x cheaper than ZoomInfo.",desc:"6 endpoints for company and domain intelligence — domain enrichment (meta, social links, DNS, email + hosting providers), full company enrichment (Companies House + officers + domain data), email pattern guessing, UK officer lookup, UK filing history, and pure tech-stack detection across 55+ signatures (frameworks, CMS, e-commerce, analytics, marketing, payments, monitoring, CDN).",ep:6,pr:"$0.003–0.005",net:"Base",cat:"Intelligence",tags:["company","domain","enrichment","tech-stack","officers","companies-house"],st:"live",vf:true,ft:false,tier:"free",url:"https://company-enrich-api-production.up.railway.app",sse:"https://company-enrich-api-production.up.railway.app/mcp/sse",c:0,r:0,up:99.9,ms:180},
+  {id:"io.github.chetparker/postcode-api",name:"Postcode & Address Lookup API",by:"chetparker",tag:"UK postcode lookup, address search, coordinates, council data, nearest postcodes. Powered by Ordnance Survey.",desc:"5 endpoints for UK postcode and address intelligence — full postcode lookup (coordinates, council, ward, parliamentary constituency, region), free-text address search, nearest postcodes within a radius (lat/lng), validity check, and partial-postcode autocomplete. Backed by Ordnance Survey-derived data.",ep:5,pr:"$0.001",net:"Base",cat:"Data",tags:["uk","postcode","address","geocoding","council","constituency"],st:"live",vf:true,ft:false,tier:"free",url:"https://postcode-api-production.up.railway.app",sse:"https://postcode-api-production.up.railway.app/mcp/sse",c:0,r:0,up:99.9,ms:90},
+  {id:"io.github.chetparker/currency-api",name:"Currency & Crypto API",by:"chetparker",tag:"Real-time FX rates from ECB, currency conversion, historical rates, crypto prices via CoinGecko.",desc:"5 endpoints for fiat and crypto pricing — latest ECB exchange rates for any base currency, fast amount conversion, historical rates back to 1999, single-coin crypto price lookup, and batch crypto pricing for up to 50 coins at once. Per-key TTL cache (1h fiat, 30s crypto) keeps upstream load minimal.",ep:5,pr:"$0.001",net:"Base",cat:"Data",tags:["currency","fx","ecb","crypto","coingecko","conversion"],st:"live",vf:true,ft:false,tier:"free",url:"https://currency-api-production-4a8d.up.railway.app",sse:"https://currency-api-production-4a8d.up.railway.app/mcp/sse",c:0,r:0,up:99.9,ms:110},
+  {id:"io.github.chetparker/screenshot-api",name:"Screenshot & PDF Capture API",by:"chetparker",tag:"Capture website screenshots and PDFs programmatically. Full page, element, and viewport options via Playwright.",desc:"4 endpoints for headless web capture — viewport screenshot, full-page screenshot (scrolled), PDF render with print emulation, and CSS-selected element capture. Powered by Playwright + Chromium with one warm browser instance per process. Returns base64-encoded binary in JSON to keep the x402 envelope consistent.",ep:4,pr:"$0.002",net:"Base",cat:"Intelligence",tags:["screenshot","pdf","playwright","chromium","headless","capture"],st:"live",vf:true,ft:false,tier:"free",url:"https://screenshot-api-production-fe7e.up.railway.app",sse:"https://screenshot-api-production-fe7e.up.railway.app/mcp/sse",c:0,r:0,up:99.9,ms:850},
+  {id:"io.github.chetparker/dns-intel-api",name:"DNS & Domain Intelligence API",by:"chetparker",tag:"Full DNS records, WHOIS lookup, SSL certificate details, subdomain discovery via certificate transparency.",desc:"5 endpoints for DNS and domain intelligence — every common record type (A, AAAA, MX, TXT, NS, SOA, CNAME), WHOIS registration metadata, live SSL certificate inspection (issuer, validity, SANs, days remaining), Certificate Transparency-log subdomain discovery via crt.sh, and reverse-IP lookup with PTR fallback.",ep:5,pr:"$0.002",net:"Base",cat:"Intelligence",tags:["dns","whois","ssl","certificate","subdomains","crt-sh","reverse-ip"],st:"live",vf:true,ft:false,tier:"free",url:"https://dns-intel-api-production.up.railway.app",sse:"https://dns-intel-api-production.up.railway.app/mcp/sse",c:0,r:0,up:99.9,ms:240},
 ];
 
 const CATS=["All","Data","Verification","Intelligence"];
@@ -72,12 +76,18 @@ const Card=({a,idx=0,onClick})=>{
       <span>{a.net}</span>
     </div>
 
-    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:12,padding:"14px 0 0",borderTop:`1px solid ${C.bd}`}}>
-      <Mt v={a.c>1000?`${(a.c/1000).toFixed(1)}K`:a.c} l="30d calls"/>
-      <Mt v={`$${a.r}`} l="revenue"/>
-      <Mt v={`${a.up}%`} l="uptime"/>
-      <Mt v={`${a.ms}ms`} l="latency"/>
-    </div>
+    {a.c>0?(
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:12,padding:"14px 0 0",borderTop:`1px solid ${C.bd}`}}>
+        <Mt v={a.c>1000?`${(a.c/1000).toFixed(1)}K`:a.c} l="30d calls"/>
+        <Mt v={`$${a.r}`} l="revenue"/>
+        <Mt v={`${a.up}%`} l="uptime"/>
+        <Mt v={`${a.ms}ms`} l="latency"/>
+      </div>
+    ):(
+      <div style={{padding:"14px 0 0",borderTop:`1px solid ${C.bd}`,display:"flex",justifyContent:"center"}}>
+        <span style={{padding:"4px 12px",borderRadius:100,fontSize:11,fontWeight:500,color:C.tM,background:C.sf2,border:`1px solid ${C.bd}`,letterSpacing:"0.02em"}}>Just launched</span>
+      </div>
+    )}
   </div>;
 };
 
