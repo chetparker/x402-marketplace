@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import SEOHead from "./components/SEOHead";
 import EmailCapture from "./components/EmailCapture";
+import { computeCardStats, computeTotalStats, getDaysSinceLaunch, getDayOfYear } from "./growth";
 
 // Two-color system: white text + #3B82F6 accent. Legacy color keys
 // (gn/am/gold/pu/rd) are aliased to neutral gray so the rest of the
@@ -285,12 +286,19 @@ export default function App(){
   const[reg,sR]=useState(false);
   const[pricing,sP]=useState(false);
 
-  const sorted=APIS.filter(a=>{const s=q.toLowerCase();return(!s||a.name.toLowerCase().includes(s)||a.tag.toLowerCase().includes(s)||a.tags.some(t=>t.includes(s)))&&(cat==="All"||a.cat===cat)});
+  // Daily growth: enrich every API with computed (c, r) for today before
+  // filtering/sorting. days/doy are read once per render so all cards and
+  // the totals row use a consistent timestamp.
+  const days=getDaysSinceLaunch();
+  const doy=getDayOfYear();
+  const enriched=APIS.map((a,idx)=>{const s=computeCardStats(a,idx,days,doy);return {...a,c:s.c,r:s.r,justLaunched:s.justLaunched};});
+
+  const sorted=enriched.filter(a=>{const s=q.toLowerCase();return(!s||a.name.toLowerCase().includes(s)||a.tag.toLowerCase().includes(s)||a.tags.some(t=>t.includes(s)))&&(cat==="All"||a.cat===cat)});
   const featured=sorted.filter(a=>a.tier==="featured").sort((a,b)=>b.c-a.c);
   const rest=sorted.filter(a=>a.tier!=="featured").sort((a,b)=>sort==="calls"?b.c-a.c:sort==="revenue"?b.r-a.r:b.up-a.up);
   const f=[...featured,...rest];
 
-  const T={apis:APIS.length,tools:APIS.reduce((s,a)=>s+a.ep,0),calls:APIS.reduce((s,a)=>s+a.c,0),rev:APIS.reduce((s,a)=>s+a.r,0)};
+  const T=computeTotalStats(APIS.length,APIS.reduce((s,a)=>s+a.ep,0),days,doy);
 
   return <div style={{minHeight:"100vh",background:C.bg,color:C.t,fontFamily:F,position:"relative",overflow:"hidden"}}>
     <SEOHead page="home" />
