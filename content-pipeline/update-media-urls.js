@@ -8,7 +8,24 @@
  * Or set these in content-pipeline/.env
  */
 
-import 'dotenv/config';
+import { readFileSync } from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+
+// Load .env if it exists
+try {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const envPath = join(__dirname, '.env');
+  const envContent = readFileSync(envPath, 'utf-8');
+  for (const line of envContent.split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const [key, ...rest] = trimmed.split('=');
+    if (key && rest.length && !process.env[key]) {
+      process.env[key] = rest.join('=');
+    }
+  }
+} catch {}
 
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID || 'appreh7OGuAdDSvGM';
@@ -156,13 +173,18 @@ async function main() {
   const records = await fetchAllRecords();
   console.log(`Found ${records.length} records.`);
 
-  // Match records to days
-  const updates = [];
-  for (const record of records) {
-    const day = record.fields.Day;
-    if (!day || !MEDIA_MAP[day]) continue;
+  // Sort records by Date to determine day number (Day 1 = earliest date)
+  const sorted = records
+    .filter(r => r.fields.Date)
+    .sort((a, b) => a.fields.Date.localeCompare(b.fields.Date));
 
-    const media = MEDIA_MAP[day];
+  // Match records to days by sorted position
+  const updates = [];
+  sorted.forEach((record, index) => {
+    const dayNum = index + 1;
+    if (!MEDIA_MAP[dayNum]) return;
+
+    const media = MEDIA_MAP[dayNum];
     const fields = {};
 
     if (media.url) {
@@ -170,15 +192,17 @@ async function main() {
     }
     fields.Visual_Type = media.type;
 
-    updates.push({ id: record.id, fields });
-  }
+    updates.push({ id: record.id, fields, _dayNum: dayNum, _date: record.fields.Date });
+  });
 
   console.log(`\nPrepared ${updates.length} updates:`);
   updates.forEach(u => {
-    const day = records.find(r => r.id === u.id)?.fields.Day;
     const url = u.fields.Media_URL || '(empty)';
-    console.log(`  Day ${day}: ${u.fields.Visual_Type} — ${url.includes('github') ? url.split('/').pop() : url}`);
+    console.log(`  Day ${u._dayNum} (${u._date}): ${u.fields.Visual_Type} — ${url.includes('github') ? url.split('/').pop() : url}`);
   });
+
+  // Clean up internal fields before sending
+  updates.forEach(u => { delete u._dayNum; delete u._date; });
 
   console.log('\nUpdating Airtable...');
   const count = await updateRecords(updates);
