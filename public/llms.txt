@@ -22,9 +22,10 @@ PayAPI Market is a curated marketplace of paid APIs designed for AI agents. Ever
 - Pricing: https://payapi.market/pricing
 - Revenue calculator: https://payapi.market/calculator
 - Blog: https://payapi.market/blog
-- For API providers: https://payapi.market/for/api-providers
-- For AI agents: https://payapi.market/for/ai-agents
-- For developers: https://payapi.market/for/developers
+- For API providers: https://payapi.market/providers
+- For AI agents: https://payapi.market/agents
+- For developers: https://payapi.market/developers
+- For enterprises: https://payapi.market/enterprises
 - MCP SSE endpoint: https://web-production-18a32.up.railway.app/mcp/sse
 
 ## Currently listed APIs (launch)

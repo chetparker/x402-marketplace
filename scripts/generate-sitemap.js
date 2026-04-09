@@ -16,10 +16,10 @@ const STATIC_ROUTES = [
   { path: '/pricing', priority: 0.9, changefreq: 'weekly' },
   { path: '/calculator', priority: 0.9, changefreq: 'weekly' },
   { path: '/blog', priority: 0.8, changefreq: 'weekly' },
-  { path: '/for/api-providers', priority: 0.9, changefreq: 'weekly' },
-  { path: '/for/ai-agents', priority: 0.9, changefreq: 'weekly' },
-  { path: '/for/developers', priority: 0.9, changefreq: 'weekly' },
-  { path: '/for/enterprises', priority: 0.9, changefreq: 'weekly' },
+  { path: '/providers', priority: 0.9, changefreq: 'weekly' },
+  { path: '/agents', priority: 0.9, changefreq: 'weekly' },
+  { path: '/developers', priority: 0.9, changefreq: 'weekly' },
+  { path: '/enterprises', priority: 0.9, changefreq: 'weekly' },
 ];
 
 const BLOG_POSTS = [

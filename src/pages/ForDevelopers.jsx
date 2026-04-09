@@ -6,7 +6,7 @@ export default function ForDevelopers() {
       seo={{
         title: 'Turn Your Expertise Into Passive Revenue — PayAPI Market for Developers',
         description: 'You\'ve built APIs your whole career. Now wrap them once, list them on PayAPI Market, and earn USDC every time an AI agent calls them.',
-        path: '/for/developers',
+        path: '/developers',
       }}
       eyebrow="For Developers"
       headline="Turn Your Expertise Into Passive Revenue."

@@ -28,10 +28,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/calculator" element={<CalculatorPage />} />
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/for/api-providers" element={<ForAPIProviders />} />
-          <Route path="/for/ai-agents" element={<ForAIAgents />} />
-          <Route path="/for/developers" element={<ForDevelopers />} />
-          <Route path="/for/enterprises" element={<ForEnterprise />} />
+          <Route path="/providers" element={<ForAPIProviders />} />
+          <Route path="/agents" element={<ForAIAgents />} />
+          <Route path="/developers" element={<ForDevelopers />} />
+          <Route path="/enterprises" element={<ForEnterprise />} />
         </Routes>
       </BrowserRouter>
     </HelmetProvider>

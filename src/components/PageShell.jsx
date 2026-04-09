@@ -3,8 +3,9 @@ import { C, F, M } from '../theme';
 
 const NAV = [
   { to: '/', label: 'Marketplace' },
-  { to: '/for/api-providers', label: 'For Providers' },
-  { to: '/for/ai-agents', label: 'For Agents' },
+  { to: '/providers', label: 'Providers' },
+  { to: '/agents', label: 'Agents' },
+  { to: '/enterprises', label: 'Enterprises' },
   { to: '/calculator', label: 'Calculator' },
   { to: '/pricing', label: 'Pricing' },
   { to: '/blog', label: 'Blog' },
@@ -59,7 +60,7 @@ function Footer() {
         </div>
         <div>
           <div style={{ fontSize: 11, color: C.tD, textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, marginBottom: 8 }}>Audiences</div>
-          {[['/for/api-providers', 'API Providers'], ['/for/ai-agents', 'AI Agents'], ['/for/developers', 'Developers']].map(([to, l]) => (
+          {[['/providers', 'Providers'], ['/agents', 'Agents'], ['/developers', 'Developers'], ['/enterprises', 'Enterprises']].map(([to, l]) => (
             <Link key={to} to={to} style={{ display: 'block', fontSize: 13, color: C.tM, textDecoration: 'none', padding: '3px 0' }}>{l}</Link>
           ))}
         </div>

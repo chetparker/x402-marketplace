@@ -310,12 +310,13 @@ export default function App(){
       <div style={{maxWidth:1120,margin:"0 auto"}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:18}}>
           <div style={{display:"flex",alignItems:"baseline",gap:10}}>
-            <span style={{fontSize:22,fontWeight:700,color:C.t,letterSpacing:"-0.02em"}}>x402</span>
-            <span style={{fontSize:18,fontWeight:400,color:C.tM,letterSpacing:"-0.01em"}}>marketplace</span>
+            <span style={{fontSize:22,fontWeight:700,color:C.t,letterSpacing:"-0.02em"}}>PayAPI</span>
+            <span style={{fontSize:18,fontWeight:400,color:C.tM,letterSpacing:"-0.01em"}}>Market</span>
           </div>
           <div style={{display:"flex",gap:8,alignItems:"center",flexWrap:"wrap"}}>
-            <Link to="/for/api-providers" style={{padding:"10px 12px",fontSize:13,color:C.tM,textDecoration:"none",fontFamily:F}}>For Providers</Link>
-            <Link to="/for/ai-agents" style={{padding:"10px 12px",fontSize:13,color:C.tM,textDecoration:"none",fontFamily:F}}>For Agents</Link>
+            <Link to="/providers" style={{padding:"10px 12px",fontSize:13,color:C.tM,textDecoration:"none",fontFamily:F}}>Providers</Link>
+            <Link to="/agents" style={{padding:"10px 12px",fontSize:13,color:C.tM,textDecoration:"none",fontFamily:F}}>Agents</Link>
+            <Link to="/enterprises" style={{padding:"10px 12px",fontSize:13,color:C.tM,textDecoration:"none",fontFamily:F}}>Enterprises</Link>
             <Link to="/blog" style={{padding:"10px 12px",fontSize:13,color:C.tM,textDecoration:"none",fontFamily:F}}>Blog</Link>
             <Link to="/about" style={{padding:"10px 12px",fontSize:13,color:C.tM,textDecoration:"none",fontFamily:F}}>About</Link>
             <Link to="/calculator" style={{padding:"11px 16px",borderRadius:10,border:`1px solid ${C.bd}`,background:"transparent",color:C.tM,fontSize:13,fontFamily:F,textDecoration:"none"}}>Calculator</Link>

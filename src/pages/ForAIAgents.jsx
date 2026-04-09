@@ -6,7 +6,7 @@ export default function ForAIAgents() {
       seo={{
         title: 'Your Agents Need Data. We Have It. — PayAPI Market for AI Agents',
         description: 'Connect your AI agent to PayAPI Market over MCP and instantly access dozens of paid APIs. No keys, no accounts — just pay per request in USDC via x402.',
-        path: '/for/ai-agents',
+        path: '/agents',
       }}
       eyebrow="For AI Agents"
       headline="Your Agents Need Data. We Have It."

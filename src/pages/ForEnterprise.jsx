@@ -47,7 +47,7 @@ export default function ForEnterprise() {
       <SEOHead
         title="Replace £15K/Year Data Subscriptions — PayAPI Market for Enterprise"
         description="Your AI agents get the same data for fractions of a penny. No contracts. No procurement. No sales calls. 10 APIs, 65 tools, pay-per-request in USDC."
-        path="/for/enterprises"
+        path="/enterprises"
       />
       <div style={{ padding: '60px 32px' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>

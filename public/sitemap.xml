@@ -31,25 +31,25 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://payapi.market/for/api-providers</loc>
+    <loc>https://payapi.market/providers</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://payapi.market/for/ai-agents</loc>
+    <loc>https://payapi.market/agents</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://payapi.market/for/developers</loc>
+    <loc>https://payapi.market/developers</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://payapi.market/for/enterprises</loc>
+    <loc>https://payapi.market/enterprises</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>

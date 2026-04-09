@@ -52,7 +52,7 @@ export default function AboutPage() {
           You keep 97% of every payment, settled directly to your wallet.
         </P>
         <P>
-          <Link to="/for/api-providers" style={{ color: C.ac }}>How to list your API →</Link>
+          <Link to="/providers" style={{ color: C.ac }}>How to list your API →</Link>
         </P>
 
         <H2>For AI agents</H2>
@@ -64,7 +64,7 @@ export default function AboutPage() {
           happen invisibly via x402. No API keys to manage. No accounts to create.
         </P>
         <P>
-          <Link to="/for/ai-agents" style={{ color: C.ac }}>How agents use PayAPI Market →</Link>
+          <Link to="/agents" style={{ color: C.ac }}>How agents use PayAPI Market →</Link>
         </P>
 
         <H2>Current APIs</H2>
