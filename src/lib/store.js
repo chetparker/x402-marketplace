@@ -18,18 +18,27 @@ async function safe(fn, fallback = null) {
 // Providers
 // ---------------------------------------------------------------------------
 export async function createProvider({ email, name, company_name, wallet_address }) {
-  if (!isConfigured) return null;
-  // Upsert-like: return existing if email already registered
-  const { data: existing } = await supabase
-    .from('providers').select('*').eq('email', email).maybeSingle();
-  if (existing) return existing;
+  if (!isConfigured) throw new Error('Database not configured');
 
+  // Try insert first. If it fails with a unique-violation (23505) the
+  // provider already exists — fetch and return them instead.
   const { data, error } = await supabase
     .from('providers')
     .insert({ email, name, company_name: company_name || null, wallet_address })
     .select()
     .single();
-  if (error) { console.error('[store] createProvider error:', error.message); return null; }
+
+  if (error) {
+    if (error.code === '23505') {
+      // Duplicate email — fetch the existing row (use service-level select
+      // which our permissive RLS policy allows)
+      const { data: existing, error: fetchErr } = await supabase
+        .from('providers').select('*').eq('email', email).maybeSingle();
+      if (fetchErr) throw new Error(`Provider lookup failed: ${fetchErr.message}`);
+      if (existing) return existing;
+    }
+    throw new Error(`Provider insert failed: ${error.message}`);
+  }
   return data;
 }
 
@@ -74,7 +83,7 @@ export async function createListing({
   base_url, mcp_endpoint, endpoints_count, tools_count,
   price_min, price_max,
 }) {
-  if (!isConfigured) return null;
+  if (!isConfigured) throw new Error('Database not configured');
   const { data, error } = await supabase
     .from('api_listings')
     .insert({
@@ -89,7 +98,7 @@ export async function createListing({
     })
     .select()
     .single();
-  if (error) { console.error('[store] createListing error:', error.message); return null; }
+  if (error) throw new Error(`Listing insert failed: ${error.message}`);
   return data;
 }
 

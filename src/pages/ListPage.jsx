@@ -48,19 +48,23 @@ export default function ListPage() {
   const uA = up(api, setApi);
 
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   async function handleSubmit() {
     setSubmitting(true);
+    setSubmitError(null);
     try {
       const prov = await createProvider(provider);
-      if (!prov) { setSubmitting(false); return; }
+      if (!prov) throw new Error('Failed to create provider account — check your details and try again.');
       const listing = await createListing({ ...api, provider_id: prov.id });
+      if (!listing) throw new Error('Failed to create listing — the API details may be invalid.');
       setSession(prov.email);
       notifyProviderWelcome(prov);
-      if (listing) notifyAdminNewListing(listing, prov);
+      notifyAdminNewListing(listing, prov);
       setSubmitted(true);
     } catch (err) {
       console.error('[list] submit error:', err);
+      setSubmitError(err.message || 'Submission failed. Please try again.');
     }
     setSubmitting(false);
   }
@@ -225,8 +229,15 @@ export default function ListPage() {
             </div>
           )}
 
+          {/* Error message */}
+          {submitError && (
+            <div style={{ marginTop: 16, padding: '12px 16px', borderRadius: 8, background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)' }}>
+              <p style={{ margin: 0, fontSize: 13, color: '#EF4444', lineHeight: 1.5 }}>{submitError}</p>
+            </div>
+          )}
+
           {/* Navigation buttons */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 28 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 16 }}>
             <button onClick={() => step > 0 ? setStep(step - 1) : null} style={{ ...btnSecondary, visibility: step === 0 ? 'hidden' : 'visible' }}>Back</button>
             {step < 3 ? (
               <button onClick={() => setStep(step + 1)} style={btnPrimary}>Continue</button>
