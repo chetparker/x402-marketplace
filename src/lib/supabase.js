@@ -13,5 +13,6 @@ if (supabaseUrl.startsWith('http') && supabaseKey.length > 0) {
   }
 }
 
+console.log('[supabase] URL:', supabaseUrl?.slice(0, 30) || '(empty)', 'KEY:', supabaseKey?.slice(0, 10) || '(empty)', 'client:', _client ? 'created' : 'null');
+
 export const supabase = _client;
-export const isConfigured = _client !== null;

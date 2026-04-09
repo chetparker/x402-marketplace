@@ -2,15 +2,18 @@
 //
 // Every function is async and returns the data directly (or null on error).
 // Callers must await. Session helpers remain synchronous (sessionStorage).
+//
+// IMPORTANT: we check `supabase` (the client object) directly in every
+// function — never a cached boolean. This avoids stale-module-binding bugs.
 
-import { supabase, isConfigured } from './supabase';
+import { supabase } from './supabase';
 
 const SESSION_KEY = 'payapi_session';
 
-// Every Supabase call is wrapped in a try/catch so a network error or missing
-// table never crashes the React tree. Callers just get null / [].
+// Wrap read-only Supabase calls so a network error or missing table never
+// crashes the React tree. Callers just get null / [].
 async function safe(fn, fallback = null) {
-  if (!isConfigured) return fallback;
+  if (!supabase) return fallback;
   try { return await fn(); } catch (e) { console.error('[store]', e.message); return fallback; }
 }
 
@@ -18,10 +21,8 @@ async function safe(fn, fallback = null) {
 // Providers
 // ---------------------------------------------------------------------------
 export async function createProvider({ email, name, company_name, wallet_address }) {
-  if (!isConfigured) throw new Error('Database not configured');
+  if (!supabase) throw new Error('Database not configured — check VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY');
 
-  // Try insert first. If it fails with a unique-violation (23505) the
-  // provider already exists — fetch and return them instead.
   const { data, error } = await supabase
     .from('providers')
     .insert({ email, name, company_name: company_name || null, wallet_address })
@@ -30,8 +31,6 @@ export async function createProvider({ email, name, company_name, wallet_address
 
   if (error) {
     if (error.code === '23505') {
-      // Duplicate email — fetch the existing row (use service-level select
-      // which our permissive RLS policy allows)
       const { data: existing, error: fetchErr } = await supabase
         .from('providers').select('*').eq('email', email).maybeSingle();
       if (fetchErr) throw new Error(`Provider lookup failed: ${fetchErr.message}`);
@@ -43,21 +42,21 @@ export async function createProvider({ email, name, company_name, wallet_address
 }
 
 export async function getProviderByEmail(email) {
-  if (!isConfigured) return null;
+  if (!supabase) return null;
   const { data } = await supabase
     .from('providers').select('*').eq('email', email).maybeSingle();
   return data || null;
 }
 
 export async function getProviderById(id) {
-  if (!isConfigured) return null;
+  if (!supabase) return null;
   const { data } = await supabase
     .from('providers').select('*').eq('id', id).maybeSingle();
   return data || null;
 }
 
 export async function updateProvider(id, updates) {
-  if (!isConfigured) return null;
+  if (!supabase) return null;
   const { data, error } = await supabase
     .from('providers')
     .update({ ...updates, updated_at: new Date().toISOString() })
@@ -83,7 +82,7 @@ export async function createListing({
   base_url, mcp_endpoint, endpoints_count, tools_count,
   price_min, price_max,
 }) {
-  if (!isConfigured) throw new Error('Database not configured');
+  if (!supabase) throw new Error('Database not configured — check VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY');
   const { data, error } = await supabase
     .from('api_listings')
     .insert({
@@ -103,21 +102,21 @@ export async function createListing({
 }
 
 export async function getListingById(id) {
-  if (!isConfigured) return null;
+  if (!supabase) return null;
   const { data } = await supabase
     .from('api_listings').select('*, providers(*)').eq('id', id).maybeSingle();
   return data || null;
 }
 
 export async function getListingsByProvider(providerId) {
-  if (!isConfigured) return [];
+  if (!supabase) return [];
   const { data } = await supabase
     .from('api_listings').select('*').eq('provider_id', providerId).order('created_at', { ascending: false });
   return data || [];
 }
 
 export async function getListingsByStatus(status) {
-  if (!isConfigured) return [];
+  if (!supabase) return [];
   const { data } = await supabase
     .from('api_listings').select('*, providers(*)').eq('status', status).order('created_at', { ascending: false });
   return data || [];
@@ -132,7 +131,7 @@ export async function getLiveListings() {
 }
 
 export async function updateListing(id, updates) {
-  if (!isConfigured) return null;
+  if (!supabase) return null;
   const { data, error } = await supabase
     .from('api_listings')
     .update({ ...updates, updated_at: new Date().toISOString() })
