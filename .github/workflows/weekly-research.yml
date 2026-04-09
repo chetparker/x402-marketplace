@@ -1,0 +1,38 @@
+name: Weekly Content Research Loop
+
+on:
+  schedule:
+    # Every Sunday at 10:00 AM GMT
+    - cron: '0 10 * * 0'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  research-loop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: cd content-pipeline && npm install dotenv
+
+      - name: Step 1 — Scrape engagement metrics
+        env:
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+          APIFY_API_KEY: ${{ secrets.APIFY_API_KEY }}
+        run: node content-pipeline/scrape-metrics.js
+
+      - name: Step 2 — Analyse performance patterns
+        env:
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+        run: node content-pipeline/analyze-performance.js
+
+      - name: Step 3 — Rewrite upcoming week with winning patterns
+        env:
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: node content-pipeline/improve-content.js

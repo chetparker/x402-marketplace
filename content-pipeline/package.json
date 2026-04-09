@@ -1,0 +1,8 @@
+{
+  "name": "payapi-content-pipeline",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^16.4.0"
+  }
+}
