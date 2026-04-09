@@ -1,10 +1,15 @@
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || '';
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL || '').trim();
+const supabaseKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || '').trim();
 
-export const supabase = (SUPABASE_URL && SUPABASE_ANON_KEY)
-  ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-  : null;
+// Only create the client when both values are present AND the URL is a real
+// HTTP(S) URL. If either is missing or malformed the app runs in "no-db"
+// mode — store functions return empty arrays, the 10 hardcoded APIs still
+// render, and nothing crashes.
+export const supabase =
+  supabaseUrl.startsWith('http') && supabaseKey.length > 0
+    ? createClient(supabaseUrl, supabaseKey)
+    : null;
 
 export const isConfigured = !!supabase;

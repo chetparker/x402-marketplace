@@ -7,6 +7,13 @@ import { supabase, isConfigured } from './supabase';
 
 const SESSION_KEY = 'payapi_session';
 
+// Every Supabase call is wrapped in a try/catch so a network error or missing
+// table never crashes the React tree. Callers just get null / [].
+async function safe(fn, fallback = null) {
+  if (!isConfigured) return fallback;
+  try { return await fn(); } catch (e) { console.error('[store]', e.message); return fallback; }
+}
+
 // ---------------------------------------------------------------------------
 // Providers
 // ---------------------------------------------------------------------------
@@ -53,9 +60,10 @@ export async function updateProvider(id, updates) {
 }
 
 export async function getAllProviders() {
-  if (!isConfigured) return [];
-  const { data } = await supabase.from('providers').select('*').order('created_at', { ascending: false });
-  return data || [];
+  return safe(async () => {
+    const { data } = await supabase.from('providers').select('*').order('created_at', { ascending: false });
+    return data || [];
+  }, []);
 }
 
 // ---------------------------------------------------------------------------
@@ -107,10 +115,11 @@ export async function getListingsByStatus(status) {
 }
 
 export async function getLiveListings() {
-  if (!isConfigured) return [];
-  const { data } = await supabase
-    .from('api_listings').select('*, providers(*)').eq('status', 'live').order('created_at', { ascending: false });
-  return data || [];
+  return safe(async () => {
+    const { data } = await supabase
+      .from('api_listings').select('*, providers(*)').eq('status', 'live').order('created_at', { ascending: false });
+    return data || [];
+  }, []);
 }
 
 export async function updateListing(id, updates) {
@@ -126,10 +135,11 @@ export async function updateListing(id, updates) {
 }
 
 export async function getAllListings() {
-  if (!isConfigured) return [];
-  const { data } = await supabase
-    .from('api_listings').select('*, providers(*)').order('created_at', { ascending: false });
-  return data || [];
+  return safe(async () => {
+    const { data } = await supabase
+      .from('api_listings').select('*, providers(*)').order('created_at', { ascending: false });
+    return data || [];
+  }, []);
 }
 
 // ---------------------------------------------------------------------------
