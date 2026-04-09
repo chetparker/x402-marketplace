@@ -1,6 +1,7 @@
 import PageShell from '../components/PageShell';
 import SEOHead from '../components/SEOHead';
 import APICalculator from '../components/APICalculator';
+import ExitIntentPopup from '../components/ExitIntentPopup';
 import { C, F } from '../theme';
 
 export default function CalculatorPage() {
@@ -18,6 +19,7 @@ export default function CalculatorPage() {
         </div>
         <APICalculator />
       </div>
+      <ExitIntentPopup />
     </PageShell>
   );
 }

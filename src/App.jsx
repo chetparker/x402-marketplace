@@ -265,7 +265,7 @@ const RegModal=({onClose})=>{
         <p style={{margin:"0 0 6px",fontSize:13,color:C.tM}}>Plan: <span style={{color:TIERS[tier].color,fontWeight:700}}>{TIERS[tier].label}</span> · Fee: {TIERS[tier].fee}</p>
         <p style={{margin:"0 0 20px",fontSize:12,color:C.tD}}>Discoverable by agents within minutes.</p>
         <div style={{background:C.sf,borderRadius:12,padding:16,textAlign:"left",border:`1px solid ${C.bd}`}}>
-          {[["Official MCP Registry","auto-publish"],["x402 Marketplace","listed"],["mcp.so","submitted"],["PulseMCP","auto-ingested"],["Smithery","listed"],["Glama","submitted"]].map(([n,s])=>
+          {[["Official MCP Registry","auto-publish"],["PayAPI Market","listed"],["mcp.so","submitted"],["PulseMCP","auto-ingested"],["Smithery","listed"],["Glama","submitted"]].map(([n,s])=>
             <div key={n} style={{display:"flex",justifyContent:"space-between",padding:"5px 0"}}><span style={{fontSize:13,color:C.tM}}>{n}</span><span style={{fontSize:13,color:C.gn,fontFamily:M}}>✓ {s}</span></div>)}
         </div>
       </div>}

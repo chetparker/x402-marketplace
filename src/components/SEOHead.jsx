@@ -16,7 +16,7 @@ export const PAGE_SEO = {
     title: 'About PayAPI Market — Why We Built the x402 API Marketplace',
     description: 'PayAPI Market is the first marketplace designed for the agent economy. List your API, keep 97%, get discovered by every agent on the network.',
     path: '/about',
-    keywords: 'about payapi market, x402 marketplace, api monetization',
+    keywords: 'about payapi market, payapi market, api monetization',
   },
   pricing: {
     title: 'Pricing — Free to List, 97% Revenue Share | PayAPI Market',

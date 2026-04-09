@@ -19,6 +19,7 @@ const STATIC_ROUTES = [
   { path: '/for/api-providers', priority: 0.9, changefreq: 'weekly' },
   { path: '/for/ai-agents', priority: 0.9, changefreq: 'weekly' },
   { path: '/for/developers', priority: 0.9, changefreq: 'weekly' },
+  { path: '/for/enterprises', priority: 0.9, changefreq: 'weekly' },
 ];
 
 const BLOG_POSTS = [

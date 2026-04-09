@@ -1,11 +1,12 @@
-# x402 Marketplace
+# PayAPI Market
 
 Discover and list x402-powered APIs. AI agents pay per-request with USDC on Base network. No API keys needed.
 
+Live at **[payapi.market](https://www.payapi.market)**.
+
 ## Features
 
-- Browse x402-powered APIs across categories (Data, Finance, Weather, Legal)
-- Live registry connection to Official MCP Registry
+- Browse x402-powered APIs across categories (Data, Verification, Intelligence, Tools)
 - Click-to-copy Claude Desktop configs
 - Self-registration wizard for API builders
 - Search, filter, sort by usage/revenue/uptime

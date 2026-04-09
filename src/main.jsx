@@ -11,6 +11,7 @@ import BlogPost from './pages/BlogPost.jsx'
 import ForAPIProviders from './pages/ForAPIProviders.jsx'
 import ForAIAgents from './pages/ForAIAgents.jsx'
 import ForDevelopers from './pages/ForDevelopers.jsx'
+import ForEnterprise from './pages/ForEnterprise.jsx'
 
 document.body.style.margin = '0'
 document.body.style.padding = '0'
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/for/api-providers" element={<ForAPIProviders />} />
           <Route path="/for/ai-agents" element={<ForAIAgents />} />
           <Route path="/for/developers" element={<ForDevelopers />} />
+          <Route path="/for/enterprises" element={<ForEnterprise />} />
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
