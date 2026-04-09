@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 850" width="680" height="850">
+  <defs>
+    <style>
+      .headline { font-family: Georgia, 'Times New Roman', serif; }
+      .body { font-family: Helvetica, Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="680" height="850" fill="#FFFFFF"/>
+
+  <!-- Terracotta left bar -->
+  <rect x="0" y="0" width="6" height="850" fill="#C45426"/>
+
+  <!-- Top rule -->
+  <rect x="30" y="30" width="620" height="2" fill="#1A1A1A"/>
+
+  <!-- Headline -->
+  <text x="30" y="75" class="headline" font-size="26" fill="#1A1A1A" font-weight="700">20 professionals sitting on</text>
+  <text x="30" y="108" class="headline" font-size="26" fill="#1A1A1A" font-weight="700">untapped API revenue.</text>
+
+  <rect x="30" y="125" width="620" height="0.5" fill="#CCC"/>
+
+  <!-- Row 1 -->
+  <text x="30" y="158" class="body" font-size="13" fill="#1A1A1A" font-weight="700">Mortgage Brokers</text>
+  <text x="220" y="158" class="body" font-size="12" fill="#888">— rate comparison &amp; affordability checks</text>
+
+  <!-- Row 2 -->
+  <text x="30" y="188" class="body" font-size="13" fill="#1A1A1A" font-weight="700">Recruiters</text>
+  <text x="220" y="188" class="body" font-size="12" fill="#888">— salary benchmarks &amp; market data</text>
+
+  <!-- Row 3 -->
+  <text x="30" y="218" class="body" font-size="13" fill="#1A1A1A" font-weight="700">Accountants</text>
+  <text x="220" y="218" class="body" font-size="12" fill="#888">— tax calculations &amp; compliance checks</text>
+
+  <!-- Row 4 -->
+  <text x="30" y="248" class="body" font-size="13" fill="#1A1A1A" font-weight="700">Estate Agents</text>
+  <text x="220" y="248" class="body" font-size="12" fill="#888">— property valuations &amp; market data</text>
+
+  <!-- Row 5 -->
+  <text x="30" y="278" class="body" font-size="13" fill="#1A1A1A" font-weight="700">Solicitors</text>
+  <text x="220" y="278" class="body" font-size="12" fill="#888">— contract clause analysis &amp; compliance</text>
+
+  <!-- Row 6 -->
+  <text x="30" y="308" class="body" font-size="13" fill="#1A1A1A" font-weight="700">Logistics Managers</text>
+  <text x="220" y="308" class="body" font-size="12" fill="#888">— route optimization &amp; carrier rates</text>
+
+  <!-- Row 7 -->
+  <text x="30" y="338" class="body" font-size="13" fill="#1A1A1A" font-weight="700">Compliance Officers</text>
+  <text x="220" y="338" class="body" font-size="12" fill="#888">— regulatory screening &amp; risk scoring</text>
+
+  <!-- Row 8 -->
+  <text x="30" y="368" class="body" font-size="13" fill="#1A1A1A" font-weight="700">Insurance Underwriters</text>
+  <text x="220" y="368" class="body" font-size="12" fill="#888">— risk assessment &amp; premium calculation</text>
+
+  <!-- Row 9 -->
+  <text x="30" y="398" class="body" font-size="13" fill="#1A1A1A" font-weight="700">Pharmacists</text>
+  <text x="220" y="398" class="body" font-size="12" fill="#888">— drug interaction checks &amp; dosage data</text>
+
+  <!-- Row 10 -->
+  <text x="30" y="428" class="body" font-size="13" fill="#1A1A1A" font-weight="700">Quantity Surveyors</text>
+  <text x="220" y="428" class="body" font-size="12" fill="#888">— material costs &amp; project estimation</text>
+
+  <!-- Row 11 -->
+  <text x="30" y="458" class="body" font-size="13" fill="#1A1A1A" font-weight="700">Architects</text>
+  <text x="220" y="458" class="body" font-size="12" fill="#888">— planning permission checks &amp; building regs</text>
+
+  <!-- Row 12 -->
+  <text x="30" y="488" class="body" font-size="13" fill="#1A1A1A" font-weight="700">Energy Assessors</text>
+  <text x="220" y="488" class="body" font-size="12" fill="#888">— EPC ratings &amp; efficiency calculations</text>
+
+  <!-- Row 13 -->
+  <text x="30" y="518" class="body" font-size="13" fill="#1A1A1A" font-weight="700">Financial Advisors</text>
+  <text x="220" y="518" class="body" font-size="12" fill="#888">— portfolio analysis &amp; risk profiling</text>
+
+  <!-- Row 14 -->
+  <text x="30" y="548" class="body" font-size="13" fill="#1A1A1A" font-weight="700">Nutritionists</text>
+  <text x="220" y="548" class="body" font-size="12" fill="#888">— meal planning &amp; macro calculations</text>
+
+  <!-- Row 15 -->
+  <text x="30" y="578" class="body" font-size="13" fill="#1A1A1A" font-weight="700">Immigration Consultants</text>
+  <text x="220" y="578" class="body" font-size="12" fill="#888">— visa eligibility &amp; requirement checks</text>
+
+  <!-- Divider -->
+  <rect x="30" y="605" width="620" height="0.5" fill="#CCC"/>
+
+  <!-- More professions -->
+  <text x="30" y="640" class="body" font-size="13" fill="#C45426" font-weight="600">+ electricians, teachers, farmers, chefs, HR managers...</text>
+
+  <!-- Divider -->
+  <rect x="30" y="665" width="620" height="0.5" fill="#CCC"/>
+
+  <!-- Closing quote -->
+  <text x="30" y="710" class="headline" font-size="22" fill="#1A1A1A" font-style="italic" font-weight="400">Domain expertise</text>
+  <text x="30" y="740" class="headline" font-size="22" fill="#1A1A1A" font-style="italic" font-weight="400">is the moat.</text>
+
+  <!-- CTA -->
+  <rect x="30" y="775" width="620" height="45" fill="#1A1A1A"/>
+  <text x="340" y="803" class="body" font-size="14" fill="#F7F5F0" text-anchor="middle" font-weight="600">List your expertise → payapi.market</text>
+
+  <!-- Bottom rule -->
+  <rect x="30" y="835" width="620" height="1" fill="#CCC"/>
+</svg>

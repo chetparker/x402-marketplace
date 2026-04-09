@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Day 21 — Week 3 Progression</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px; overflow: hidden;
+    background: #F7F5F0;
+    font-family: Helvetica, Arial, sans-serif;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .top-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #2D6B4A; }
+  .bot-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 8px; background: #2D6B4A; }
+
+  .header {
+    font-size: 20px; color: #888; letter-spacing: 4px; margin-bottom: 100px;
+    opacity: 0; animation: fadeIn 0.4s ease 0.2s forwards;
+  }
+  .progression { display: flex; align-items: center; gap: 30px; margin-bottom: 100px; }
+  .week {
+    text-align: center; opacity: 0;
+  }
+  .week:nth-child(1) { animation: popIn 0.5s ease 0.5s forwards; }
+  .week:nth-child(2) { animation: fadeIn 0.3s ease 1.2s forwards; }
+  .week:nth-child(3) { animation: popIn 0.5s ease 1.5s forwards; }
+  .week:nth-child(4) { animation: fadeIn 0.3s ease 2.5s forwards; }
+  .week:nth-child(5) { animation: popIn 0.5s ease 2.8s forwards; }
+
+  .week-amount {
+    font-family: Georgia, serif; font-size: 72px; font-weight: 700;
+  }
+  .week-amount.current { color: #2D6B4A; font-size: 90px; }
+  .week-amount.past { color: #888; }
+  .week-label { font-size: 18px; color: #AAA; margin-top: 8px; }
+  .arrow {
+    font-size: 48px; color: #CCC;
+  }
+
+  .total {
+    font-family: Georgia, serif; font-size: 36px; font-weight: 700; color: #1A1A1A;
+    opacity: 0; animation: slideUp 0.5s ease 3.8s forwards;
+  }
+  .hours {
+    margin-top: 30px;
+    font-family: Georgia, serif; font-size: 42px; font-weight: 700; color: #2D6B4A;
+    opacity: 0; animation: slideUp 0.5s ease 4.5s forwards;
+  }
+  .footer {
+    margin-top: 80px; font-size: 20px; color: #AAA;
+    opacity: 0; animation: fadeIn 0.3s ease 5.2s forwards;
+  }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0.7); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+  <div class="top-bar"></div>
+  <div class="header">WEEKLY PROGRESSION</div>
+  <div class="progression">
+    <div class="week">
+      <div class="week-amount past">£465</div>
+      <div class="week-label">week 1</div>
+    </div>
+    <div class="week"><div class="arrow">→</div></div>
+    <div class="week">
+      <div class="week-amount past">£512</div>
+      <div class="week-label">week 2</div>
+    </div>
+    <div class="week"><div class="arrow">→</div></div>
+    <div class="week">
+      <div class="week-amount current">£560</div>
+      <div class="week-label">week 3</div>
+    </div>
+  </div>
+  <div class="total">£1,537 total</div>
+  <div class="hours">0 hours worked</div>
+  <div class="footer">payapi.market</div>
+  <div class="bot-bar"></div>
+</body>
+</html>

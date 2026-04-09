@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Day 02 — Price Comparison</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px; overflow: hidden;
+    background: #FFFFFF;
+    font-family: Helvetica, Arial, sans-serif;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .container { text-align: center; width: 100%; padding: 0 80px; }
+  .header {
+    font-size: 22px; color: #888; letter-spacing: 5px;
+    margin-bottom: 120px;
+    opacity: 0; animation: fadeIn 0.5s ease 0.3s forwards;
+  }
+  .old-price {
+    font-family: Georgia, serif; font-size: 140px; font-weight: 700; color: #1A1A1A;
+    position: relative; display: inline-block;
+    opacity: 0; animation: fadeIn 0.6s ease 0.5s forwards;
+  }
+  .old-price .strike {
+    position: absolute; left: -20px; right: -20px; top: 50%;
+    height: 6px; background: #C45426;
+    transform: scaleX(0); transform-origin: left;
+    animation: strikeThrough 0.4s ease 2s forwards;
+  }
+  .old-label {
+    font-size: 28px; color: #999; margin-top: 15px;
+    opacity: 0; animation: fadeIn 0.4s ease 0.8s forwards;
+  }
+  .divider {
+    width: 400px; height: 1px; background: #CCC; margin: 80px auto;
+    opacity: 0; animation: fadeIn 0.3s ease 1.5s forwards;
+  }
+  .vs {
+    font-family: Georgia, serif; font-size: 32px; color: #AAA; font-style: italic;
+    margin: -60px 0;
+    opacity: 0; animation: fadeIn 0.3s ease 1.8s forwards;
+  }
+  .new-price {
+    font-family: Georgia, serif; font-size: 140px; font-weight: 700; color: #2D6B4A;
+    opacity: 0; animation: slideUp 0.6s ease 3s forwards;
+  }
+  .new-label {
+    font-size: 28px; color: #999; margin-top: 15px;
+    opacity: 0; animation: fadeIn 0.4s ease 3.3s forwards;
+  }
+  .breakeven {
+    margin-top: 80px; padding: 30px 50px;
+    background: #F0F6F2; border: 2px solid #2D6B4A; border-radius: 8px;
+    font-family: Georgia, serif; font-size: 32px; color: #2D6B4A; font-weight: 700;
+    opacity: 0; animation: slideUp 0.5s ease 5s forwards;
+  }
+  .footer {
+    margin-top: 60px;
+    font-size: 22px; color: #AAA;
+    opacity: 0; animation: fadeIn 0.3s ease 5.3s forwards;
+  }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+  @keyframes strikeThrough { to { transform: scaleX(1); } }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">THE REAL COST OF DATA</div>
+  <div class="old-price">
+    £15,000
+    <div class="strike"></div>
+  </div>
+  <div class="old-label">per year — ZoomInfo</div>
+  <div class="divider"></div>
+  <div class="vs">vs</div>
+  <div class="divider"></div>
+  <div class="new-price">£0.002</div>
+  <div class="new-label">per request — PayAPI Market</div>
+  <div class="breakeven">7.5 million requests to break even</div>
+  <div class="footer">payapi.market</div>
+</div>
+</body>
+</html>

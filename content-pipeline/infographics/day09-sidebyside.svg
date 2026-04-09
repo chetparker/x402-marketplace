@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 680" width="680" height="680">
+  <defs>
+    <style>
+      .headline { font-family: Georgia, 'Times New Roman', serif; }
+      .body { font-family: Helvetica, Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="680" height="680" fill="#F7F5F0"/>
+
+  <!-- Top rule -->
+  <rect x="40" y="30" width="600" height="3" fill="#1A1A1A"/>
+
+  <!-- Header -->
+  <text x="340" y="68" class="body" font-size="11" fill="#888" letter-spacing="2.5" text-anchor="middle">TWO WAYS TO SELL AN API</text>
+  <rect x="40" y="78" width="600" height="0.5" fill="#CCC"/>
+
+  <!-- Left card: TRADITIONAL -->
+  <rect x="40" y="100" width="290" height="460" rx="3" fill="#FFF" stroke="#DDD" stroke-width="1"/>
+  <!-- Card header -->
+  <rect x="40" y="100" width="290" height="40" rx="3" fill="#F2F0EB"/>
+  <rect x="40" y="137" width="290" height="3" fill="#F2F0EB"/>
+  <text x="185" y="126" class="body" font-size="12" fill="#888" text-anchor="middle" font-weight="700" letter-spacing="2">TRADITIONAL</text>
+
+  <text x="60" y="175" class="body" font-size="10" fill="#AAA" letter-spacing="1">SETUP TIME</text>
+  <text x="60" y="195" class="headline" font-size="18" fill="#1A1A1A" font-weight="700">7–14 days</text>
+
+  <rect x="60" y="215" width="250" height="0.5" fill="#EEE"/>
+
+  <text x="60" y="240" class="body" font-size="10" fill="#AAA" letter-spacing="1">YOU NEED</text>
+  <text x="60" y="258" class="body" font-size="12" fill="#1A1A1A">Stripe account</text>
+  <text x="60" y="276" class="body" font-size="12" fill="#1A1A1A">API key management</text>
+  <text x="60" y="294" class="body" font-size="12" fill="#1A1A1A">Billing system</text>
+  <text x="60" y="312" class="body" font-size="12" fill="#1A1A1A">User accounts</text>
+  <text x="60" y="330" class="body" font-size="12" fill="#1A1A1A">Usage tracking</text>
+
+  <rect x="60" y="345" width="250" height="0.5" fill="#EEE"/>
+
+  <text x="60" y="370" class="body" font-size="10" fill="#AAA" letter-spacing="1">MINIMUM CHARGE</text>
+  <text x="60" y="390" class="headline" font-size="18" fill="#C45426" font-weight="700">£0.50</text>
+
+  <text x="60" y="420" class="body" font-size="10" fill="#AAA" letter-spacing="1">PLATFORM FEE</text>
+  <text x="60" y="440" class="headline" font-size="18" fill="#1A1A1A" font-weight="700">2.9% + 30p</text>
+
+  <rect x="60" y="460" width="250" height="0.5" fill="#EEE"/>
+
+  <text x="60" y="485" class="body" font-size="10" fill="#AAA" letter-spacing="1">AI AGENT COMPATIBLE</text>
+  <text x="60" y="510" class="headline" font-size="22" fill="#C45426" font-weight="700">No.</text>
+
+  <!-- Right card: x402 PROTOCOL -->
+  <rect x="350" y="100" width="290" height="460" rx="3" fill="#FFF" stroke="#2D6B4A" stroke-width="1.5"/>
+  <!-- Card header -->
+  <rect x="350" y="100" width="290" height="40" rx="3" fill="#2D6B4A"/>
+  <rect x="350" y="137" width="290" height="3" fill="#2D6B4A"/>
+  <text x="495" y="126" class="body" font-size="12" fill="#FFF" text-anchor="middle" font-weight="700" letter-spacing="2">x402 PROTOCOL</text>
+
+  <text x="370" y="175" class="body" font-size="10" fill="#AAA" letter-spacing="1">SETUP TIME</text>
+  <text x="370" y="195" class="headline" font-size="18" fill="#2D6B4A" font-weight="700">10 minutes</text>
+
+  <rect x="370" y="215" width="250" height="0.5" fill="#EEE"/>
+
+  <text x="370" y="240" class="body" font-size="10" fill="#AAA" letter-spacing="1">YOU NEED</text>
+  <text x="370" y="258" class="body" font-size="12" fill="#1A1A1A">3 lines of middleware</text>
+  <text x="370" y="276" class="body" font-size="12" fill="#888">That's it.</text>
+
+  <rect x="370" y="345" width="250" height="0.5" fill="#EEE"/>
+
+  <text x="370" y="370" class="body" font-size="10" fill="#AAA" letter-spacing="1">MINIMUM CHARGE</text>
+  <text x="370" y="390" class="headline" font-size="18" fill="#2D6B4A" font-weight="700">£0.0001</text>
+
+  <text x="370" y="420" class="body" font-size="10" fill="#AAA" letter-spacing="1">PLATFORM FEE</text>
+  <text x="370" y="440" class="headline" font-size="18" fill="#2D6B4A" font-weight="700">&lt;1%</text>
+
+  <rect x="370" y="460" width="250" height="0.5" fill="#EEE"/>
+
+  <text x="370" y="485" class="body" font-size="10" fill="#AAA" letter-spacing="1">AI AGENT COMPATIBLE</text>
+  <text x="370" y="510" class="headline" font-size="22" fill="#2D6B4A" font-weight="700">Yes.</text>
+
+  <!-- Closing -->
+  <text x="340" y="600" class="headline" font-size="16" fill="#1A1A1A" text-anchor="middle" font-weight="700">Built for humans vs built for agents.</text>
+
+  <!-- Footer -->
+  <rect x="40" y="640" width="600" height="1" fill="#CCC"/>
+  <text x="340" y="665" class="body" font-size="10" fill="#AAA" text-anchor="middle">payapi.market</text>
+</svg>

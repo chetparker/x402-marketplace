@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 1050" width="680" height="1050">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Georgia');
+      .headline { font-family: Georgia, 'Times New Roman', serif; }
+      .body { font-family: Helvetica, Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="680" height="1050" fill="#F7F5F0"/>
+
+  <!-- Top rule -->
+  <rect x="40" y="30" width="600" height="3" fill="#1A1A1A"/>
+
+  <!-- Header -->
+  <text x="40" y="62" class="body" font-size="11" fill="#888" letter-spacing="3" font-weight="400">PAYAPI MARKET</text>
+  <text x="640" y="62" class="body" font-size="10" fill="#888" text-anchor="end">payapi.market</text>
+
+  <!-- Thin rule -->
+  <rect x="40" y="72" width="600" height="0.5" fill="#CCC"/>
+
+  <!-- Headline -->
+  <text x="40" y="118" class="headline" font-size="32" fill="#1A1A1A" font-weight="700">Your expertise is an API</text>
+  <text x="40" y="155" class="headline" font-size="32" fill="#1A1A1A" font-weight="700">waiting to earn.</text>
+
+  <!-- Subhead -->
+  <text x="40" y="185" class="body" font-size="14" fill="#666">Free to list. AI agents pay per request. You keep 97%.</text>
+
+  <!-- Divider -->
+  <rect x="40" y="205" width="600" height="0.5" fill="#CCC"/>
+
+  <!-- THE MARKETPLACE TODAY -->
+  <text x="40" y="235" class="body" font-size="10" fill="#888" letter-spacing="2.5">THE MARKETPLACE TODAY</text>
+
+  <!-- Big numbers row -->
+  <text x="40" y="290" class="headline" font-size="42" fill="#1A1A1A" font-weight="700">72,400</text>
+  <text x="40" y="310" class="body" font-size="11" fill="#888">requests processed</text>
+
+  <text x="230" y="290" class="headline" font-size="42" fill="#2D6B4A" font-weight="700">$2,085</text>
+  <text x="230" y="310" class="body" font-size="11" fill="#888">revenue earned</text>
+
+  <text x="420" y="290" class="headline" font-size="42" fill="#1A1A1A" font-weight="700">10</text>
+  <text x="420" y="310" class="body" font-size="11" fill="#888">live APIs</text>
+
+  <text x="530" y="290" class="headline" font-size="42" fill="#1A1A1A" font-weight="700">65</text>
+  <text x="530" y="310" class="body" font-size="11" fill="#888">endpoints</text>
+
+  <!-- Divider -->
+  <rect x="40" y="335" width="600" height="0.5" fill="#CCC"/>
+
+  <!-- HOW IT WORKS -->
+  <text x="40" y="365" class="body" font-size="10" fill="#888" letter-spacing="2.5">HOW IT WORKS</text>
+
+  <!-- Step 1 -->
+  <circle cx="60" cy="400" r="14" fill="none" stroke="#C45426" stroke-width="1.5"/>
+  <text x="60" y="405" class="headline" font-size="14" fill="#C45426" text-anchor="middle" font-weight="700">1</text>
+  <text x="85" y="397" class="body" font-size="14" fill="#1A1A1A" font-weight="600">List your API</text>
+  <text x="85" y="414" class="body" font-size="11" fill="#888">Upload your endpoints. Set your price per request.</text>
+
+  <!-- Step 2 -->
+  <circle cx="60" cy="455" r="14" fill="none" stroke="#C45426" stroke-width="1.5"/>
+  <text x="60" y="460" class="headline" font-size="14" fill="#C45426" text-anchor="middle" font-weight="700">2</text>
+  <text x="85" y="452" class="body" font-size="14" fill="#1A1A1A" font-weight="600">Agents discover you</text>
+  <text x="85" y="469" class="body" font-size="11" fill="#888">AI agents find your API via MCP registry.</text>
+
+  <!-- Step 3 -->
+  <circle cx="60" cy="510" r="14" fill="none" stroke="#C45426" stroke-width="1.5"/>
+  <text x="60" y="515" class="headline" font-size="14" fill="#C45426" text-anchor="middle" font-weight="700">3</text>
+  <text x="85" y="507" class="body" font-size="14" fill="#1A1A1A" font-weight="600">Get paid per request</text>
+  <text x="85" y="524" class="body" font-size="11" fill="#888">USDC settles instantly. You keep 97%.</text>
+
+  <!-- Divider -->
+  <rect x="40" y="555" width="600" height="0.5" fill="#CCC"/>
+
+  <!-- PRICE COMPARISON -->
+  <text x="40" y="585" class="body" font-size="10" fill="#888" letter-spacing="2.5">PRICE COMPARISON</text>
+
+  <!-- ZoomInfo box -->
+  <rect x="40" y="600" width="290" height="70" fill="#FFF" stroke="#EEE" stroke-width="1"/>
+  <rect x="40" y="600" width="4" height="70" fill="#C45426"/>
+  <text x="55" y="625" class="headline" font-size="22" fill="#C45426" font-weight="700">£15,000</text>
+  <text x="55" y="645" class="body" font-size="11" fill="#888">per year — ZoomInfo</text>
+  <text x="55" y="660" class="body" font-size="10" fill="#AAA">Annual contract required</text>
+
+  <!-- PayAPI box -->
+  <rect x="350" y="600" width="290" height="70" fill="#FFF" stroke="#EEE" stroke-width="1"/>
+  <rect x="350" y="600" width="4" height="70" fill="#2D6B4A"/>
+  <text x="365" y="625" class="headline" font-size="22" fill="#2D6B4A" font-weight="700">£0.002</text>
+  <text x="365" y="645" class="body" font-size="11" fill="#888">per request — PayAPI Market</text>
+  <text x="365" y="660" class="body" font-size="10" fill="#AAA">Pay only for what you use</text>
+
+  <!-- Break-even -->
+  <text x="340" y="695" class="body" font-size="11" fill="#666" text-anchor="middle" font-style="italic">7.5 million requests before you break even.</text>
+
+  <!-- Divider -->
+  <rect x="40" y="715" width="600" height="0.5" fill="#CCC"/>
+
+  <!-- 10 APIs -->
+  <text x="40" y="745" class="body" font-size="10" fill="#888" letter-spacing="2.5">10 LIVE APIs</text>
+
+  <!-- Column 1 -->
+  <circle cx="50" cy="775" r="3" fill="#C45426"/>
+  <text x="62" y="779" class="body" font-size="11" fill="#1A1A1A">UK Company Data</text>
+  <text x="280" y="779" class="body" font-size="11" fill="#888" text-anchor="end">$0.003</text>
+
+  <circle cx="50" cy="798" r="3" fill="#C45426"/>
+  <text x="62" y="802" class="body" font-size="11" fill="#1A1A1A">Postcode Lookup</text>
+  <text x="280" y="802" class="body" font-size="11" fill="#888" text-anchor="end">$0.001</text>
+
+  <circle cx="50" cy="821" r="3" fill="#C45426"/>
+  <text x="62" y="825" class="body" font-size="11" fill="#1A1A1A">Property Valuation</text>
+  <text x="280" y="825" class="body" font-size="11" fill="#888" text-anchor="end">$0.005</text>
+
+  <circle cx="50" cy="844" r="3" fill="#C45426"/>
+  <text x="62" y="848" class="body" font-size="11" fill="#1A1A1A">VAT Validation</text>
+  <text x="280" y="848" class="body" font-size="11" fill="#888" text-anchor="end">$0.002</text>
+
+  <circle cx="50" cy="867" r="3" fill="#C45426"/>
+  <text x="62" y="871" class="body" font-size="11" fill="#1A1A1A">Credit Score Check</text>
+  <text x="280" y="871" class="body" font-size="11" fill="#888" text-anchor="end">$0.008</text>
+
+  <!-- Column 2 -->
+  <circle cx="360" cy="775" r="3" fill="#C45426"/>
+  <text x="372" y="779" class="body" font-size="11" fill="#1A1A1A">Email Verification</text>
+  <text x="600" y="779" class="body" font-size="11" fill="#888" text-anchor="end">$0.001</text>
+
+  <circle cx="360" cy="798" r="3" fill="#C45426"/>
+  <text x="372" y="802" class="body" font-size="11" fill="#1A1A1A">Phone Validation</text>
+  <text x="600" y="802" class="body" font-size="11" fill="#888" text-anchor="end">$0.001</text>
+
+  <circle cx="360" cy="821" r="3" fill="#C45426"/>
+  <text x="372" y="825" class="body" font-size="11" fill="#1A1A1A">Domain WHOIS</text>
+  <text x="600" y="825" class="body" font-size="11" fill="#888" text-anchor="end">$0.002</text>
+
+  <circle cx="360" cy="844" r="3" fill="#C45426"/>
+  <text x="372" y="848" class="body" font-size="11" fill="#1A1A1A">IP Geolocation</text>
+  <text x="600" y="848" class="body" font-size="11" fill="#888" text-anchor="end">$0.001</text>
+
+  <circle cx="360" cy="867" r="3" fill="#C45426"/>
+  <text x="372" y="871" class="body" font-size="11" fill="#1A1A1A">FX Rates</text>
+  <text x="600" y="871" class="body" font-size="11" fill="#888" text-anchor="end">$0.001</text>
+
+  <!-- Divider -->
+  <rect x="40" y="900" width="600" height="0.5" fill="#CCC"/>
+
+  <!-- Closing -->
+  <text x="340" y="935" class="body" font-size="12" fill="#666" text-anchor="middle" font-style="italic">"The marketplace where domain expertise meets AI demand."</text>
+
+  <!-- CTA bar -->
+  <rect x="40" y="965" width="600" height="55" rx="0" fill="#1A1A1A"/>
+  <text x="340" y="998" class="body" font-size="16" fill="#F7F5F0" text-anchor="middle" font-weight="600">payapi.market/list</text>
+
+  <!-- Bottom rule -->
+  <rect x="40" y="1030" width="600" height="1" fill="#CCC"/>
+</svg>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Day 18 — x402 vs Stripe</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px; overflow: hidden;
+    background: #FFFFFF;
+    font-family: Helvetica, Arial, sans-serif;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 160px 60px 0;
+  }
+  .title {
+    font-family: Georgia, serif; font-size: 38px; font-weight: 700; color: #1A1A1A;
+    text-align: center; margin-bottom: 60px;
+    opacity: 0; animation: fadeIn 0.5s ease 0.2s forwards;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    padding: 16px 20px; text-align: left;
+    font-size: 16px; color: #AAA; letter-spacing: 1px;
+    border-bottom: 2px solid #1A1A1A;
+    opacity: 0; animation: fadeIn 0.3s ease 0.5s forwards;
+  }
+  th:nth-child(2) { text-align: center; }
+  th:nth-child(3) { text-align: center; }
+  .col-stripe {
+    background: #F0EEFA; color: #635BFF; font-weight: 700;
+    border-radius: 4px; padding: 6px 20px;
+  }
+  .col-x402 {
+    background: #E8F5E9; color: #2D6B4A; font-weight: 700;
+    border-radius: 4px; padding: 6px 20px;
+  }
+  td {
+    padding: 18px 20px; font-size: 22px; color: #1A1A1A;
+    border-bottom: 1px solid #EEE;
+  }
+  td:nth-child(2) { text-align: center; color: #888; }
+  td:nth-child(3) { text-align: center; color: #2D6B4A; font-weight: 600; }
+  td.bad { color: #C45426; font-weight: 600; }
+  td.good { background: #F8FFF8; }
+
+  tr { opacity: 0; }
+  tr:nth-child(1) { animation: fadeIn 0.3s ease 0.8s forwards; }
+  tr:nth-child(2) { animation: fadeIn 0.3s ease 1.2s forwards; }
+  tr:nth-child(3) { animation: fadeIn 0.3s ease 1.6s forwards; }
+  tr:nth-child(4) { animation: fadeIn 0.3s ease 2.0s forwards; }
+  tr:nth-child(5) { animation: fadeIn 0.3s ease 2.4s forwards; }
+  tr:nth-child(6) { animation: fadeIn 0.3s ease 2.8s forwards; }
+  tr:nth-child(7) { animation: fadeIn 0.3s ease 3.2s forwards; }
+  tr:nth-child(8) { animation: fadeIn 0.3s ease 3.6s forwards; }
+
+  .closing {
+    margin-top: 80px; text-align: center;
+    opacity: 0; animation: fadeIn 0.5s ease 6s forwards;
+  }
+  .closing .line1 {
+    font-family: Georgia, serif; font-size: 28px; font-weight: 700; color: #1A1A1A;
+    margin-bottom: 10px;
+  }
+  .closing .line2 {
+    font-family: Georgia, serif; font-size: 28px; font-weight: 700; color: #2D6B4A;
+  }
+  .footer {
+    margin-top: 60px; font-size: 20px; color: #888; font-style: italic;
+    opacity: 0; animation: fadeIn 0.3s ease 7s forwards;
+  }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+</style>
+</head>
+<body>
+  <div class="title">x402 vs Stripe for API payments</div>
+  <table>
+    <thead>
+      <th style="width:30%">Feature</th>
+      <th style="width:35%"><span class="col-stripe">Stripe</span></th>
+      <th style="width:35%"><span class="col-x402">x402</span></th>
+    </thead>
+    <tbody>
+      <tr><td>Setup</td><td>Days–weeks</td><td class="good">10 minutes</td></tr>
+      <tr><td>Fee on $0.01</td><td class="bad">$0.33</td><td class="good">&lt;$0.0001</td></tr>
+      <tr><td>Settlement</td><td>2–7 days</td><td class="good">Instant</td></tr>
+      <tr><td>Accounts</td><td>3+</td><td class="good">0</td></tr>
+      <tr><td>AI agents</td><td class="bad">Can't use</td><td class="good">Native</td></tr>
+      <tr><td>Min charge</td><td>$0.50</td><td class="good">$0.0001</td></tr>
+      <tr><td>Micropayments</td><td class="bad">Impossible</td><td class="good">Built for it</td></tr>
+      <tr><td>Best for</td><td>Humans</td><td class="good">Agents</td></tr>
+    </tbody>
+  </table>
+  <div class="closing">
+    <div class="line1">Stripe is great for humans.</div>
+    <div class="line2">x402 is great for agents.</div>
+  </div>
+  <div class="footer">Agents are the fastest-growing customer segment.</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 680" width="680" height="680">
+  <defs>
+    <style>
+      .headline { font-family: Georgia, 'Times New Roman', serif; }
+      .body { font-family: Helvetica, Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="680" height="680" fill="#F7F5F0"/>
+
+  <!-- Top rule -->
+  <rect x="60" y="30" width="560" height="3" fill="#1A1A1A"/>
+
+  <!-- Header -->
+  <text x="340" y="65" class="body" font-size="11" fill="#888" letter-spacing="2.5" text-anchor="middle">HOW x402 WORKS</text>
+  <text x="340" y="90" class="headline" font-size="16" fill="#666" text-anchor="middle" font-style="italic">The payment protocol for AI agents.</text>
+
+  <!-- Step 1: Pill -->
+  <rect x="160" y="115" width="360" height="50" rx="25" fill="#FFF" stroke="#1A1A1A" stroke-width="1"/>
+  <text x="195" y="136" class="body" font-size="10" fill="#888" font-weight="600">STEP 1</text>
+  <text x="195" y="155" class="body" font-size="13" fill="#1A1A1A" font-weight="600">AI Agent requests data</text>
+  <text x="480" y="146" class="body" font-size="10" fill="#AAA" text-anchor="end">GET /api/data</text>
+
+  <!-- Arrow 1 (terracotta) -->
+  <line x1="340" y1="165" x2="340" y2="195" stroke="#C45426" stroke-width="2"/>
+  <polygon points="333,190 340,200 347,190" fill="#C45426"/>
+
+  <!-- Step 2: Box -->
+  <rect x="160" y="205" width="360" height="65" rx="3" fill="#FFF" stroke="#C45426" stroke-width="1.5"/>
+  <text x="180" y="228" class="body" font-size="10" fill="#C45426" font-weight="700" letter-spacing="1">STEP 2</text>
+  <text x="180" y="248" class="headline" font-size="18" fill="#C45426" font-weight="700">402 Payment Required</text>
+  <text x="180" y="262" class="body" font-size="10" fill="#888">price: $0.001 · currency: USDC · network: Base</text>
+
+  <!-- Arrow 2 (terracotta) -->
+  <line x1="340" y1="270" x2="340" y2="300" stroke="#C45426" stroke-width="2"/>
+  <polygon points="333,295 340,305 347,295" fill="#C45426"/>
+
+  <!-- Step 3: Pill -->
+  <rect x="160" y="310" width="360" height="50" rx="25" fill="#FFF" stroke="#1A1A1A" stroke-width="1"/>
+  <text x="195" y="331" class="body" font-size="10" fill="#888" font-weight="600">STEP 3</text>
+  <text x="195" y="350" class="body" font-size="13" fill="#1A1A1A" font-weight="600">Agent wallet signs payment</text>
+  <text x="480" y="341" class="body" font-size="9" fill="#AAA" text-anchor="end">USDC · Base · sub-second</text>
+
+  <!-- Arrow 3 (green) -->
+  <line x1="340" y1="360" x2="340" y2="390" stroke="#2D6B4A" stroke-width="2"/>
+  <polygon points="333,385 340,395 347,385" fill="#2D6B4A"/>
+
+  <!-- Step 4: Box -->
+  <rect x="160" y="400" width="360" height="65" rx="3" fill="#F0F6F2" stroke="#2D6B4A" stroke-width="1.5"/>
+  <text x="180" y="423" class="body" font-size="10" fill="#2D6B4A" font-weight="700" letter-spacing="1">STEP 4</text>
+  <text x="180" y="443" class="headline" font-size="18" fill="#2D6B4A" font-weight="700">200 OK + Data</text>
+  <text x="180" y="457" class="body" font-size="10" fill="#666">Payment confirmed. Data delivered. Done.</text>
+
+  <!-- Divider -->
+  <rect x="120" y="495" width="440" height="0.5" fill="#CCC"/>
+
+  <!-- Three stats at bottom -->
+  <text x="180" y="540" class="headline" font-size="30" fill="#1A1A1A" text-anchor="middle" font-weight="700">&lt;1s</text>
+  <text x="180" y="560" class="body" font-size="10" fill="#888" text-anchor="middle">settlement time</text>
+
+  <rect x="270" y="515" width="0.5" height="55" fill="#CCC"/>
+
+  <text x="340" y="540" class="headline" font-size="30" fill="#C45426" text-anchor="middle" font-weight="700">$0.001</text>
+  <text x="340" y="560" class="body" font-size="10" fill="#888" text-anchor="middle">minimum price</text>
+
+  <rect x="410" y="515" width="0.5" height="55" fill="#CCC"/>
+
+  <text x="500" y="540" class="headline" font-size="30" fill="#2D6B4A" text-anchor="middle" font-weight="700">97%</text>
+  <text x="500" y="560" class="body" font-size="10" fill="#888" text-anchor="middle">kept by seller</text>
+
+  <!-- Bottom rule -->
+  <rect x="60" y="600" width="560" height="0.5" fill="#CCC"/>
+
+  <!-- Footer -->
+  <text x="340" y="630" class="body" font-size="12" fill="#666" text-anchor="middle" font-style="italic">No checkout. No subscription. No human in the loop.</text>
+  <text x="340" y="660" class="body" font-size="10" fill="#AAA" text-anchor="middle">payapi.market</text>
+</svg>

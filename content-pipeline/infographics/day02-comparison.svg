@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 680" width="680" height="680">
+  <defs>
+    <style>
+      .headline { font-family: Georgia, 'Times New Roman', serif; }
+      .body { font-family: Helvetica, Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="680" height="680" fill="#FFFFFF"/>
+
+  <!-- Top rule -->
+  <rect x="60" y="40" width="560" height="3" fill="#1A1A1A"/>
+
+  <!-- Header -->
+  <text x="340" y="80" class="body" font-size="11" fill="#888" letter-spacing="3" text-anchor="middle" font-weight="400">THE REAL COST OF DATA</text>
+
+  <!-- ZoomInfo price -->
+  <text x="340" y="190" class="headline" font-size="88" fill="#1A1A1A" text-anchor="middle" font-weight="700">£15,000</text>
+  <text x="340" y="220" class="body" font-size="15" fill="#999" text-anchor="middle">per year — ZoomInfo</text>
+
+  <!-- VS divider -->
+  <rect x="140" y="255" width="160" height="0.5" fill="#CCC"/>
+  <text x="340" y="263" class="headline" font-size="18" fill="#AAA" text-anchor="middle" font-style="italic">vs</text>
+  <rect x="380" y="255" width="160" height="0.5" fill="#CCC"/>
+
+  <!-- PayAPI price -->
+  <text x="340" y="350" class="headline" font-size="88" fill="#2D6B4A" text-anchor="middle" font-weight="700">£0.002</text>
+  <text x="340" y="380" class="body" font-size="15" fill="#999" text-anchor="middle">per request — PayAPI Market</text>
+
+  <!-- Break-even box -->
+  <rect x="120" y="420" width="440" height="55" rx="4" fill="#F0F6F2" stroke="#2D6B4A" stroke-width="1"/>
+  <text x="340" y="454" class="headline" font-size="20" fill="#2D6B4A" text-anchor="middle" font-weight="700">7,500,000 requests</text>
+  <text x="340" y="470" class="body" font-size="11" fill="#2D6B4A" text-anchor="middle">before you'd break even</text>
+
+  <!-- Closing -->
+  <text x="340" y="540" class="body" font-size="13" fill="#666" text-anchor="middle" font-style="italic">AI agents don't need subscriptions.</text>
+  <text x="340" y="560" class="body" font-size="13" fill="#666" text-anchor="middle" font-style="italic">They need vending machines.</text>
+
+  <!-- Bottom rule -->
+  <rect x="60" y="620" width="560" height="1" fill="#CCC"/>
+
+  <!-- Footer -->
+  <text x="340" y="650" class="body" font-size="10" fill="#AAA" text-anchor="middle">payapi.market</text>
+</svg>

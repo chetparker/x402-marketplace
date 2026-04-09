@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Day 14 — Week 2 Results</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px; overflow: hidden;
+    background: #FFFFFF;
+    font-family: Helvetica, Arial, sans-serif;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .top-bar { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: #2D6B4A; }
+  .header {
+    font-size: 20px; color: #888; letter-spacing: 4px; margin-bottom: 80px;
+    opacity: 0; animation: fadeIn 0.4s ease 0.2s forwards;
+  }
+  .big-number {
+    font-family: Georgia, serif; font-size: 180px; font-weight: 700; color: #1A1A1A;
+    opacity: 0; animation: countReveal 1.5s ease 0.5s forwards;
+  }
+  .badge {
+    display: inline-block; margin-top: 20px;
+    padding: 12px 40px; border-radius: 30px;
+    background: #E8F5E9;
+    font-size: 28px; font-weight: 700; color: #2D6B4A;
+    opacity: 0; transform: scale(0.5);
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 2s forwards;
+  }
+  .divider {
+    width: 600px; height: 1px; background: #EEE; margin: 60px 0;
+    opacity: 0; animation: fadeIn 0.3s ease 2.5s forwards;
+  }
+  .stats { display: flex; gap: 80px; }
+  .stat {
+    text-align: center;
+    opacity: 0; transform: translateY(20px);
+  }
+  .stat:nth-child(1) { animation: slideUp 0.4s ease 3s forwards; }
+  .stat:nth-child(2) { animation: slideUp 0.4s ease 3.3s forwards; }
+  .stat:nth-child(3) { animation: slideUp 0.4s ease 3.6s forwards; }
+  .stat-value { font-family: Georgia, serif; font-size: 52px; font-weight: 700; color: #1A1A1A; }
+  .stat-value.green { color: #2D6B4A; }
+  .stat-label { font-size: 18px; color: #888; margin-top: 8px; }
+  .footer {
+    margin-top: 80px; font-size: 20px; color: #AAA;
+    opacity: 0; animation: fadeIn 0.3s ease 4.2s forwards;
+  }
+  .bot-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 8px; background: #2D6B4A; }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+  @keyframes countReveal {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes popIn {
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes slideUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+  <div class="top-bar"></div>
+  <div class="header">WEEK 2 RESULTS</div>
+  <div class="big-number">£512</div>
+  <div class="badge">+10% WoW</div>
+  <div class="divider"></div>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-value">15,840</div>
+      <div class="stat-label">requests</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value green">99.6%</div>
+      <div class="stat-label">uptime</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">118ms</div>
+      <div class="stat-label">latency</div>
+    </div>
+  </div>
+  <div class="footer">payapi.market</div>
+  <div class="bot-bar"></div>
+</body>
+</html>

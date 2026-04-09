@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Day 09 — Side by Side</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px; overflow: hidden;
+    background: #F7F5F0;
+    font-family: Helvetica, Arial, sans-serif;
+    display: flex; flex-direction: column; align-items: center;
+    padding-top: 200px;
+  }
+  .header {
+    font-size: 20px; color: #888; letter-spacing: 4px; margin-bottom: 60px;
+    opacity: 0; animation: fadeIn 0.5s ease 0.3s forwards;
+  }
+  .columns { display: flex; gap: 40px; margin-top: 30px; }
+
+  .card {
+    width: 440px; background: #FFF; border-radius: 6px; overflow: hidden;
+  }
+  .card-traditional {
+    border: 1px solid #DDD;
+    opacity: 0; transform: translateX(-60px);
+    animation: slideRight 0.6s ease 0.5s forwards;
+  }
+  .card-x402 {
+    border: 2px solid #2D6B4A;
+    opacity: 0; transform: translateX(60px);
+    animation: slideLeft 0.6s ease 2s forwards;
+  }
+  .card-header {
+    padding: 20px 30px; text-align: center;
+    font-size: 18px; font-weight: 700; letter-spacing: 3px;
+  }
+  .card-traditional .card-header { background: #F2F0EB; color: #888; }
+  .card-x402 .card-header { background: #2D6B4A; color: #FFF; }
+
+  .card-body { padding: 30px; }
+  .comp-row {
+    margin-bottom: 28px; opacity: 0;
+  }
+  .comp-label { font-size: 14px; color: #AAA; letter-spacing: 1px; margin-bottom: 6px; }
+  .comp-value { font-family: Georgia, serif; font-size: 28px; font-weight: 700; }
+  .card-traditional .comp-value { color: #1A1A1A; }
+  .card-x402 .comp-value { color: #2D6B4A; }
+  .comp-value.bad { color: #C45426; }
+
+  /* Staggered row reveals */
+  .card-traditional .comp-row:nth-child(1) { animation: fadeIn 0.3s ease 1.2s forwards; }
+  .card-traditional .comp-row:nth-child(2) { animation: fadeIn 0.3s ease 1.5s forwards; }
+  .card-traditional .comp-row:nth-child(3) { animation: fadeIn 0.3s ease 1.8s forwards; }
+  .card-traditional .comp-row:nth-child(4) { animation: fadeIn 0.3s ease 1.9s forwards; }
+  .card-traditional .comp-row:nth-child(5) { animation: fadeIn 0.3s ease 2.0s forwards; }
+
+  .card-x402 .comp-row:nth-child(1) { animation: fadeIn 0.3s ease 2.8s forwards; }
+  .card-x402 .comp-row:nth-child(2) { animation: fadeIn 0.3s ease 3.2s forwards; }
+  .card-x402 .comp-row:nth-child(3) { animation: fadeIn 0.3s ease 3.6s forwards; }
+  .card-x402 .comp-row:nth-child(4) { animation: fadeIn 0.3s ease 4.0s forwards; }
+  .card-x402 .comp-row:nth-child(5) { animation: fadeIn 0.3s ease 4.4s forwards; }
+
+  .closing {
+    margin-top: 80px;
+    font-family: Georgia, serif; font-size: 30px; font-weight: 700; color: #1A1A1A;
+    opacity: 0; animation: fadeIn 0.5s ease 5.5s forwards;
+  }
+  .footer {
+    margin-top: 40px; font-size: 20px; color: #AAA;
+    opacity: 0; animation: fadeIn 0.3s ease 6s forwards;
+  }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+  @keyframes slideRight { to { opacity: 1; transform: translateX(0); } }
+  @keyframes slideLeft { to { opacity: 1; transform: translateX(0); } }
+</style>
+</head>
+<body>
+  <div class="header">TWO WAYS TO SELL AN API</div>
+  <div class="columns">
+    <div class="card card-traditional">
+      <div class="card-header">TRADITIONAL</div>
+      <div class="card-body">
+        <div class="comp-row">
+          <div class="comp-label">SETUP TIME</div>
+          <div class="comp-value">7–14 days</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-label">MINIMUM CHARGE</div>
+          <div class="comp-value bad">£0.50</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-label">PLATFORM FEE</div>
+          <div class="comp-value">2.9% + 30p</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-label">YOU NEED</div>
+          <div class="comp-value" style="font-size:20px;">Stripe, keys, billing, accounts</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-label">AI AGENTS</div>
+          <div class="comp-value bad">No.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-x402">
+      <div class="card-header">x402 PROTOCOL</div>
+      <div class="card-body">
+        <div class="comp-row">
+          <div class="comp-label">SETUP TIME</div>
+          <div class="comp-value">10 minutes</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-label">MINIMUM CHARGE</div>
+          <div class="comp-value">£0.0001</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-label">PLATFORM FEE</div>
+          <div class="comp-value">&lt;1%</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-label">YOU NEED</div>
+          <div class="comp-value" style="font-size:20px;">3 lines of middleware</div>
+        </div>
+        <div class="comp-row">
+          <div class="comp-label">AI AGENTS</div>
+          <div class="comp-value">Yes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="closing">Built for humans vs built for agents.</div>
+  <div class="footer">payapi.market</div>
+</body>
+</html>

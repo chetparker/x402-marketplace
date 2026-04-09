@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 680" width="680" height="680">
+  <defs>
+    <style>
+      .headline { font-family: Georgia, 'Times New Roman', serif; }
+      .body { font-family: Helvetica, Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="680" height="680" fill="#FFFFFF"/>
+
+  <!-- Top rule -->
+  <rect x="50" y="30" width="580" height="3" fill="#1A1A1A"/>
+
+  <!-- Header -->
+  <text x="340" y="70" class="body" font-size="11" fill="#888" letter-spacing="2.5" text-anchor="middle">DISCOVERABILITY</text>
+
+  <!-- Headline -->
+  <text x="340" y="115" class="headline" font-size="28" fill="#1A1A1A" text-anchor="middle" font-weight="700">Why your API is invisible.</text>
+
+  <rect x="50" y="135" width="580" height="0.5" fill="#CCC"/>
+
+  <!-- WITHOUT MCP section -->
+  <text x="50" y="170" class="body" font-size="10" fill="#C45426" letter-spacing="2" font-weight="700">WITHOUT MCP</text>
+
+  <rect x="50" y="185" width="580" height="130" rx="4" fill="#FDF5F3" stroke="#C45426" stroke-width="1"/>
+
+  <!-- Flow: Agent → searches → nothing → gives up -->
+  <rect x="75" y="210" width="110" height="36" rx="18" fill="#FFF" stroke="#C45426" stroke-width="1"/>
+  <text x="130" y="233" class="body" font-size="11" fill="#C45426" text-anchor="middle" font-weight="600">AI Agent</text>
+
+  <text x="205" y="233" class="body" font-size="14" fill="#C45426">→</text>
+
+  <text x="230" y="228" class="body" font-size="11" fill="#888">needs data</text>
+
+  <text x="300" y="233" class="body" font-size="14" fill="#C45426">→</text>
+
+  <text x="325" y="228" class="body" font-size="11" fill="#888">searches</text>
+
+  <text x="395" y="233" class="body" font-size="14" fill="#C45426">→</text>
+
+  <text x="425" y="228" class="body" font-size="11" fill="#888">finds nothing</text>
+
+  <text x="520" y="233" class="body" font-size="14" fill="#C45426">→</text>
+
+  <text x="555" y="228" class="body" font-size="11" fill="#C45426" font-weight="700">gives up</text>
+
+  <!-- X mark -->
+  <text x="565" y="293" class="headline" font-size="28" fill="#C45426" text-anchor="middle" font-weight="700">&#10007;</text>
+  <text x="340" y="296" class="body" font-size="12" fill="#C45426" font-style="italic">Your API exists — but no agent knows about it.</text>
+
+  <!-- WITH MCP section -->
+  <text x="50" y="345" class="body" font-size="10" fill="#2D6B4A" letter-spacing="2" font-weight="700">WITH MCP</text>
+
+  <rect x="50" y="360" width="580" height="130" rx="4" fill="#F0F6F2" stroke="#2D6B4A" stroke-width="1"/>
+
+  <!-- Flow: Agent → MCP Registry → Your API -->
+  <rect x="75" y="395" width="130" height="45" rx="22" fill="#FFF" stroke="#2D6B4A" stroke-width="1"/>
+  <text x="140" y="415" class="body" font-size="12" fill="#2D6B4A" text-anchor="middle" font-weight="600">AI Agent</text>
+  <text x="140" y="430" class="body" font-size="9" fill="#888" text-anchor="middle">needs data</text>
+
+  <!-- Arrow -->
+  <line x1="215" y1="418" x2="260" y2="418" stroke="#2D6B4A" stroke-width="2"/>
+  <polygon points="255,412 265,418 255,424" fill="#2D6B4A"/>
+
+  <!-- MCP Registry box -->
+  <rect x="270" y="390" width="140" height="55" rx="4" fill="#2D6B4A"/>
+  <text x="340" y="414" class="body" font-size="11" fill="#FFF" text-anchor="middle" font-weight="700">MCP Registry</text>
+  <text x="340" y="432" class="body" font-size="9" fill="#D4E8DC" text-anchor="middle">discovers &amp; connects</text>
+
+  <!-- Arrow -->
+  <line x1="420" y1="418" x2="465" y2="418" stroke="#2D6B4A" stroke-width="2"/>
+  <polygon points="460,412 470,418 460,424" fill="#2D6B4A"/>
+
+  <!-- Your API box -->
+  <rect x="475" y="395" width="130" height="45" rx="22" fill="#FFF" stroke="#2D6B4A" stroke-width="1"/>
+  <text x="540" y="415" class="body" font-size="12" fill="#2D6B4A" text-anchor="middle" font-weight="600">Your API</text>
+  <text x="540" y="430" class="body" font-size="9" fill="#888" text-anchor="middle">gets paid</text>
+
+  <!-- Check mark -->
+  <text x="565" y="473" class="headline" font-size="28" fill="#2D6B4A" text-anchor="middle" font-weight="700">&#10003;</text>
+
+  <!-- Divider -->
+  <rect x="50" y="515" width="580" height="0.5" fill="#CCC"/>
+
+  <!-- Explanation -->
+  <text x="340" y="548" class="body" font-size="14" fill="#1A1A1A" text-anchor="middle" font-weight="600">MCP = Model Context Protocol</text>
+  <text x="340" y="572" class="body" font-size="12" fill="#888" text-anchor="middle">The standard way AI agents discover and connect to APIs.</text>
+
+  <!-- CTA -->
+  <rect x="170" y="598" width="340" height="40" rx="4" fill="#1A1A1A"/>
+  <text x="340" y="623" class="body" font-size="13" fill="#F7F5F0" text-anchor="middle" font-weight="600">Register once. Every AI agent can find you.</text>
+
+  <!-- Bottom -->
+  <rect x="50" y="655" width="580" height="0.5" fill="#CCC"/>
+  <text x="340" y="675" class="body" font-size="10" fill="#AAA" text-anchor="middle">payapi.market</text>
+</svg>

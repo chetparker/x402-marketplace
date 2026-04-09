@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 680" width="680" height="680">
+  <defs>
+    <style>
+      .headline { font-family: Georgia, 'Times New Roman', serif; }
+      .body { font-family: Helvetica, Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="680" height="680" fill="#FFFFFF"/>
+
+  <!-- Top rule -->
+  <rect x="50" y="30" width="580" height="3" fill="#1A1A1A"/>
+
+  <!-- Small caps header -->
+  <text x="340" y="68" class="body" font-size="10" fill="#888" letter-spacing="3" text-anchor="middle">THE SURPRISING TRUTH</text>
+
+  <!-- Headline -->
+  <text x="340" y="115" class="headline" font-size="24" fill="#1A1A1A" text-anchor="middle" font-weight="700">My most boring API</text>
+  <text x="340" y="148" class="headline" font-size="24" fill="#1A1A1A" text-anchor="middle" font-weight="700">earns the most money.</text>
+
+  <rect x="50" y="170" width="580" height="0.5" fill="#CCC"/>
+
+  <!-- Featured card -->
+  <rect x="80" y="195" width="520" height="100" rx="4" fill="#F7F5F0" stroke="#C45426" stroke-width="1.5"/>
+  <rect x="80" y="195" width="520" height="30" rx="4" fill="#C45426"/>
+  <rect x="80" y="222" width="520" height="3" fill="#C45426"/>
+  <text x="340" y="216" class="body" font-size="11" fill="#FFF" text-anchor="middle" font-weight="700" letter-spacing="1">FEATURED API</text>
+
+  <text x="110" y="260" class="headline" font-size="20" fill="#1A1A1A" font-weight="700">Postcode &amp; Address Lookup</text>
+  <text x="110" y="280" class="body" font-size="12" fill="#888">$0.001 per request · UK postcode to full address</text>
+
+  <!-- Divider -->
+  <rect x="80" y="315" width="520" height="0.5" fill="#CCC"/>
+
+  <!-- Three big stats -->
+  <text x="185" y="375" class="headline" font-size="40" fill="#1A1A1A" text-anchor="middle" font-weight="700">11.4K</text>
+  <text x="185" y="400" class="body" font-size="11" fill="#888" text-anchor="middle">requests this month</text>
+
+  <rect x="290" y="345" width="0.5" height="65" fill="#CCC"/>
+
+  <text x="365" y="375" class="headline" font-size="40" fill="#2D6B4A" text-anchor="middle" font-weight="700">£228</text>
+  <text x="365" y="400" class="body" font-size="11" fill="#888" text-anchor="middle">revenue earned</text>
+
+  <rect x="440" y="345" width="0.5" height="65" fill="#CCC"/>
+
+  <text x="530" y="375" class="headline" font-size="40" fill="#1A1A1A" text-anchor="middle" font-weight="700">45ms</text>
+  <text x="530" y="400" class="body" font-size="11" fill="#888" text-anchor="middle">avg latency</text>
+
+  <!-- Divider -->
+  <rect x="50" y="430" width="580" height="0.5" fill="#CCC"/>
+
+  <!-- WHY IT WINS -->
+  <text x="50" y="462" class="body" font-size="10" fill="#2D6B4A" letter-spacing="2" font-weight="700">WHY IT WINS</text>
+
+  <text x="50" y="495" class="body" font-size="14" fill="#1A1A1A" font-weight="600">Every agent that processes UK addresses needs postcodes.</text>
+
+  <text x="50" y="525" class="body" font-size="13" fill="#666">It's not glamorous. It's not complex. It's not "AI."</text>
+  <text x="50" y="548" class="body" font-size="13" fill="#666">It's a lookup table that runs 11,400 times a month.</text>
+  <text x="50" y="571" class="body" font-size="13" fill="#666">And it earns more than my fanciest API.</text>
+
+  <!-- Divider -->
+  <rect x="50" y="595" width="580" height="0.5" fill="#CCC"/>
+
+  <!-- Closing -->
+  <text x="340" y="632" class="headline" font-size="20" fill="#1A1A1A" text-anchor="middle" font-weight="700" font-style="italic">Boring APIs = reliable revenue.</text>
+
+  <!-- Footer -->
+  <rect x="50" y="655" width="580" height="0.5" fill="#CCC"/>
+  <text x="340" y="675" class="body" font-size="10" fill="#AAA" text-anchor="middle">payapi.market</text>
+</svg>

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 680" width="680" height="680">
+  <defs>
+    <style>
+      .headline { font-family: Georgia, 'Times New Roman', serif; }
+      .body { font-family: Helvetica, Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="680" height="680" fill="#F2F0EB"/>
+
+  <!-- Top rule -->
+  <rect x="30" y="25" width="620" height="2" fill="#1A1A1A"/>
+
+  <!-- Header -->
+  <text x="340" y="65" class="headline" font-size="22" fill="#1A1A1A" text-anchor="middle" font-weight="700">How AI agents actually pay for things.</text>
+  <rect x="30" y="80" width="620" height="0.5" fill="#CCC"/>
+
+  <!-- 4 cards in a row -->
+  <!-- Card 1 -->
+  <rect x="30" y="105" width="140" height="160" rx="4" fill="#FFF" stroke="#DDD" stroke-width="1"/>
+  <circle cx="100" cy="135" r="16" fill="none" stroke="#C45426" stroke-width="1.5"/>
+  <text x="100" y="140" class="headline" font-size="14" fill="#C45426" text-anchor="middle" font-weight="700">1</text>
+  <text x="100" y="170" class="body" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="700">Agent calls</text>
+  <text x="100" y="186" class="body" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="700">API</text>
+  <text x="100" y="210" class="body" font-size="9" fill="#888" text-anchor="middle">GET /api/lookup</text>
+  <text x="100" y="245" class="body" font-size="9" fill="#AAA" text-anchor="middle">Standard HTTP</text>
+
+  <!-- Arrow 1 -->
+  <text x="183" y="185" class="body" font-size="18" fill="#C45426">→</text>
+
+  <!-- Card 2 -->
+  <rect x="200" y="105" width="140" height="160" rx="4" fill="#FFF" stroke="#C45426" stroke-width="1.5"/>
+  <circle cx="270" cy="135" r="16" fill="none" stroke="#C45426" stroke-width="1.5"/>
+  <text x="270" y="140" class="headline" font-size="14" fill="#C45426" text-anchor="middle" font-weight="700">2</text>
+  <text x="270" y="170" class="body" font-size="12" fill="#C45426" text-anchor="middle" font-weight="700">API says</text>
+  <text x="270" y="186" class="body" font-size="12" fill="#C45426" text-anchor="middle" font-weight="700">"pay me"</text>
+  <text x="270" y="210" class="body" font-size="9" fill="#888" text-anchor="middle">HTTP 402</text>
+  <text x="270" y="245" class="body" font-size="9" fill="#AAA" text-anchor="middle">$0.001 USDC</text>
+
+  <!-- Arrow 2 -->
+  <text x="353" y="185" class="body" font-size="18" fill="#C45426">→</text>
+
+  <!-- Card 3 -->
+  <rect x="370" y="105" width="140" height="160" rx="4" fill="#FFF" stroke="#DDD" stroke-width="1"/>
+  <circle cx="440" cy="135" r="16" fill="none" stroke="#C45426" stroke-width="1.5"/>
+  <text x="440" y="140" class="headline" font-size="14" fill="#C45426" text-anchor="middle" font-weight="700">3</text>
+  <text x="440" y="170" class="body" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="700">Agent pays</text>
+  <text x="440" y="186" class="body" font-size="12" fill="#1A1A1A" text-anchor="middle" font-weight="700">USDC</text>
+  <text x="440" y="210" class="body" font-size="9" fill="#888" text-anchor="middle">Wallet signs tx</text>
+  <text x="440" y="245" class="body" font-size="9" fill="#AAA" text-anchor="middle">Sub-second</text>
+
+  <!-- Arrow 3 (green) -->
+  <text x="523" y="185" class="body" font-size="18" fill="#2D6B4A">→</text>
+
+  <!-- Card 4 -->
+  <rect x="540" y="105" width="110" height="160" rx="4" fill="#F0F6F2" stroke="#2D6B4A" stroke-width="1.5"/>
+  <circle cx="595" cy="135" r="16" fill="none" stroke="#2D6B4A" stroke-width="1.5"/>
+  <text x="595" y="140" class="headline" font-size="14" fill="#2D6B4A" text-anchor="middle" font-weight="700">4</text>
+  <text x="595" y="170" class="body" font-size="12" fill="#2D6B4A" text-anchor="middle" font-weight="700">Data</text>
+  <text x="595" y="186" class="body" font-size="12" fill="#2D6B4A" text-anchor="middle" font-weight="700">returned</text>
+  <text x="595" y="210" class="body" font-size="9" fill="#888" text-anchor="middle">200 OK</text>
+  <text x="595" y="245" class="body" font-size="9" fill="#AAA" text-anchor="middle">Done.</text>
+
+  <!-- Divider -->
+  <rect x="30" y="295" width="620" height="0.5" fill="#CCC"/>
+
+  <!-- WHAT DOESN'T HAPPEN -->
+  <text x="30" y="330" class="body" font-size="10" fill="#C45426" letter-spacing="2" font-weight="700">WHAT DOESN'T HAPPEN</text>
+
+  <!-- Two-column list -->
+  <text x="55" y="362" class="body" font-size="13" fill="#888">&#10007;</text>
+  <text x="75" y="362" class="body" font-size="13" fill="#666">No checkout page</text>
+
+  <text x="55" y="390" class="body" font-size="13" fill="#888">&#10007;</text>
+  <text x="75" y="390" class="body" font-size="13" fill="#666">No credit card</text>
+
+  <text x="55" y="418" class="body" font-size="13" fill="#888">&#10007;</text>
+  <text x="75" y="418" class="body" font-size="13" fill="#666">No "contact sales"</text>
+
+  <text x="370" y="362" class="body" font-size="13" fill="#888">&#10007;</text>
+  <text x="390" y="362" class="body" font-size="13" fill="#666">No subscription</text>
+
+  <text x="370" y="390" class="body" font-size="13" fill="#888">&#10007;</text>
+  <text x="390" y="390" class="body" font-size="13" fill="#666">No account creation</text>
+
+  <text x="370" y="418" class="body" font-size="13" fill="#888">&#10007;</text>
+  <text x="390" y="418" class="body" font-size="13" fill="#666">No human in the loop</text>
+
+  <!-- Divider -->
+  <rect x="30" y="448" width="620" height="0.5" fill="#CCC"/>
+
+  <!-- Big stat -->
+  <text x="340" y="500" class="headline" font-size="38" fill="#1A1A1A" text-anchor="middle" font-weight="700">100M+</text>
+  <text x="340" y="525" class="body" font-size="12" fill="#888" text-anchor="middle">transactions processed via x402 protocol</text>
+
+  <!-- Closing -->
+  <text x="340" y="575" class="body" font-size="13" fill="#666" text-anchor="middle" font-style="italic">The future of commerce is machine-to-machine.</text>
+
+  <!-- CTA bar -->
+  <rect x="30" y="610" width="620" height="40" fill="#1A1A1A"/>
+  <text x="340" y="636" class="body" font-size="13" fill="#F7F5F0" text-anchor="middle" font-weight="600">payapi.market — where agents pay per request</text>
+
+  <!-- Bottom rule -->
+  <rect x="30" y="665" width="620" height="1" fill="#CCC"/>
+</svg>
