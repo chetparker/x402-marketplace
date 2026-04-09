@@ -134,7 +134,8 @@ function enrichRow(row) {
     Has_Numbers: hasNumbers,
     Has_List: hasList,
     Post_Format: 'text only',
-    Status: 'Ready',
+    // Status omitted — singleSelect field. Set manually in Airtable or
+    // via a separate PATCH after adding 'Ready' as an option.
   };
 }
 
