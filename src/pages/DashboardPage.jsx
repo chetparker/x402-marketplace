@@ -1,0 +1,192 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import PageShell from '../components/PageShell';
+import SEOHead from '../components/SEOHead';
+import { C, F, M } from '../theme';
+import {
+  getSession, setSession, clearSession,
+  getProviderByEmail, getListingsByProvider, updateListing,
+} from '../lib/store';
+
+const inputStyle = {
+  width: '100%', background: C.sf, border: `1px solid ${C.bd}`, borderRadius: 8,
+  padding: '10px 14px', color: C.t, fontSize: 14, outline: 'none', fontFamily: F,
+  boxSizing: 'border-box',
+};
+
+function LoginGate({ onLogin }) {
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState(null);
+
+  function handleLogin(e) {
+    e.preventDefault();
+    const prov = getProviderByEmail(email.trim().toLowerCase());
+    if (!prov) {
+      setError('No provider account found for this email. Have you listed an API yet?');
+      return;
+    }
+    setSession(prov.email);
+    onLogin(prov);
+  }
+
+  return (
+    <div style={{ maxWidth: 400, margin: '0 auto', padding: '80px 32px', textAlign: 'center' }}>
+      <h1 style={{ margin: '0 0 8px', fontSize: 24, fontWeight: 700, color: C.t, fontFamily: F }}>Provider Dashboard</h1>
+      <p style={{ margin: '0 0 28px', fontSize: 14, color: C.tM }}>Enter your email to access your listings.</p>
+      <form onSubmit={handleLogin}>
+        <input
+          style={{ ...inputStyle, marginBottom: 12 }}
+          type="email" value={email} onChange={e => setEmail(e.target.value)}
+          placeholder="you@company.com" required
+        />
+        <button type="submit" style={{
+          width: '100%', padding: '10px 0', borderRadius: 8, border: 'none',
+          background: '#1D4ED8', color: '#FFFFFF', fontSize: 14, fontWeight: 500,
+          cursor: 'pointer', fontFamily: F,
+        }}>Sign in</button>
+      </form>
+      {error && <p style={{ margin: '12px 0 0', fontSize: 13, color: '#EF4444' }}>{error}</p>}
+      <p style={{ marginTop: 20, fontSize: 13, color: C.tD }}>
+        Don't have an account? <Link to="/list" style={{ color: '#3B82F6' }}>List your API first</Link>.
+      </p>
+    </div>
+  );
+}
+
+const STATUS_COLORS = {
+  pending_review: '#F59E0B',
+  live: '#10B981',
+  rejected: '#EF4444',
+  paused: C.tD,
+};
+
+function StatCard({ value, label }) {
+  return (
+    <div style={{ background: C.sf, border: `1px solid ${C.bd}`, borderRadius: 10, padding: '18px 16px', textAlign: 'center' }}>
+      <div style={{ fontSize: 22, fontWeight: 700, color: C.t, fontFamily: F }}>{value}</div>
+      <div style={{ fontSize: 11, color: C.tD, marginTop: 4 }}>{label}</div>
+    </div>
+  );
+}
+
+function Dashboard({ provider, onLogout }) {
+  const [listings, setListings] = useState(() => getListingsByProvider(provider.id));
+
+  function togglePause(listing) {
+    const newStatus = listing.status === 'paused' ? 'live' : 'paused';
+    updateListing(listing.id, { status: newStatus });
+    setListings(getListingsByProvider(provider.id));
+  }
+
+  const liveCount = listings.filter(l => l.status === 'live').length;
+
+  return (
+    <div style={{ maxWidth: 760, margin: '0 auto', padding: '48px 32px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
+        <div>
+          <h1 style={{ margin: '0 0 4px', fontSize: 24, fontWeight: 700, color: C.t, fontFamily: F }}>Dashboard</h1>
+          <p style={{ margin: 0, fontSize: 13, color: C.tD }}>{provider.email} · {provider.tier} tier</p>
+        </div>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <Link to="/list" style={{
+            padding: '8px 16px', borderRadius: 8, border: `1px solid ${C.bd}`,
+            background: 'transparent', color: C.tM, fontSize: 13, textDecoration: 'none', fontFamily: F,
+          }}>+ Add API</Link>
+          <button onClick={onLogout} style={{
+            padding: '8px 16px', borderRadius: 8, border: `1px solid ${C.bd}`,
+            background: 'transparent', color: C.tD, fontSize: 13, cursor: 'pointer', fontFamily: F,
+          }}>Sign out</button>
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 32 }}>
+        <StatCard value={`$0`} label="Total revenue (USDC)" />
+        <StatCard value="—" label="30d requests" />
+        <StatCard value="—" label="Uptime" />
+        <StatCard value={liveCount} label="Live APIs" />
+      </div>
+
+      {/* Tier upgrade */}
+      {provider.tier === 'free' && (
+        <div style={{
+          background: C.sf, border: `1px solid ${C.bd}`, borderRadius: 10,
+          padding: '18px 22px', marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        }}>
+          <div>
+            <div style={{ fontSize: 14, fontWeight: 600, color: C.t }}>Upgrade to Featured</div>
+            <div style={{ fontSize: 13, color: C.tM, marginTop: 2 }}>$49/mo — priority placement, reduced 2.5% fee, gold card.</div>
+          </div>
+          <button style={{
+            padding: '8px 18px', borderRadius: 8, border: 'none',
+            background: '#1D4ED8', color: '#FFFFFF', fontSize: 13, fontWeight: 500,
+            cursor: 'pointer', fontFamily: F,
+          }}>Upgrade</button>
+          {/* TODO:STRIPE — redirect to Stripe Checkout for Featured tier on click */}
+        </div>
+      )}
+
+      {/* Listings */}
+      <h2 style={{ margin: '0 0 14px', fontSize: 18, fontWeight: 600, color: C.t, fontFamily: F }}>My APIs</h2>
+      {listings.length === 0 ? (
+        <div style={{ background: C.sf, border: `1px solid ${C.bd}`, borderRadius: 10, padding: 32, textAlign: 'center' }}>
+          <p style={{ margin: '0 0 12px', fontSize: 14, color: C.tM }}>No APIs listed yet.</p>
+          <Link to="/list" style={{ color: '#3B82F6', fontSize: 14 }}>List your first API →</Link>
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {listings.map(l => (
+            <div key={l.id} style={{ background: C.sf, border: `1px solid ${C.bd}`, borderRadius: 10, padding: '16px 20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                <div>
+                  <div style={{ fontSize: 15, fontWeight: 600, color: C.t }}>{l.name}</div>
+                  <div style={{ fontSize: 12, color: C.tD, marginTop: 2 }}>{l.category} · {l.endpoints_count} endpoints · ${l.price_min}–${l.price_max}/req</div>
+                </div>
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                  <span style={{
+                    padding: '3px 10px', borderRadius: 100, fontSize: 11, fontWeight: 600,
+                    color: STATUS_COLORS[l.status] || C.tD,
+                    background: `${STATUS_COLORS[l.status] || C.tD}15`,
+                  }}>{l.status.replace('_', ' ')}</span>
+                  {(l.status === 'live' || l.status === 'paused') && (
+                    <button onClick={() => togglePause(l)} style={{
+                      padding: '4px 12px', borderRadius: 6, border: `1px solid ${C.bd}`,
+                      background: 'transparent', color: C.tD, fontSize: 11, cursor: 'pointer', fontFamily: F,
+                    }}>{l.status === 'paused' ? 'Unpause' : 'Pause'}</button>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function DashboardPage() {
+  const [provider, setProvider] = useState(() => {
+    const email = getSession();
+    return email ? getProviderByEmail(email) : null;
+  });
+
+  function handleLogin(prov) {
+    setProvider(prov);
+  }
+
+  function handleLogout() {
+    clearSession();
+    setProvider(null);
+  }
+
+  return (
+    <PageShell>
+      <SEOHead title="Provider Dashboard — PayAPI Market" path="/dashboard" noindex />
+      {provider ? (
+        <Dashboard provider={provider} onLogout={handleLogout} />
+      ) : (
+        <LoginGate onLogin={handleLogin} />
+      )}
+    </PageShell>
+  );
+}

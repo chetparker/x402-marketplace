@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SEOHead from "./components/SEOHead";
 import EmailCapture from "./components/EmailCapture";
 import { computeCardStats, computeTotalStats, getDaysSinceLaunch, getDayOfYear } from "./growth";
+import { getLiveListings, getProviderById } from "./lib/store";
 
 // Two-color system: white text + #3B82F6 accent. Legacy color keys
 // (gn/am/gold/pu/rd) are aliased to neutral gray so the rest of the
@@ -286,12 +287,30 @@ export default function App(){
   const[reg,sR]=useState(false);
   const[pricing,sP]=useState(false);
 
+  // Merge hardcoded seed APIs with any provider-submitted live listings
+  // from the localStorage store. Provider listings get c=0 (show pill).
+  const providerListings=getLiveListings().map(l=>{
+    const prov=getProviderById(l.provider_id);
+    return {
+      id:l.id,name:l.name,by:prov?prov.name:"provider",
+      tag:l.description,desc:l.description,
+      ep:l.endpoints_count||0,pr:`$${l.price_min}–$${l.price_max}`,
+      net:l.network||"Base",cat:l.category||"Data",
+      tags:[l.category?.toLowerCase()].filter(Boolean),
+      st:"live",vf:true,ft:false,
+      tier:prov?.tier==="featured"?"featured":"free",
+      url:l.base_url,sse:l.mcp_endpoint||`${l.base_url}/mcp/sse`,
+      c:0,r:0,up:99.9,ms:200,
+    };
+  });
+  const allApis=[...APIS,...providerListings];
+
   // Daily growth: enrich every API with computed (c, r) for today before
   // filtering/sorting. days/doy are read once per render so all cards and
   // the totals row use a consistent timestamp.
   const days=getDaysSinceLaunch();
   const doy=getDayOfYear();
-  const enriched=APIS.map((a,idx)=>{const s=computeCardStats(a,idx,days,doy);return {...a,c:s.c,r:s.r,justLaunched:s.justLaunched};});
+  const enriched=allApis.map((a,idx)=>{const s=computeCardStats(a,idx,days,doy);return {...a,c:s.c,r:s.r,justLaunched:s.justLaunched};});
 
   const sorted=enriched.filter(a=>{const s=q.toLowerCase();return(!s||a.name.toLowerCase().includes(s)||a.tag.toLowerCase().includes(s)||a.tags.some(t=>t.includes(s)))&&(cat==="All"||a.cat===cat)});
   const featured=sorted.filter(a=>a.tier==="featured").sort((a,b)=>b.c-a.c);
@@ -321,7 +340,7 @@ export default function App(){
             <Link to="/about" style={{padding:"10px 12px",fontSize:13,color:C.tM,textDecoration:"none",fontFamily:F}}>About</Link>
             <Link to="/calculator" style={{padding:"11px 16px",borderRadius:10,border:`1px solid ${C.bd}`,background:"transparent",color:C.tM,fontSize:13,fontFamily:F,textDecoration:"none"}}>Calculator</Link>
             <Link to="/pricing" style={{padding:"11px 18px",borderRadius:10,border:`1px solid ${C.bd}`,background:"transparent",color:C.tM,fontSize:13,fontFamily:F,textDecoration:"none"}}>Pricing</Link>
-            <button onClick={()=>sR(true)} style={{padding:"9px 16px",borderRadius:8,border:"1px solid #1D4ED8",cursor:"pointer",background:"#1D4ED8",color:"#FFFFFF",fontSize:13,fontWeight:500,fontFamily:F}}>List your API</button>
+            <Link to="/list" style={{padding:"9px 16px",borderRadius:8,border:"1px solid #1D4ED8",background:"#1D4ED8",color:"#FFFFFF",fontSize:13,fontWeight:500,fontFamily:F,textDecoration:"none"}}>List your API</Link>
           </div>
         </div>
         <div style={{display:"flex",gap:36,marginBottom:18}}>
@@ -353,7 +372,7 @@ export default function App(){
 
     <div style={{maxWidth:1120,margin:"14px auto",padding:"0 32px 48px",display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(360px,1fr))",gap:16}}>
       {f.map((a,i)=><Card key={a.id} a={a} idx={i} onClick={sSel}/>)}
-      {!f.length&&<div style={{gridColumn:"1/-1",textAlign:"center",padding:"60px 0"}}><p style={{fontSize:15,color:C.tD}}>No APIs found.</p><button onClick={()=>sR(true)} style={{marginTop:10,padding:"10px 20px",borderRadius:10,border:`1px solid ${C.ac}`,background:"transparent",color:C.ac,cursor:"pointer",fontSize:13}}>List yours →</button></div>}
+      {!f.length&&<div style={{gridColumn:"1/-1",textAlign:"center",padding:"60px 0"}}><p style={{fontSize:15,color:C.tD}}>No APIs found.</p><Link to="/list" style={{marginTop:10,display:"inline-block",padding:"10px 20px",borderRadius:10,border:`1px solid ${C.ac}`,color:C.ac,fontSize:13,textDecoration:"none"}}>List yours →</Link></div>}
     </div>
 
     <div style={{maxWidth:760,margin:"24px auto 0",padding:"0 32px"}}>
@@ -366,7 +385,7 @@ export default function App(){
         <h2 style={{margin:"0 0 8px",fontSize:22,fontWeight:800,color:C.t}}>Already built an MCP server?</h2>
         <p style={{margin:"0 0 20px",fontSize:14,color:C.tM,lineHeight:1.6}}>Add x402 payments in 10 minutes and start earning from every agent that calls your API. Free to list. You keep 97%+ of all revenue.</p>
         <div style={{display:"flex",gap:12,justifyContent:"center"}}>
-          <button onClick={()=>sR(true)} style={{padding:"10px 20px",borderRadius:8,border:"1px solid #1D4ED8",background:"#1D4ED8",color:"#FFFFFF",fontSize:14,fontWeight:500,cursor:"pointer",fontFamily:F}}>List your API free</button>
+          <Link to="/list" style={{padding:"10px 20px",borderRadius:8,border:"1px solid #1D4ED8",background:"#1D4ED8",color:"#FFFFFF",fontSize:14,fontWeight:500,fontFamily:F,textDecoration:"none"}}>List your API free</Link>
           <button onClick={()=>sP(true)} style={{padding:"10px 20px",borderRadius:8,border:`1px solid ${C.bd}`,background:"transparent",color:C.t,fontSize:14,fontWeight:500,cursor:"pointer",fontFamily:F}}>View pricing</button>
         </div>
       </div>

@@ -20,6 +20,7 @@ const STATIC_ROUTES = [
   { path: '/agents', priority: 0.9, changefreq: 'weekly' },
   { path: '/developers', priority: 0.9, changefreq: 'weekly' },
   { path: '/enterprises', priority: 0.9, changefreq: 'weekly' },
+  { path: '/list', priority: 0.9, changefreq: 'monthly' },
 ];
 
 const BLOG_POSTS = [
