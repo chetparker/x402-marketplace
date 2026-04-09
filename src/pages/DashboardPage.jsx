@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageShell from '../components/PageShell';
 import SEOHead from '../components/SEOHead';
@@ -17,16 +17,25 @@ const inputStyle = {
 function LoginGate({ onLogin }) {
   const [email, setEmail] = useState('');
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
-    const prov = getProviderByEmail(email.trim().toLowerCase());
-    if (!prov) {
-      setError('No provider account found for this email. Have you listed an API yet?');
-      return;
+    setLoading(true);
+    setError(null);
+    try {
+      const prov = await getProviderByEmail(email.trim().toLowerCase());
+      if (!prov) {
+        setError('No provider account found for this email. Have you listed an API yet?');
+        setLoading(false);
+        return;
+      }
+      setSession(prov.email);
+      onLogin(prov);
+    } catch (err) {
+      setError('Connection error. Please try again.');
     }
-    setSession(prov.email);
-    onLogin(prov);
+    setLoading(false);
   }
 
   return (
@@ -39,11 +48,11 @@ function LoginGate({ onLogin }) {
           type="email" value={email} onChange={e => setEmail(e.target.value)}
           placeholder="you@company.com" required
         />
-        <button type="submit" style={{
+        <button type="submit" disabled={loading} style={{
           width: '100%', padding: '10px 0', borderRadius: 8, border: 'none',
           background: '#1D4ED8', color: '#FFFFFF', fontSize: 14, fontWeight: 500,
-          cursor: 'pointer', fontFamily: F,
-        }}>Sign in</button>
+          cursor: 'pointer', fontFamily: F, opacity: loading ? 0.6 : 1,
+        }}>{loading ? 'Checking...' : 'Sign in'}</button>
       </form>
       {error && <p style={{ margin: '12px 0 0', fontSize: 13, color: '#EF4444' }}>{error}</p>}
       <p style={{ marginTop: 20, fontSize: 13, color: C.tD }}>
@@ -70,12 +79,18 @@ function StatCard({ value, label }) {
 }
 
 function Dashboard({ provider, onLogout }) {
-  const [listings, setListings] = useState(() => getListingsByProvider(provider.id));
+  const [listings, setListings] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  function togglePause(listing) {
+  useEffect(() => {
+    getListingsByProvider(provider.id).then(data => { setListings(data); setLoading(false); });
+  }, [provider.id]);
+
+  async function togglePause(listing) {
     const newStatus = listing.status === 'paused' ? 'live' : 'paused';
-    updateListing(listing.id, { status: newStatus });
-    setListings(getListingsByProvider(provider.id));
+    await updateListing(listing.id, { status: newStatus });
+    const refreshed = await getListingsByProvider(provider.id);
+    setListings(refreshed);
   }
 
   const liveCount = listings.filter(l => l.status === 'live').length;
@@ -99,15 +114,13 @@ function Dashboard({ provider, onLogout }) {
         </div>
       </div>
 
-      {/* Stats */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 32 }}>
-        <StatCard value={`$0`} label="Total revenue (USDC)" />
+        <StatCard value="$0" label="Total revenue (USDC)" />
         <StatCard value="—" label="30d requests" />
         <StatCard value="—" label="Uptime" />
         <StatCard value={liveCount} label="Live APIs" />
       </div>
 
-      {/* Tier upgrade */}
       {provider.tier === 'free' && (
         <div style={{
           background: C.sf, border: `1px solid ${C.bd}`, borderRadius: 10,
@@ -115,20 +128,20 @@ function Dashboard({ provider, onLogout }) {
         }}>
           <div>
             <div style={{ fontSize: 14, fontWeight: 600, color: C.t }}>Upgrade to Featured</div>
-            <div style={{ fontSize: 13, color: C.tM, marginTop: 2 }}>$49/mo — priority placement, reduced 2.5% fee, gold card.</div>
+            <div style={{ fontSize: 13, color: C.tM, marginTop: 2 }}>$49/mo — priority placement, reduced 2.5% fee.</div>
           </div>
           <button style={{
             padding: '8px 18px', borderRadius: 8, border: 'none',
             background: '#1D4ED8', color: '#FFFFFF', fontSize: 13, fontWeight: 500,
             cursor: 'pointer', fontFamily: F,
           }}>Upgrade</button>
-          {/* TODO:STRIPE — redirect to Stripe Checkout for Featured tier on click */}
         </div>
       )}
 
-      {/* Listings */}
       <h2 style={{ margin: '0 0 14px', fontSize: 18, fontWeight: 600, color: C.t, fontFamily: F }}>My APIs</h2>
-      {listings.length === 0 ? (
+      {loading ? (
+        <p style={{ color: C.tD }}>Loading...</p>
+      ) : listings.length === 0 ? (
         <div style={{ background: C.sf, border: `1px solid ${C.bd}`, borderRadius: 10, padding: 32, textAlign: 'center' }}>
           <p style={{ margin: '0 0 12px', fontSize: 14, color: C.tM }}>No APIs listed yet.</p>
           <Link to="/list" style={{ color: '#3B82F6', fontSize: 14 }}>List your first API →</Link>
@@ -165,19 +178,21 @@ function Dashboard({ provider, onLogout }) {
 }
 
 export default function DashboardPage() {
-  const [provider, setProvider] = useState(() => {
+  const [provider, setProvider] = useState(null);
+  const [checking, setChecking] = useState(true);
+
+  useEffect(() => {
     const email = getSession();
-    return email ? getProviderByEmail(email) : null;
-  });
+    if (email) {
+      getProviderByEmail(email).then(prov => { setProvider(prov); setChecking(false); });
+    } else {
+      setChecking(false);
+    }
+  }, []);
 
-  function handleLogin(prov) {
-    setProvider(prov);
-  }
+  function handleLogout() { clearSession(); setProvider(null); }
 
-  function handleLogout() {
-    clearSession();
-    setProvider(null);
-  }
+  if (checking) return <PageShell><div style={{ padding: 80, textAlign: 'center', color: C.tD }}>Loading...</div></PageShell>;
 
   return (
     <PageShell>
@@ -185,7 +200,7 @@ export default function DashboardPage() {
       {provider ? (
         <Dashboard provider={provider} onLogout={handleLogout} />
       ) : (
-        <LoginGate onLogin={handleLogin} />
+        <LoginGate onLogin={prov => setProvider(prov)} />
       )}
     </PageShell>
   );

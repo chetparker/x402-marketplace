@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PageShell from '../components/PageShell';
 import SEOHead from '../components/SEOHead';
 import { C, F, M } from '../theme';
@@ -61,45 +61,52 @@ function PasswordGate({ onAuth }) {
 
 function AdminPanel() {
   const [tab, setTab] = useState('pending');
-  const [listings, setListings] = useState(() => getAllListings());
-  const [providers, setProviders] = useState(() => getAllProviders());
+  const [listings, setListings] = useState([]);
+  const [providers, setProviders] = useState([]);
   const [rejectId, setRejectId] = useState(null);
   const [rejectReason, setRejectReason] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  function refresh() {
-    setListings(getAllListings());
-    setProviders(getAllProviders());
+  async function refresh() {
+    const [l, p] = await Promise.all([getAllListings(), getAllProviders()]);
+    setListings(l);
+    setProviders(p);
+    setLoading(false);
   }
 
-  function approveListing(id) {
-    const listing = updateListing(id, { status: 'live' });
+  useEffect(() => { refresh(); }, []);
+
+  async function approveListing(id) {
+    const listing = await updateListing(id, { status: 'live' });
     if (listing) {
-      const prov = getProviderById(listing.provider_id);
+      const prov = await getProviderById(listing.provider_id);
       if (prov) {
-        updateProvider(prov.id, { status: 'approved' });
+        await updateProvider(prov.id, { status: 'approved' });
         notifyProviderApproved(prov, listing);
       }
     }
-    refresh();
+    await refresh();
   }
 
-  function rejectListing(id) {
-    const listing = updateListing(id, { status: 'rejected' });
+  async function rejectListing(id) {
+    const listing = await updateListing(id, { status: 'rejected' });
     if (listing) {
-      const prov = getProviderById(listing.provider_id);
+      const prov = await getProviderById(listing.provider_id);
       if (prov) notifyProviderRejected(prov, listing, rejectReason);
     }
     setRejectId(null);
     setRejectReason('');
-    refresh();
+    await refresh();
   }
 
-  function toggleSuspendProvider(provId) {
+  async function toggleSuspendProvider(provId) {
     const prov = providers.find(p => p.id === provId);
     if (!prov) return;
-    updateProvider(provId, { status: prov.status === 'suspended' ? 'approved' : 'suspended' });
-    refresh();
+    await updateProvider(provId, { status: prov.status === 'suspended' ? 'approved' : 'suspended' });
+    await refresh();
   }
+
+  if (loading) return <div style={{ padding: 60, textAlign: 'center', color: C.tD }}>Loading...</div>;
 
   const tabStyle = (active) => ({
     padding: '8px 16px', borderRadius: 8, border: 'none', cursor: 'pointer',
@@ -208,7 +215,7 @@ function AdminPanel() {
             <div key={p.id} style={{ background: C.sf, border: `1px solid ${C.bd}`, borderRadius: 8, padding: '12px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <span style={{ fontSize: 14, color: C.t, fontWeight: 500 }}>{p.name}</span>
-                <span style={{ fontSize: 12, color: C.tD, marginLeft: 10 }}>{p.email} · {p.tier} · {getListingsByStatus('live').filter(l => l.provider_id === p.id).length} live</span>
+                <span style={{ fontSize: 12, color: C.tD, marginLeft: 10 }}>{p.email} · {p.tier} · {listings.filter(l => l.provider_id === p.id && l.status === 'live').length} live</span>
               </div>
               <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                 <span style={{

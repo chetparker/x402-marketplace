@@ -47,13 +47,22 @@ export default function ListPage() {
   const uP = up(provider, setProvider);
   const uA = up(api, setApi);
 
-  function handleSubmit() {
-    const prov = createProvider(provider);
-    const listing = createListing({ ...api, provider_id: prov.id });
-    setSession(prov.email);
-    notifyProviderWelcome(prov);
-    notifyAdminNewListing(listing, prov);
-    setSubmitted(true);
+  const [submitting, setSubmitting] = useState(false);
+
+  async function handleSubmit() {
+    setSubmitting(true);
+    try {
+      const prov = await createProvider(provider);
+      if (!prov) { setSubmitting(false); return; }
+      const listing = await createListing({ ...api, provider_id: prov.id });
+      setSession(prov.email);
+      notifyProviderWelcome(prov);
+      if (listing) notifyAdminNewListing(listing, prov);
+      setSubmitted(true);
+    } catch (err) {
+      console.error('[list] submit error:', err);
+    }
+    setSubmitting(false);
   }
 
   if (submitted) {
@@ -222,7 +231,7 @@ export default function ListPage() {
             {step < 3 ? (
               <button onClick={() => setStep(step + 1)} style={btnPrimary}>Continue</button>
             ) : (
-              <button onClick={handleSubmit} style={{ ...btnPrimary, background: '#10B981' }}>Submit Listing</button>
+              <button onClick={handleSubmit} disabled={submitting} style={{ ...btnPrimary, background: '#10B981', opacity: submitting ? 0.6 : 1 }}>{submitting ? 'Submitting...' : 'Submit Listing'}</button>
             )}
           </div>
         </div>

@@ -1,142 +1,139 @@
-// Data store for the provider marketplace.
+// Data store for the provider marketplace — Supabase backend.
 //
-// MVP: localStorage-backed. Every function here has the same signature it
-// would have with a Supabase/Postgres backend — when you're ready to
-// migrate, replace the internals of each function and leave the callers
-// untouched.
-//
-// LIMITATION: localStorage is per-browser. A provider who signs up in
-// Chrome won't appear in Safari's admin panel. For production, swap to
-// Supabase (see README or search "TODO:SUPABASE" in this file).
+// Every function is async and returns the data directly (or null on error).
+// Callers must await. Session helpers remain synchronous (sessionStorage).
 
-const PROVIDERS_KEY = 'payapi_providers';
-const LISTINGS_KEY  = 'payapi_listings';
-const SESSION_KEY   = 'payapi_session';
+import { supabase, isConfigured } from './supabase';
 
-function uid() {
-  return crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36);
-}
-
-function readAll(key) {
-  try { return JSON.parse(localStorage.getItem(key) || '[]'); }
-  catch { return []; }
-}
-
-function writeAll(key, data) {
-  localStorage.setItem(key, JSON.stringify(data));
-}
+const SESSION_KEY = 'payapi_session';
 
 // ---------------------------------------------------------------------------
 // Providers
 // ---------------------------------------------------------------------------
-export function createProvider({ email, name, company_name, wallet_address }) {
-  const providers = readAll(PROVIDERS_KEY);
-  const existing = providers.find(p => p.email === email);
-  if (existing) return existing; // idempotent
+export async function createProvider({ email, name, company_name, wallet_address }) {
+  if (!isConfigured) return null;
+  // Upsert-like: return existing if email already registered
+  const { data: existing } = await supabase
+    .from('providers').select('*').eq('email', email).maybeSingle();
+  if (existing) return existing;
 
-  const provider = {
-    id: uid(),
-    email,
-    name,
-    company_name: company_name || null,
-    wallet_address,
-    stripe_customer_id: null,
-    tier: 'free',
-    status: 'pending',
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  };
-  providers.push(provider);
-  writeAll(PROVIDERS_KEY, providers);
-  return provider;
+  const { data, error } = await supabase
+    .from('providers')
+    .insert({ email, name, company_name: company_name || null, wallet_address })
+    .select()
+    .single();
+  if (error) { console.error('[store] createProvider error:', error.message); return null; }
+  return data;
 }
 
-export function getProviderByEmail(email) {
-  return readAll(PROVIDERS_KEY).find(p => p.email === email) || null;
+export async function getProviderByEmail(email) {
+  if (!isConfigured) return null;
+  const { data } = await supabase
+    .from('providers').select('*').eq('email', email).maybeSingle();
+  return data || null;
 }
 
-export function getProviderById(id) {
-  return readAll(PROVIDERS_KEY).find(p => p.id === id) || null;
+export async function getProviderById(id) {
+  if (!isConfigured) return null;
+  const { data } = await supabase
+    .from('providers').select('*').eq('id', id).maybeSingle();
+  return data || null;
 }
 
-export function updateProvider(id, data) {
-  const providers = readAll(PROVIDERS_KEY);
-  const idx = providers.findIndex(p => p.id === id);
-  if (idx === -1) return null;
-  providers[idx] = { ...providers[idx], ...data, updated_at: new Date().toISOString() };
-  writeAll(PROVIDERS_KEY, providers);
-  return providers[idx];
+export async function updateProvider(id, updates) {
+  if (!isConfigured) return null;
+  const { data, error } = await supabase
+    .from('providers')
+    .update({ ...updates, updated_at: new Date().toISOString() })
+    .eq('id', id)
+    .select()
+    .single();
+  if (error) { console.error('[store] updateProvider error:', error.message); return null; }
+  return data;
 }
 
-export function getAllProviders() {
-  return readAll(PROVIDERS_KEY);
+export async function getAllProviders() {
+  if (!isConfigured) return [];
+  const { data } = await supabase.from('providers').select('*').order('created_at', { ascending: false });
+  return data || [];
 }
 
 // ---------------------------------------------------------------------------
-// Listings (API entries submitted by providers)
+// Listings
 // ---------------------------------------------------------------------------
-export function createListing({
+export async function createListing({
   provider_id, name, description, category,
   base_url, mcp_endpoint, endpoints_count, tools_count,
   price_min, price_max,
 }) {
-  const listings = readAll(LISTINGS_KEY);
-  const listing = {
-    id: uid(),
-    provider_id,
-    name,
-    description,
-    category: category || 'Data',
-    base_url,
-    mcp_endpoint: mcp_endpoint || null,
-    endpoints_count: parseInt(endpoints_count) || 0,
-    tools_count: parseInt(tools_count) || 0,
-    price_min: parseFloat(price_min) || 0.001,
-    price_max: parseFloat(price_max) || 0.001,
-    network: 'base',
-    status: 'pending_review',
-    health_status: null,
-    uptime_percentage: null,
-    avg_latency_ms: null,
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  };
-  listings.push(listing);
-  writeAll(LISTINGS_KEY, listings);
-  return listing;
+  if (!isConfigured) return null;
+  const { data, error } = await supabase
+    .from('api_listings')
+    .insert({
+      provider_id, name, description,
+      category: category || 'Data',
+      base_url,
+      mcp_endpoint: mcp_endpoint || null,
+      endpoints_count: parseInt(endpoints_count) || 0,
+      tools_count: parseInt(tools_count) || 0,
+      price_min: parseFloat(price_min) || 0.001,
+      price_max: parseFloat(price_max) || 0.001,
+    })
+    .select()
+    .single();
+  if (error) { console.error('[store] createListing error:', error.message); return null; }
+  return data;
 }
 
-export function getListingById(id) {
-  return readAll(LISTINGS_KEY).find(l => l.id === id) || null;
+export async function getListingById(id) {
+  if (!isConfigured) return null;
+  const { data } = await supabase
+    .from('api_listings').select('*, providers(*)').eq('id', id).maybeSingle();
+  return data || null;
 }
 
-export function getListingsByProvider(providerId) {
-  return readAll(LISTINGS_KEY).filter(l => l.provider_id === providerId);
+export async function getListingsByProvider(providerId) {
+  if (!isConfigured) return [];
+  const { data } = await supabase
+    .from('api_listings').select('*').eq('provider_id', providerId).order('created_at', { ascending: false });
+  return data || [];
 }
 
-export function getListingsByStatus(status) {
-  return readAll(LISTINGS_KEY).filter(l => l.status === status);
+export async function getListingsByStatus(status) {
+  if (!isConfigured) return [];
+  const { data } = await supabase
+    .from('api_listings').select('*, providers(*)').eq('status', status).order('created_at', { ascending: false });
+  return data || [];
 }
 
-export function getLiveListings() {
-  return readAll(LISTINGS_KEY).filter(l => l.status === 'live');
+export async function getLiveListings() {
+  if (!isConfigured) return [];
+  const { data } = await supabase
+    .from('api_listings').select('*, providers(*)').eq('status', 'live').order('created_at', { ascending: false });
+  return data || [];
 }
 
-export function updateListing(id, data) {
-  const listings = readAll(LISTINGS_KEY);
-  const idx = listings.findIndex(l => l.id === id);
-  if (idx === -1) return null;
-  listings[idx] = { ...listings[idx], ...data, updated_at: new Date().toISOString() };
-  writeAll(LISTINGS_KEY, listings);
-  return listings[idx];
+export async function updateListing(id, updates) {
+  if (!isConfigured) return null;
+  const { data, error } = await supabase
+    .from('api_listings')
+    .update({ ...updates, updated_at: new Date().toISOString() })
+    .eq('id', id)
+    .select()
+    .single();
+  if (error) { console.error('[store] updateListing error:', error.message); return null; }
+  return data;
 }
 
-export function getAllListings() {
-  return readAll(LISTINGS_KEY);
+export async function getAllListings() {
+  if (!isConfigured) return [];
+  const { data } = await supabase
+    .from('api_listings').select('*, providers(*)').order('created_at', { ascending: false });
+  return data || [];
 }
 
 // ---------------------------------------------------------------------------
-// Session (simple email-based "auth" — MVP only)
+// Session (synchronous — sessionStorage, not Supabase)
 // ---------------------------------------------------------------------------
 export function setSession(email) {
   sessionStorage.setItem(SESSION_KEY, email);

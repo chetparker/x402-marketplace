@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SEOHead from "./components/SEOHead";
 import EmailCapture from "./components/EmailCapture";
 import { computeCardStats, computeTotalStats, getDaysSinceLaunch, getDayOfYear } from "./growth";
-import { getLiveListings, getProviderById } from "./lib/store";
+import { getLiveListings } from "./lib/store";
 
 // Two-color system: white text + #3B82F6 accent. Legacy color keys
 // (gn/am/gold/pu/rd) are aliased to neutral gray so the rest of the
@@ -287,22 +287,27 @@ export default function App(){
   const[reg,sR]=useState(false);
   const[pricing,sP]=useState(false);
 
-  // Merge hardcoded seed APIs with any provider-submitted live listings
-  // from the localStorage store. Provider listings get c=0 (show pill).
-  const providerListings=getLiveListings().map(l=>{
-    const prov=getProviderById(l.provider_id);
-    return {
-      id:l.id,name:l.name,by:prov?prov.name:"provider",
-      tag:l.description,desc:l.description,
-      ep:l.endpoints_count||0,pr:`$${l.price_min}–$${l.price_max}`,
-      net:l.network||"Base",cat:l.category||"Data",
-      tags:[l.category?.toLowerCase()].filter(Boolean),
-      st:"live",vf:true,ft:false,
-      tier:prov?.tier==="featured"?"featured":"free",
-      url:l.base_url,sse:l.mcp_endpoint||`${l.base_url}/mcp/sse`,
-      c:0,r:0,up:99.9,ms:200,
-    };
-  });
+  // Merge hardcoded seed APIs with provider-submitted live listings from Supabase.
+  const [providerListings,setPL]=useState([]);
+  useEffect(()=>{
+    getLiveListings().then(rows=>{
+      const mapped=rows.map(l=>{
+        const prov=l.providers; // joined via Supabase select('*, providers(*)')
+        return {
+          id:l.id,name:l.name,by:prov?prov.name:"provider",
+          tag:l.description||"",desc:l.description||"",
+          ep:l.endpoints_count||0,pr:`$${l.price_min}–$${l.price_max}`,
+          net:l.network||"Base",cat:l.category||"Data",
+          tags:[l.category?.toLowerCase()].filter(Boolean),
+          st:"live",vf:true,ft:false,
+          tier:prov?.tier==="featured"?"featured":"free",
+          url:l.base_url,sse:l.mcp_endpoint||`${l.base_url}/mcp/sse`,
+          c:0,r:0,up:l.uptime_percentage||99.9,ms:l.avg_latency_ms||200,
+        };
+      });
+      setPL(mapped);
+    });
+  },[]);
   const allApis=[...APIS,...providerListings];
 
   // Daily growth: enrich every API with computed (c, r) for today before
