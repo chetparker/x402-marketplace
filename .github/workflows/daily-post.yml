@@ -24,7 +24,7 @@ jobs:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
           BLOTATO_API_KEY: ${{ secrets.BLOTATO_API_KEY }}
-        run: node content-pipeline/post-daily.js
+        run: node content-pipeline/post-daily.js --live
 
   scrape:
     if: github.event.schedule == '0 10 * * *'
