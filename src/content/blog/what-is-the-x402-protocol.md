@@ -1,23 +1,25 @@
 ## What is the x402 protocol?
 
-**x402 is an open payment protocol that revives HTTP status code 402 ("Payment Required") so that AI agents and software clients can pay for API requests on a per-call basis using stablecoins.** Instead of API keys or monthly subscriptions, an x402-enabled server responds to an unauthenticated request with a signed payment requirement; the client signs a USDC transfer for the exact amount, retries, and gets the response. Settlement is on-chain — typically Base — and finalizes in under a second.
+HTTP status code 402 was reserved for "future use" in 1997. Twenty-nine years later, Coinbase built a payment protocol on top of it. That protocol is x402.
 
-x402 was originally proposed as part of the agent payments stack and is designed specifically for use cases where the client is not a human: autonomous agents, batch jobs, and CI pipelines that need to call APIs they have no prior relationship with.
+**x402 lets AI agents pay for API calls using USDC.** No API keys. No accounts. No subscriptions. The agent makes a request, the server says "pay me $0.001", the agent signs a USDC transfer, and the server returns the data. The whole thing takes about 400 milliseconds.
+
+Settlement happens on Base (Coinbase's L2 network). The payment is the auth.
 
 ## How x402 works in 4 steps
 
 1. **Client makes a request** to a protected endpoint with no auth.
-2. **Server responds 402** with a JSON body specifying the payment amount, recipient address, asset (USDC), network (Base), and a nonce.
+2. **Server responds 402** with a JSON body: price, recipient wallet address, asset (USDC), network (Base), and a nonce.
 3. **Client signs a USDC transfer** for that exact amount and retries the request with the signed payment as a header.
-4. **Server verifies the payment**, broadcasts it on-chain, and returns the response. Settlement is final in ~400ms.
+4. **Server verifies the payment**, broadcasts it on-chain, and returns the response. Settlement is final in about 400ms.
 
-There are no accounts. No API keys. No invoices. The payment *is* the auth.
+No accounts. No API keys. No invoices. The payment *is* the auth.
 
-## Why x402 matters
+## Why this matters
 
-The current API economy is built around two assumptions: (1) the customer is a human who can sign up, and (2) usage is predictable enough to bill monthly. AI agents break both. They can't fill out signup forms, they don't have credit cards, and their usage spikes from zero to a million calls in a single task.
+The current API economy assumes two things: the customer is a human who can sign up, and usage is predictable enough to bill monthly. AI agents break both assumptions. They can't fill out forms. They don't have credit cards. Their usage spikes from zero to a million calls in a single task.
 
-x402 collapses signup, billing and authentication into a single per-request step. The agent doesn't need to know the API exists in advance, doesn't need to manage credentials, and only pays for the responses it actually gets.
+x402 collapses signup, billing, and authentication into a single per-request step. The agent doesn't need to know the API exists in advance, doesn't need to manage credentials, and only pays for the responses it actually gets.
 
 ## Comparison to alternatives
 
@@ -37,7 +39,7 @@ It's a payment protocol layered on HTTP. Settlement happens on-chain (Base by de
 USDC is the default. Any ERC-20 stablecoin can be supported with the right facilitator.
 
 **Do I need a wallet to use x402 as a developer?**
-Yes — to receive payments you need an EVM wallet address. To make payments your client needs a funded wallet.
+Yes. To receive payments you need an EVM wallet address. To make payments your client needs a funded wallet.
 
 **How is x402 different from L402?**
-L402 settles over the Bitcoin Lightning Network and is closely tied to Lightning's UX. x402 settles on EVM chains using USDC, which is closer to how today's AI agents already hold value. Both share the spirit of HTTP 402.
+L402 settles over the Bitcoin Lightning Network. x402 settles on EVM chains using USDC, which is closer to how today's AI agents already hold value. Both use the spirit of HTTP 402.

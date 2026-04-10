@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import PageShell from '../components/PageShell';
 import SEOHead from '../components/SEOHead';
 import EmailCapture from '../components/EmailCapture';
-import { POSTS } from '../content/blog/posts';
+import { PUBLISHED_POSTS } from '../content/blog/posts';
 import { C, F, M } from '../theme';
 
 export default function BlogIndex() {
@@ -20,7 +20,7 @@ export default function BlogIndex() {
           </p>
 
           <div style={{ display: 'grid', gap: 16 }}>
-            {POSTS.map(p => (
+            {PUBLISHED_POSTS.map(p => (
               <Link
                 key={p.slug}
                 to={`/blog/${p.slug}`}
