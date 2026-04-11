@@ -41,6 +41,8 @@ function TierCard({ tier }) {
       borderRadius: 14,
       padding: '32px 32px',
       position: 'relative',
+      display: 'flex',
+      flexDirection: 'column',
       boxShadow: pop ? '0 4px 20px rgba(245,200,66,0.1)' : 'none',
     }}>
       {pop && (
@@ -58,7 +60,7 @@ function TierCard({ tier }) {
       </div>
       <div style={{ fontSize: 13, color: C.am, fontFamily: M, marginBottom: 18 }}>{tier.fee} platform fee</div>
       <div style={{ fontSize: 13, color: C.gn, fontFamily: M, marginBottom: 18 }}>{tier.kept} you keep</div>
-      <div style={{ borderTop: `1px solid ${C.bd}`, paddingTop: 18 }}>
+      <div style={{ borderTop: `1px solid ${C.bd}`, paddingTop: 18, flex: 1 }}>
         {tier.features.map(f => (
           <div key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, padding: '6px 0' }}>
             <span style={{ color: tier.color, fontSize: 14 }}>✓</span>
@@ -66,6 +68,39 @@ function TierCard({ tier }) {
           </div>
         ))}
       </div>
+      <Link
+        to={tier.ctaHref}
+        style={pop ? {
+          display: 'block',
+          marginTop: 22,
+          padding: '13px 0',
+          borderRadius: 10,
+          background: '#1D4ED8',
+          border: 'none',
+          color: '#FFFFFF',
+          fontSize: 14,
+          fontWeight: 700,
+          textDecoration: 'none',
+          textAlign: 'center',
+          fontFamily: F,
+          boxShadow: '0 2px 12px rgba(29,78,216,0.25)',
+        } : {
+          display: 'block',
+          marginTop: 22,
+          padding: '13px 0',
+          borderRadius: 10,
+          background: 'transparent',
+          border: `1px solid ${C.bd}`,
+          color: C.t,
+          fontSize: 14,
+          fontWeight: 600,
+          textDecoration: 'none',
+          textAlign: 'center',
+          fontFamily: F,
+        }}
+      >
+        {tier.ctaLabel}
+      </Link>
     </div>
   );
 }
@@ -81,6 +116,8 @@ export default function PricingPage() {
       fee: '3%',
       kept: '97%',
       color: C.ac,
+      ctaLabel: 'Get Started Free',
+      ctaHref: '/list',
       features: [
         'Unlimited API listings',
         'MCP Registry auto-sync',
@@ -98,6 +135,8 @@ export default function PricingPage() {
       kept: '97.5%',
       color: C.gold,
       popular: true,
+      ctaLabel: 'Go Featured — $49/mo',
+      ctaHref: '/list?tier=featured',
       features: [
         'Everything in Free',
         '★ Gold badge + highlighted card',

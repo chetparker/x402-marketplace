@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import PageShell from '../components/PageShell';
 import SEOHead from '../components/SEOHead';
 import { C, F, M } from '../theme';
@@ -37,11 +37,13 @@ function Field({ label, children }) {
 }
 
 export default function ListPage() {
+  const [searchParams] = useSearchParams();
+  const initialTier = searchParams.get('tier') === 'featured' ? 'featured' : 'free';
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [provider, setProvider] = useState({ name: '', email: '', company_name: '', wallet_address: '' });
   const [api, setApi] = useState({ name: '', description: '', category: 'Data', base_url: '', mcp_endpoint: '', endpoints_count: '', tools_count: '', price_min: '0.001', price_max: '0.001' });
-  const [tier, setTier] = useState('free');
+  const [tier, setTier] = useState(initialTier);
 
   const up = (obj, setObj) => (key, val) => setObj(prev => ({ ...prev, [key]: val }));
   const uP = up(provider, setProvider);
