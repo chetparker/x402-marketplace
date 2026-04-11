@@ -1,66 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PageShell from '../components/PageShell';
 import SEOHead from '../components/SEOHead';
 import { C, F, M } from '../theme';
 import {
-  getSession, setSession, clearSession,
-  getProviderByEmail, getListingsByProvider, updateListing,
+  getSession, clearSession,
+  getProviderById, getListingsByProvider, updateListing,
 } from '../lib/store';
-
-const inputStyle = {
-  width: '100%', background: C.sf, border: `1px solid ${C.bd}`, borderRadius: 8,
-  padding: '10px 14px', color: C.t, fontSize: 14, outline: 'none', fontFamily: F,
-  boxSizing: 'border-box',
-};
-
-function LoginGate({ onLogin }) {
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  async function handleLogin(e) {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    try {
-      const prov = await getProviderByEmail(email.trim().toLowerCase());
-      if (!prov) {
-        setError('No provider account found for this email. Have you listed an API yet?');
-        setLoading(false);
-        return;
-      }
-      setSession(prov.email);
-      onLogin(prov);
-    } catch (err) {
-      setError('Connection error. Please try again.');
-    }
-    setLoading(false);
-  }
-
-  return (
-    <div style={{ maxWidth: 400, margin: '0 auto', padding: '80px 32px', textAlign: 'center' }}>
-      <h1 style={{ margin: '0 0 8px', fontSize: 24, fontWeight: 700, color: C.t, fontFamily: F }}>Provider Dashboard</h1>
-      <p style={{ margin: '0 0 28px', fontSize: 14, color: C.tM }}>Enter your email to access your listings.</p>
-      <form onSubmit={handleLogin}>
-        <input
-          style={{ ...inputStyle, marginBottom: 12 }}
-          type="email" value={email} onChange={e => setEmail(e.target.value)}
-          placeholder="you@company.com" required
-        />
-        <button type="submit" disabled={loading} style={{
-          width: '100%', padding: '10px 0', borderRadius: 8, border: 'none',
-          background: '#1D4ED8', color: '#FFFFFF', fontSize: 14, fontWeight: 500,
-          cursor: 'pointer', fontFamily: F, opacity: loading ? 0.6 : 1,
-        }}>{loading ? 'Checking...' : 'Sign in'}</button>
-      </form>
-      {error && <p style={{ margin: '12px 0 0', fontSize: 13, color: '#EF4444' }}>{error}</p>}
-      <p style={{ marginTop: 20, fontSize: 13, color: C.tD }}>
-        Don't have an account? <Link to="/list" style={{ color: '#3B82F6' }}>List your API first</Link>.
-      </p>
-    </div>
-  );
-}
 
 const STATUS_COLORS = {
   pending_review: '#F59E0B',
@@ -78,20 +24,13 @@ function StatCard({ value, label }) {
   );
 }
 
-function Dashboard({ provider, onLogout }) {
+function Dashboard({ provider, onLogout, stripeStatus }) {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [upgrading, setUpgrading] = useState(false);
-  const [stripeStatus, setStripeStatus] = useState(null);
 
   useEffect(() => {
     getListingsByProvider(provider.id).then(data => { setListings(data); setLoading(false); });
-    const params = new URLSearchParams(window.location.search);
-    const flag = params.get('stripe');
-    if (flag === 'success' || flag === 'cancelled') {
-      setStripeStatus(flag);
-      window.history.replaceState({}, '', window.location.pathname);
-    }
   }, [provider.id]);
 
   async function togglePause(listing) {
@@ -220,30 +159,88 @@ function Dashboard({ provider, onLogout }) {
 }
 
 export default function DashboardPage() {
+  const navigate = useNavigate();
   const [provider, setProvider] = useState(null);
   const [checking, setChecking] = useState(true);
+  const [stripeStatus, setStripeStatus] = useState(null);
 
   useEffect(() => {
-    const email = getSession();
-    if (email) {
-      getProviderByEmail(email).then(prov => { setProvider(prov); setChecking(false); });
-    } else {
+    let cancelled = false;
+
+    async function init() {
+      const id = getSession();
+      if (!id) {
+        navigate('/login', { replace: true });
+        return;
+      }
+
+      const prov = await getProviderById(id);
+      if (cancelled) return;
+
+      if (!prov) {
+        // Stored id doesn't resolve — stale localStorage. Clear and bounce.
+        clearSession();
+        navigate('/login', { replace: true });
+        return;
+      }
+
+      setProvider(prov);
       setChecking(false);
+
+      // Pull the Stripe redirect flag and clean it from the URL bar.
+      const params = new URLSearchParams(window.location.search);
+      const flag = params.get('stripe');
+      if (flag === 'success' || flag === 'cancelled') {
+        setStripeStatus(flag);
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+
+      // After Stripe success, the webhook may not have updated providers.tier
+      // yet — there's a race between the browser redirect and Stripe's
+      // server-to-server delivery. Poll a few times until we see 'featured'.
+      if (flag === 'success' && prov.tier !== 'featured') {
+        for (let i = 0; i < 6; i++) {
+          await new Promise(r => setTimeout(r, 1500));
+          if (cancelled) return;
+          const fresh = await getProviderById(id);
+          if (fresh?.tier === 'featured') {
+            setProvider(fresh);
+            return;
+          }
+          // Even if tier isn't flipped yet, refresh the object so any other
+          // fields the webhook touched (e.g. stripe_customer_id) come through.
+          if (fresh) setProvider(fresh);
+        }
+      }
     }
-  }, []);
 
-  function handleLogout() { clearSession(); setProvider(null); }
+    init();
+    return () => { cancelled = true; };
+  }, [navigate]);
 
-  if (checking) return <PageShell><div style={{ padding: 80, textAlign: 'center', color: C.tD }}>Loading...</div></PageShell>;
+  function handleLogout() {
+    clearSession();
+    setProvider(null);
+    navigate('/login', { replace: true });
+  }
+
+  if (checking) {
+    return (
+      <PageShell>
+        <div style={{ padding: 80, textAlign: 'center', color: C.tD }}>Loading...</div>
+      </PageShell>
+    );
+  }
+
+  if (!provider) {
+    // Safety net — useEffect should have already navigated away.
+    return null;
+  }
 
   return (
     <PageShell>
       <SEOHead title="Provider Dashboard — PayAPI Market" path="/dashboard" noindex />
-      {provider ? (
-        <Dashboard provider={provider} onLogout={handleLogout} />
-      ) : (
-        <LoginGate onLogin={prov => setProvider(prov)} />
-      )}
+      <Dashboard provider={provider} onLogout={handleLogout} stripeStatus={stripeStatus} />
     </PageShell>
   );
 }

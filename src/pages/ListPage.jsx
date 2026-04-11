@@ -67,7 +67,7 @@ export default function ListPage() {
       const listing = await createListing({ ...api, provider_id: prov.id, status: listingStatus });
       if (!listing) throw new Error('Failed to create listing — the API details may be invalid.');
 
-      setSession(prov.email);
+      setSession(prov.id);
       notifyProviderWelcome(prov);
 
       if (tier === 'featured') {

@@ -20,7 +20,7 @@ function Header() {
           <span style={{ fontSize: 22, fontWeight: 800, color: C.ac, fontFamily: M }}>payapi</span>
           <span style={{ fontSize: 16, fontWeight: 300, color: C.tM }}>market</span>
         </Link>
-        <nav style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+        <nav style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
           {NAV.map(n => (
             <Link
               key={n.to}
@@ -38,6 +38,22 @@ function Header() {
               {n.label}
             </Link>
           ))}
+          <Link
+            to="/login"
+            style={{
+              marginLeft: 6,
+              padding: '8px 16px',
+              borderRadius: 8,
+              border: `1px solid ${C.bd}`,
+              fontSize: 13,
+              color: C.t,
+              textDecoration: 'none',
+              fontFamily: F,
+              fontWeight: 600,
+            }}
+          >
+            Log in
+          </Link>
         </nav>
       </div>
     </div>
@@ -54,7 +70,7 @@ function Footer() {
         </div>
         <div>
           <div style={{ fontSize: 11, color: C.tD, textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600, marginBottom: 8 }}>Product</div>
-          {[['/', 'Marketplace'], ['/calculator', 'Revenue Calculator'], ['/pricing', 'Pricing']].map(([to, l]) => (
+          {[['/', 'Marketplace'], ['/calculator', 'Revenue Calculator'], ['/pricing', 'Pricing'], ['/login', 'Log in']].map(([to, l]) => (
             <Link key={to} to={to} style={{ display: 'block', fontSize: 13, color: C.tM, textDecoration: 'none', padding: '3px 0' }}>{l}</Link>
           ))}
         </div>

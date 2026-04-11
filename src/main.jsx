@@ -14,6 +14,7 @@ import ForDevelopers from './pages/ForDevelopers.jsx'
 import ForEnterprise from './pages/ForEnterprise.jsx'
 import ListPage from './pages/ListPage.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
 import AdminPage from './pages/AdminPage.jsx'
 
 document.body.style.margin = '0'
@@ -36,6 +37,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/developers" element={<ForDevelopers />} />
           <Route path="/enterprises" element={<ForEnterprise />} />
           <Route path="/list" element={<ListPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/admin" element={<AdminPage />} />
         </Routes>

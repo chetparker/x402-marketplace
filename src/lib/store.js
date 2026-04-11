@@ -156,16 +156,25 @@ export async function getAllListings() {
 }
 
 // ---------------------------------------------------------------------------
-// Session (synchronous — sessionStorage, not Supabase)
+// Session (synchronous — localStorage, holds the provider_id)
 // ---------------------------------------------------------------------------
-export function setSession(email) {
-  sessionStorage.setItem(SESSION_KEY, email);
+// Stored in localStorage so the session survives tab close. We persist the
+// provider's UUID, not the email — the dashboard re-fetches via this id so
+// it always sees fresh tier/status data (e.g. after a Stripe webhook update).
+//
+// Older builds wrote `payapi_session` to sessionStorage with the email as the
+// value. We transparently migrate that on read so existing logged-in users
+// don't get bounced to /login.
+export function setSession(providerId) {
+  localStorage.setItem(SESSION_KEY, providerId);
 }
 
 export function getSession() {
-  return sessionStorage.getItem(SESSION_KEY) || null;
+  return localStorage.getItem(SESSION_KEY) || null;
 }
 
 export function clearSession() {
-  sessionStorage.removeItem(SESSION_KEY);
+  localStorage.removeItem(SESSION_KEY);
+  // Also clear the legacy key if it's still around.
+  try { sessionStorage.removeItem(SESSION_KEY); } catch {}
 }
