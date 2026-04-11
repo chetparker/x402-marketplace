@@ -18,15 +18,20 @@ PayAPI Market is built for the agent economy. Every listed API speaks the Model 
 
 ### Live API listings (launch catalogue, April 2026)
 
-| API | Endpoints | Price range | Categories |
+| API | Endpoints | Price range | Coverage |
 |---|---|---|---|
-| UK Data API | 24 | $0.001 – $0.01 | Property, vehicle, weather, crime, regulation |
-| Crypto Oracle | 15 | $0.0005 – $0.005 | Prices, DEX pools, on-chain analytics |
-| Global Weather | 8 | $0.0008 – $0.003 | Forecasts, alerts, marine, historical |
-| EU Compliance Check | 10 | $0.005 – $0.02 | GDPR, PSD2, MiCA, sanctions, VAT |
-| Geospatial Intel | 12 | $0.001 – $0.008 | Geocoding, isochrones, demographics |
+| UK Data API | 24 | $0.001 – $0.002 | Land Registry, EPC, Companies House, DVLA, BoE rates, weather, crime, flood risk |
+| Email Verification API | 4 | $0.001 | SMTP check, disposable-domain filter, catch-all detection |
+| Company Enrichment API | 6 | $0.003 – $0.005 | Companies House lookup, directors, filings, SIC codes, financials |
+| Postcode & Address Lookup | 5 | $0.001 | UK postcode to address, validation, autocomplete, geocoding |
+| Currency & Crypto API | 5 | $0.001 | FX rates, crypto spot prices, historical series, conversion |
+| Screenshot & PDF Capture | 4 | $0.002 | Headless browser rendering, full-page screenshots, PDF export |
+| DNS & Domain Intelligence | 5 | $0.002 | WHOIS, DNS records, SPF/DKIM/DMARC, nameserver history |
+| Web Scraper & Content Extractor | 4 | $0.002 | HTML to structured data, readability extraction, metadata |
+| IP Geolocation API | 4 | $0.001 | IP to country, city, ASN, ISP, timezone |
+| QR Code API | 4 | $0.001 | QR generation, decoding, styling, batch |
 
-Total: 5 APIs, 69 endpoints, payment per request in USDC.
+Total: 10 APIs, 65 endpoints, payment per request in USDC. Domains: property, weather, companies, vehicles, finance.
 
 ### How it works
 1. **Discovery** — Agents connect to the MCP SSE endpoint at https://web-production-18a32.up.railway.app/mcp/sse. Every listed API is exposed as MCP tools.

@@ -19,7 +19,9 @@ PayAPI Market is a curated marketplace of paid APIs designed for AI agents. Ever
   "settlement_chain": "Base",
   "platform_fee_free_tier": "3%",
   "platform_fee_featured_tier": "2.5%",
-  "featured_tier_price": "$49/month"
+  "featured_tier_price": "$49/month",
+  "launch_api_count": 10,
+  "launch_endpoint_count": 65
 }
 ```
 
@@ -49,37 +51,59 @@ PayAPI Market is a curated marketplace of paid APIs designed for AI agents. Ever
 - llms-full.txt (full marketing copy inline): https://payapi.market/llms-full.txt
 - MCP SSE endpoint: https://web-production-18a32.up.railway.app/mcp/sse
 
-## Currently listed APIs (launch catalogue)
+## Currently listed APIs (launch catalogue — 10 APIs, 65 endpoints)
+
+Domains covered: property, weather, companies, vehicles, finance.
 
 ### UK Data API
 - Endpoints: 24
-- Price range: $0.001 – $0.01 per request
-- Coverage: Land Registry sold prices, EPC ratings, Companies House, DVLA vehicle, Bank of England rates, Met Office weather, UK crime stats, flood risk, postcode lookup
-- URL: https://payapi.market/api/uk-data
+- Price range: $0.001 – $0.002 per request
+- Coverage: Land Registry sold prices, EPC ratings, Companies House, DVLA, Bank of England rates, Met Office weather, crime, flood risk, planning, council tax, BoE base rate, FX rates, MOT history
 
-### Crypto Oracle
-- Endpoints: 15
-- Price range: $0.0005 – $0.005 per request
-- Coverage: spot prices, DEX pool depth, whale wallet tracking, on-chain TVL, gas prices, NFT floor prices
-- URL: https://payapi.market/api/crypto-oracle
+### Email Verification API
+- Endpoints: 4
+- Price range: $0.001 per request
+- Coverage: SMTP check, disposable-domain filter, catch-all detection, role-account heuristics
 
-### Global Weather
-- Endpoints: 8
-- Price range: $0.0008 – $0.003 per request
-- Coverage: hourly forecast, severe weather alerts, marine conditions, historical climate, satellite imagery
-- URL: https://payapi.market/api/global-weather
+### Company Enrichment API
+- Endpoints: 6
+- Price range: $0.003 – $0.005 per request
+- Coverage: Companies House lookup, directors, filings, SIC codes, financial summaries, beneficial owners
 
-### EU Compliance Check
-- Endpoints: 10
-- Price range: $0.005 – $0.02 per request
-- Coverage: GDPR data residency check, PSD2 PSP lookup, MiCA license verification, EU sanctions list, VAT validation
-- URL: https://payapi.market/api/eu-compliance
+### Postcode & Address Lookup
+- Endpoints: 5
+- Price range: $0.001 per request
+- Coverage: UK postcode to address, address validation, autocomplete, geocoding, reverse geocoding
 
-### Geospatial Intel
-- Endpoints: 12
-- Price range: $0.001 – $0.008 per request
-- Coverage: address-to-coordinates, isochrones, demographics, points of interest, traffic, elevation
-- URL: https://payapi.market/api/geospatial
+### Currency & Crypto API
+- Endpoints: 5
+- Price range: $0.001 per request
+- Coverage: FX rates, crypto spot prices, historical series, conversion, base currency rates
+
+### Screenshot & PDF Capture
+- Endpoints: 4
+- Price range: $0.002 per request
+- Coverage: Headless browser page rendering, full-page screenshots, PDF export, viewport options
+
+### DNS & Domain Intelligence
+- Endpoints: 5
+- Price range: $0.002 per request
+- Coverage: WHOIS, DNS A/AAAA/MX/TXT records, SPF/DKIM/DMARC, nameserver history
+
+### Web Scraper & Content Extractor
+- Endpoints: 4
+- Price range: $0.002 per request
+- Coverage: HTML to structured data, readability extraction, metadata parsing, text cleaning
+
+### IP Geolocation API
+- Endpoints: 4
+- Price range: $0.001 per request
+- Coverage: IP to country, city, ASN, ISP, timezone
+
+### QR Code API
+- Endpoints: 4
+- Price range: $0.001 per request
+- Coverage: QR generation, decoding, styling, batch operations
 
 ## FAQ
 
@@ -105,7 +129,7 @@ A: Yes. x402 supports per-endpoint pricing. A cheap lookup might be $0.001 and a
 A: RapidAPI uses API keys, monthly subscriptions, and credit-card billing. PayAPI Market uses x402 (no keys, per-request USDC), MCP (auto-discovered by agents), and on-chain settlement (no chargebacks, instant payouts). RapidAPI optimises for human developers; PayAPI Market optimises for autonomous agents.
 
 **Q: Who is the founder?**
-A: Chet Parker. Built and launched PayAPI Market in April 2026.
+A: Chet Parker. Built and launched PayAPI Market in April 2026. Background in UK property data. Built all 10 launch APIs himself using AI tools.
 
 ## Founder
 Built by Chet Parker. Launched 2026-04.

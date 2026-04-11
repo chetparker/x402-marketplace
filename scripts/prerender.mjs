@@ -18,12 +18,32 @@ const SITE = 'https://payapi.market';
 const TODAY = '2026-04-11';
 
 // ---------------------------------------------------------------------------
+// Canonical launch catalogue — 10 APIs, 65 endpoints.
+// Mirrors src/pages/ForEnterprise.jsx (the runtime source of truth).
+// Update both if/when a new API ships.
+// ---------------------------------------------------------------------------
+const APIS = [
+  { name: 'UK Data API',                      endpoints: 24, price: '$0.001–0.002', desc: 'UK government and public data: Land Registry, EPC, Companies House, DVLA, BoE rates, weather, crime, flood risk' },
+  { name: 'Email Verification API',           endpoints: 4,  price: '$0.001',       desc: 'SMTP check, disposable-domain filter, catch-all detection, role-account heuristics' },
+  { name: 'Company Enrichment API',           endpoints: 6,  price: '$0.003–0.005', desc: 'Companies House lookup plus directors, filings, SIC codes, financials' },
+  { name: 'Postcode & Address Lookup',        endpoints: 5,  price: '$0.001',       desc: 'UK postcode to address, validation, autocomplete, geocoding' },
+  { name: 'Currency & Crypto API',            endpoints: 5,  price: '$0.001',       desc: 'FX rates, crypto spot prices, historical series, conversion' },
+  { name: 'Screenshot & PDF Capture',         endpoints: 4,  price: '$0.002',       desc: 'Headless browser page rendering, full-page screenshots, PDF export' },
+  { name: 'DNS & Domain Intelligence',        endpoints: 5,  price: '$0.002',       desc: 'WHOIS, DNS A/AAAA/MX/TXT, SPF/DKIM, nameserver history' },
+  { name: 'Web Scraper & Content Extractor',  endpoints: 4,  price: '$0.002',       desc: 'HTML to structured data, readability extraction, metadata' },
+  { name: 'IP Geolocation API',               endpoints: 4,  price: '$0.001',       desc: 'IP to country, city, ASN, ISP, timezone' },
+  { name: 'QR Code API',                      endpoints: 4,  price: '$0.001',       desc: 'QR generation, decoding, styling, batch' },
+];
+const API_COUNT = APIS.length; // 10
+const ENDPOINT_TOTAL = APIS.reduce((s, a) => s + a.endpoints, 0); // 65
+
+// ---------------------------------------------------------------------------
 // Founder identity — single source of truth for author bio + Person schema.
 // If/when Chet adds his real LinkedIn URL, change CHET_LINKEDIN below and
 // every blog post + the About page will pick it up automatically.
 // ---------------------------------------------------------------------------
 const CHET_NAME = 'Chet Parker';
-const CHET_LINKEDIN = 'https://www.linkedin.com/in/chet-parker/'; // TODO: confirm exact slug
+const CHET_LINKEDIN = 'https://www.linkedin.com/in/chetparker/';
 const CHET_BIO = 'Chet Parker is a UK property data specialist who built 10 APIs earning $2K/month using AI tools. Not a developer. Background in property data.';
 
 const CHET_PERSON_SCHEMA = {
@@ -229,13 +249,9 @@ const ROUTES = [
   <p><small><em>Last updated: ${TODAY}</em></small></p>
 
   <h2>Live API listings</h2>
-  <p>Five APIs at launch (April 2026), 69 endpoints total:</p>
+  <p>${API_COUNT} APIs at launch (April 2026), ${ENDPOINT_TOTAL} endpoints total across property, weather, companies, vehicles, and finance domains:</p>
   <ul>
-    <li><strong>UK Data API</strong> — 24 endpoints. Land Registry, EPC, Companies House, DVLA, Bank of England rates, Met Office weather, crime, flood risk. $0.001 – $0.01 per request.</li>
-    <li><strong>Crypto Oracle</strong> — 15 endpoints. Spot prices, DEX pool depth, whale tracking, on-chain TVL, gas prices. $0.0005 – $0.005 per request.</li>
-    <li><strong>Global Weather</strong> — 8 endpoints. Forecasts, severe weather alerts, marine, historical climate. $0.0008 – $0.003 per request.</li>
-    <li><strong>EU Compliance Check</strong> — 10 endpoints. GDPR, PSD2, MiCA, sanctions list, VAT validation. $0.005 – $0.02 per request.</li>
-    <li><strong>Geospatial Intel</strong> — 12 endpoints. Geocoding, isochrones, demographics, points of interest, traffic. $0.001 – $0.008 per request.</li>
+${APIS.map(a => `    <li><strong>${a.name}</strong> — ${a.endpoints} endpoints. ${a.desc}. ${a.price} per request.</li>`).join('\n')}
   </ul>
 
   <h2>How it works</h2>

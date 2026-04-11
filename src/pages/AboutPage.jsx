@@ -69,14 +69,19 @@ export default function AboutPage() {
 
         <H2>Current APIs</H2>
         <P>
-          Launch APIs cover the most useful data sources for the UK and global markets:
+          10 APIs at launch, 65 endpoints total, across property, weather, companies, vehicles, and finance:
         </P>
         <ul style={{ color: C.tM, fontSize: 15, lineHeight: 1.8, paddingLeft: 22 }}>
-          <li><strong style={{ color: C.t }}>UK Data API</strong> — 24 endpoints: Land Registry, EPC, Companies House, DVLA, Bank of England, weather, crime, flood risk</li>
-          <li><strong style={{ color: C.t }}>Crypto Oracle</strong> — 15 endpoints for prices, DEX pools, whale tracking</li>
-          <li><strong style={{ color: C.t }}>Global Weather</strong> — 8 endpoints across 200K+ cities</li>
-          <li><strong style={{ color: C.t }}>EU Compliance Check</strong> — 10 endpoints for GDPR, PSD2, MiCA</li>
-          <li><strong style={{ color: C.t }}>Geospatial Intel</strong> — 12 endpoints for geocoding, isochrones, demographics</li>
+          <li><strong style={{ color: C.t }}>UK Data API</strong> — 24 endpoints: Land Registry, EPC, Companies House, DVLA, BoE rates, weather, crime, flood risk</li>
+          <li><strong style={{ color: C.t }}>Email Verification API</strong> — 4 endpoints: SMTP check, disposable-domain filter, catch-all detection</li>
+          <li><strong style={{ color: C.t }}>Company Enrichment API</strong> — 6 endpoints: Companies House lookup, directors, filings, SIC codes, financials</li>
+          <li><strong style={{ color: C.t }}>Postcode & Address Lookup</strong> — 5 endpoints: UK postcode to address, validation, autocomplete, geocoding</li>
+          <li><strong style={{ color: C.t }}>Currency & Crypto API</strong> — 5 endpoints: FX rates, crypto spot prices, historical series</li>
+          <li><strong style={{ color: C.t }}>Screenshot & PDF Capture</strong> — 4 endpoints: headless browser rendering, full-page screenshots, PDF export</li>
+          <li><strong style={{ color: C.t }}>DNS & Domain Intelligence</strong> — 5 endpoints: WHOIS, DNS records, SPF/DKIM/DMARC</li>
+          <li><strong style={{ color: C.t }}>Web Scraper & Content Extractor</strong> — 4 endpoints: HTML to structured data, readability, metadata</li>
+          <li><strong style={{ color: C.t }}>IP Geolocation API</strong> — 4 endpoints: IP to country, city, ASN, ISP</li>
+          <li><strong style={{ color: C.t }}>QR Code API</strong> — 4 endpoints: generation, decoding, styling, batch</li>
         </ul>
 
         <H2>Built by a non-developer</H2>

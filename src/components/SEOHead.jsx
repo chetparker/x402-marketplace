@@ -64,7 +64,7 @@ const FAQ_QUESTIONS = [
   },
   {
     q: 'What APIs are available on PayAPI Market?',
-    a: 'Launch APIs include the UK Data API (24 endpoints covering Land Registry, EPC, Companies House, DVLA, Bank of England rates and more), a crypto oracle, global weather, EU compliance checks, and geospatial intelligence. New APIs are added weekly — every listed API is live, verified and billed per request in USDC.'
+    a: 'PayAPI Market launched with 10 APIs and 65 endpoints across property, weather, companies, vehicles, and finance: UK Data API (24 endpoints — Land Registry, EPC, Companies House, DVLA, BoE rates, weather, crime, flood risk), Email Verification, Company Enrichment, Postcode & Address Lookup, Currency & Crypto, Screenshot & PDF Capture, DNS & Domain Intelligence, Web Scraper & Content Extractor, IP Geolocation, and QR Code. Every listed API is live, verified and billed per request in USDC.'
   },
   {
     q: 'How is PayAPI Market different from RapidAPI?',
