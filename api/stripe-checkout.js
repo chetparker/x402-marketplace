@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     try { body = JSON.parse(body); } catch { body = {}; }
   }
 
-  const { email, provider_id } = body || {};
+  const { email, provider_id, listing_id } = body || {};
   if (!email) return res.status(400).json({ error: 'email required' });
 
   const stripeKey = process.env.STRIPE_SECRET_KEY;
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
       line_items: [{ price: priceId, quantity: 1 }],
       success_url: 'https://payapi.market/dashboard?stripe=success',
       cancel_url: 'https://payapi.market/dashboard?stripe=cancelled',
-      metadata: { provider_id: provider_id || '' },
+      metadata: { provider_id: provider_id || '', listing_id: listing_id || '' },
     });
 
     return res.status(200).json({ ok: true, url: session.url });

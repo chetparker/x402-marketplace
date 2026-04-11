@@ -32,6 +32,37 @@ async function setTierByProviderId(providerId, tier, customerId) {
   else console.log(`[stripe-webhook] provider=${providerId} → tier=${tier}`);
 }
 
+// Move a listing from the "awaiting payment" sentinel ('paused') into the
+// admin review queue ('pending_review'). Called when Stripe confirms payment.
+async function activateListingAfterPayment(listingId, providerId) {
+  const supabase = await getSupabase();
+  if (!supabase) {
+    console.log(`[stripe-webhook] Supabase not configured — would activate listing=${listingId}`);
+    return;
+  }
+  if (listingId) {
+    const { error } = await supabase
+      .from('api_listings')
+      .update({ status: 'pending_review', updated_at: new Date().toISOString() })
+      .eq('id', listingId)
+      .eq('status', 'paused');
+    if (error) console.error(`[stripe-webhook] activate by listing_id failed: ${error.message}`);
+    else console.log(`[stripe-webhook] listing=${listingId} → pending_review`);
+    return;
+  }
+  // Fallback: no listing_id in metadata (e.g. retry from dashboard) —
+  // unpause every listing this provider has that is currently paused.
+  if (providerId) {
+    const { error } = await supabase
+      .from('api_listings')
+      .update({ status: 'pending_review', updated_at: new Date().toISOString() })
+      .eq('provider_id', providerId)
+      .eq('status', 'paused');
+    if (error) console.error(`[stripe-webhook] activate by provider_id failed: ${error.message}`);
+    else console.log(`[stripe-webhook] all paused listings for provider=${providerId} → pending_review`);
+  }
+}
+
 async function setTierByCustomerId(customerId, tier) {
   const supabase = await getSupabase();
   if (!supabase) {
@@ -75,8 +106,12 @@ export default async function handler(req, res) {
       case 'checkout.session.completed': {
         const session = event.data.object;
         const providerId = session.metadata?.provider_id;
-        console.log(`[stripe-webhook] checkout.session.completed — provider=${providerId} customer=${session.customer}`);
-        if (providerId) await setTierByProviderId(providerId, 'featured', session.customer);
+        const listingId = session.metadata?.listing_id;
+        console.log(`[stripe-webhook] checkout.session.completed — provider=${providerId} listing=${listingId} customer=${session.customer}`);
+        if (providerId) {
+          await setTierByProviderId(providerId, 'featured', session.customer);
+          await activateListingAfterPayment(listingId, providerId);
+        }
         break;
       }
       case 'invoice.payment_failed': {

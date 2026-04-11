@@ -80,21 +80,26 @@ export async function getAllProviders() {
 export async function createListing({
   provider_id, name, description, category,
   base_url, mcp_endpoint, endpoints_count, tools_count,
-  price_min, price_max,
+  price_min, price_max, status,
 }) {
   if (!supabase) throw new Error('Database not configured — check VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY');
+  const row = {
+    provider_id, name, description,
+    category: category || 'Data',
+    base_url,
+    mcp_endpoint: mcp_endpoint || null,
+    endpoints_count: parseInt(endpoints_count) || 0,
+    tools_count: parseInt(tools_count) || 0,
+    price_min: parseFloat(price_min) || 0.001,
+    price_max: parseFloat(price_max) || 0.001,
+  };
+  // status is optional — if omitted, schema default 'pending_review' applies.
+  // For Featured tier signups we pass 'paused' as a sentinel meaning
+  // "awaiting Stripe payment". The webhook flips it to 'pending_review' on success.
+  if (status) row.status = status;
   const { data, error } = await supabase
     .from('api_listings')
-    .insert({
-      provider_id, name, description,
-      category: category || 'Data',
-      base_url,
-      mcp_endpoint: mcp_endpoint || null,
-      endpoints_count: parseInt(endpoints_count) || 0,
-      tools_count: parseInt(tools_count) || 0,
-      price_min: parseFloat(price_min) || 0.001,
-      price_max: parseFloat(price_max) || 0.001,
-    })
+    .insert(row)
     .select()
     .single();
   if (error) throw new Error(`Listing insert failed: ${error.message}`);

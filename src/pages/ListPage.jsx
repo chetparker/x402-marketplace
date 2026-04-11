@@ -58,10 +58,37 @@ export default function ListPage() {
     try {
       const prov = await createProvider(provider);
       if (!prov) throw new Error('Failed to create provider account — check your details and try again.');
-      const listing = await createListing({ ...api, provider_id: prov.id });
+
+      // Featured tier: create the listing in a "paused" sentinel state
+      // (means "awaiting Stripe payment"), then redirect to Stripe Checkout.
+      // The webhook flips it to 'pending_review' after successful payment.
+      // Free tier: create the listing with default status and show success.
+      const listingStatus = tier === 'featured' ? 'paused' : undefined;
+      const listing = await createListing({ ...api, provider_id: prov.id, status: listingStatus });
       if (!listing) throw new Error('Failed to create listing — the API details may be invalid.');
+
       setSession(prov.email);
       notifyProviderWelcome(prov);
+
+      if (tier === 'featured') {
+        // Kick off Stripe Checkout. Don't notify admin yet — that fires from
+        // the webhook once payment clears.
+        const r = await fetch('/api/stripe-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: prov.email,
+            provider_id: prov.id,
+            listing_id: listing.id,
+          }),
+        });
+        const data = await r.json();
+        if (!data?.url) throw new Error('Could not start Stripe Checkout. Your listing was saved — please complete payment from the dashboard.');
+        window.location.href = data.url;
+        return; // never falls through to setSubmitted
+      }
+
+      // Free tier
       notifyAdminNewListing(listing, prov);
       setSubmitted(true);
     } catch (err) {
@@ -244,7 +271,7 @@ export default function ListPage() {
             {step < 3 ? (
               <button onClick={() => setStep(step + 1)} style={btnPrimary}>Continue</button>
             ) : (
-              <button onClick={handleSubmit} disabled={submitting} style={{ ...btnPrimary, background: '#10B981', opacity: submitting ? 0.6 : 1 }}>{submitting ? 'Submitting...' : 'Submit Listing'}</button>
+              <button onClick={handleSubmit} disabled={submitting} style={{ ...btnPrimary, background: '#10B981', opacity: submitting ? 0.6 : 1 }}>{submitting ? (tier === 'featured' ? 'Redirecting to Stripe…' : 'Submitting…') : (tier === 'featured' ? 'Submit & Pay $49/mo' : 'Submit Listing')}</button>
             )}
           </div>
         </div>
