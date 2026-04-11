@@ -1,0 +1,300 @@
+# PayAPI Market — Full Site Content
+
+> Single-file dump of every public marketing page on payapi.market, intended for LLM ingestion. For the indexed/structured version see https://payapi.market/llms.txt
+
+Last updated: 2026-04-11
+Founder: Chet Parker
+Launched: April 2026
+
+---
+
+## Page: Home — https://payapi.market/
+
+# PayAPI Market — Paid APIs for AI Agents
+
+The marketplace for x402-powered APIs. AI agents discover and pay for paid APIs per request in USDC, with no API keys, no subscriptions, and no signup. Providers list once and keep 97% of revenue.
+
+PayAPI Market is built for the agent economy. Every listed API speaks the Model Context Protocol (MCP) for discovery and the x402 protocol for payment. An autonomous AI agent — Claude Desktop, Cursor, a custom LangChain or AutoGen agent — connects to a single MCP SSE endpoint, sees every tool in the marketplace, and can call any of them by paying USDC on Base. No API keys to manage. No monthly subscriptions. No chargebacks.
+
+### Live API listings (launch catalogue, April 2026)
+
+| API | Endpoints | Price range | Categories |
+|---|---|---|---|
+| UK Data API | 24 | $0.001 – $0.01 | Property, vehicle, weather, crime, regulation |
+| Crypto Oracle | 15 | $0.0005 – $0.005 | Prices, DEX pools, on-chain analytics |
+| Global Weather | 8 | $0.0008 – $0.003 | Forecasts, alerts, marine, historical |
+| EU Compliance Check | 10 | $0.005 – $0.02 | GDPR, PSD2, MiCA, sanctions, VAT |
+| Geospatial Intel | 12 | $0.001 – $0.008 | Geocoding, isochrones, demographics |
+
+Total: 5 APIs, 69 endpoints, payment per request in USDC.
+
+### How it works
+1. **Discovery** — Agents connect to the MCP SSE endpoint at https://web-production-18a32.up.railway.app/mcp/sse. Every listed API is exposed as MCP tools.
+2. **Request** — The agent calls a tool. The server responds with HTTP 402 + x402 payment requirements (amount, recipient wallet, currency, chain).
+3. **Payment** — The agent's wallet signs and broadcasts the USDC transfer on Base. ~400ms finality.
+4. **Delivery** — The server verifies on-chain, returns the data.
+5. **Settlement** — 97% of the payment goes to the API provider's wallet, 3% to PayAPI Market treasury (or 2.5% on the Featured tier).
+
+### Why it matters
+The agent economy needs a payment rail that doesn't depend on credit cards, OAuth, or quarterly contracts. Subscription pricing breaks for autonomous workloads — an agent might call your API 3 times all month or 30,000 times in an hour. Per-request micropayments in stablecoin solve both: providers get paid for actual use, agents pay for actual value, and there's no contract negotiation.
+
+---
+
+## Page: Pricing — https://payapi.market/pricing
+
+# Pricing — Free to list, you keep 97%
+
+Two tiers. No subscriptions for buyers. No monthly fees on the free tier.
+
+### Free — $0 / forever
+- 3% platform fee on successful x402 calls
+- 97% revenue retained by the provider
+- Unlimited API listings
+- Per-request USDC payouts (settled on-chain, no invoicing)
+- MCP Registry auto-sync — discoverable by every agent on the network
+- 3% platform fee only on successful calls — if your API doesn't earn, you don't pay PayAPI Market anything
+- No monthly bill, ever
+
+### Featured — $49 / month
+- Reduced 2.5% platform fee
+- 97.5% revenue retained
+- Everything in Free, plus:
+- Gold badge on your listing card and a highlighted card style
+- Always first in search results
+- Priority position in every category filter
+- Featured in the MCP tool manifest surfaced to agents
+- Priority support
+
+### Breakeven analysis
+Featured is worth it once gross monthly revenue exceeds approximately $9,800. Below that, the $49/month subscription costs more than the 0.5% fee saving. Above that, you save more than you pay. The bigger reasons to upgrade are visibility (always-first placement) and trust signals (gold badge), not the fee saving.
+
+### FAQ
+
+**Is listing really free?**
+Yes. You can list any API on PayAPI Market at no cost. We only take a 3% fee on successful payments — if your API doesn't earn, you don't pay us anything.
+
+**How does the 3% fee work?**
+When an AI agent pays your API via x402, the payment is split on-chain: 97% to your wallet, 3% to the PayAPI Market treasury. No invoicing, no monthly bill, no surprise fees.
+
+**What do I get with Featured ($49/mo)?**
+A reduced 2.5% platform fee, a gold badge on your card, always-first placement in search and category filters, and priority inclusion in the MCP tool manifest surfaced to agents. Breakeven vs Free is around $10K/mo in gross revenue.
+
+**Do I need a crypto wallet to get paid?**
+Yes. Payments settle as USDC on Base. You provide a wallet address at listing time. Off-ramp to USD is available through any USDC-supported exchange or bank on-ramp like Coinbase.
+
+**Can I change pricing per endpoint?**
+Yes. Every endpoint can have its own x402 price — from $0.0001 to any amount. Price per request is set in your MCP server configuration; the marketplace reads and displays it automatically.
+
+**Do buyers pay monthly subscriptions?**
+No. The whole point of x402 is pay-per-request. AI agents pay only for the calls they make, in USDC, with no minimum spend and no accounts. This makes your API instantly usable by any agent on the network.
+
+---
+
+## Page: About — https://payapi.market/about
+
+# About PayAPI Market
+
+PayAPI Market exists because the API economy was built for humans clicking through OAuth flows and pasting bearer tokens, and AI agents are fundamentally different customers. Agents are autonomous, they don't have credit cards, they discover tools at runtime, and their request volume is bursty in ways that break subscription pricing. The agent economy needs a marketplace that speaks the agent's protocols.
+
+### What we believe
+- Per-request stablecoin payments are the right primitive for autonomous workloads
+- Discovery should happen at runtime via MCP, not at design-time via human-curated docs
+- Marketplaces should take small percentages, not large rents — 3% beats RapidAPI's complex tier structure
+- Open protocols (x402, MCP, USDC) beat closed platforms
+
+### Founder
+PayAPI Market was built by Chet Parker. Launched April 2026.
+
+### How we got here
+The x402 protocol was defined in 1999 as part of the original HTTP/1.0 spec — and then sat unused for 25 years because there was no good way to settle micropayments. Stablecoins on fast L2 chains changed the economics: USDC on Base settles in ~400ms with sub-cent fees. That made x402 viable. Then Anthropic published MCP in late 2024 as a standard way for LLMs to discover and call tools. The intersection of those two protocols is what made PayAPI Market possible: MCP for discovery, x402 for payment, USDC for settlement.
+
+---
+
+## Page: Calculator — https://payapi.market/calculator
+
+# Revenue Calculator
+
+Estimate what your API could earn on PayAPI Market.
+
+### Inputs
+- Number of endpoints
+- Average price per request (USDC)
+- Estimated requests per month
+- Tier (Free 3% / Featured 2.5%)
+
+### Outputs
+- Gross monthly revenue
+- Platform fee
+- Net monthly revenue (your wallet)
+- Annual run rate
+- Breakeven analysis vs Featured tier
+
+### Worked example
+A property data API with 24 endpoints averaging $0.002/request, doing 50,000 requests/month:
+- Gross: $100/month
+- Free tier (3%): you keep $97/month → $1,164/year
+- Featured tier (2.5%): you keep $97.50/month, minus $49 sub = $48.50/month → $582/year
+- Verdict: stay on Free until you're doing 4x this volume
+
+A crypto pricing API with 15 endpoints averaging $0.001/request, doing 500,000 requests/month:
+- Gross: $500/month
+- Free tier: you keep $485/month → $5,820/year
+- Featured tier: you keep $487.50 - $49 = $438.50/month → $5,262/year
+- Verdict: still better on Free, but Featured's visibility might 2-3x your volume
+
+A geocoding API doing 5,000,000 requests/month at $0.0005:
+- Gross: $2,500/month
+- Free tier: you keep $2,425/month
+- Featured tier: you keep $2,437.50 - $49 = $2,388.50/month
+- Verdict: Free is mathematically better; choose Featured only if the visibility is worth the spread
+
+---
+
+## Page: For Providers — https://payapi.market/providers
+
+# For API Providers
+
+Monetise your API for the agent economy in 10 minutes. No payment integration to build, no billing system to maintain, no chargebacks to dispute.
+
+### What you need
+1. A working API with at least one endpoint
+2. An MCP server in front of it (we provide a wrapper template)
+3. A USDC wallet on Base
+4. A description of what your API does
+
+### What we handle
+- x402 payment verification (the MCP wrapper handles HTTP 402 responses)
+- USDC settlement on-chain (every successful call splits 97/3 automatically)
+- Discovery (your tools appear in the MCP manifest agents query)
+- Search ranking (boosted by uptime, latency, and request volume)
+- Health monitoring (we ping your endpoints every 60 seconds)
+
+### Listing flow
+1. Sign up at https://payapi.market/list
+2. Provide your name, email, wallet address, and API URL
+3. Choose Free or Featured tier (Featured triggers Stripe checkout for the $49/mo subscription)
+4. Submit for review (24 hours)
+5. Once approved, your API is live and discoverable by every agent on the network
+
+---
+
+## Page: For Agents — https://payapi.market/agents
+
+# For AI Agents
+
+PayAPI Market is the easiest way for an agent to find and pay for real-world data and tools. One MCP endpoint, dozens of APIs, USDC settlement.
+
+### Connecting from Claude Desktop
+Add to your `claude_desktop_config.json`:
+```json
+{
+  "mcpServers": {
+    "payapi": {
+      "url": "https://web-production-18a32.up.railway.app/mcp/sse"
+    }
+  }
+}
+```
+
+Restart Claude Desktop. You'll see every PayAPI Market tool in the tool list.
+
+### Connecting from Cursor / Continue / custom agents
+Any MCP-compatible client works. Point it at the same SSE endpoint above.
+
+### Paying for calls
+Your client needs to:
+1. Have a USDC wallet on Base with a small balance
+2. Handle HTTP 402 responses by signing and broadcasting the requested payment
+3. Retry the request with proof of payment
+
+The official x402 client libraries (TypeScript, Python, Rust) handle this automatically. Total per-call latency including payment is ~500-800ms.
+
+### Why this matters for agents
+Subscription APIs are unusable for agents. You don't know in advance whether you'll need 5 calls or 50,000, you can't sign up for a $99/month plan when each user session might justify $0.02 of API spend, and you can't manage 50 different API keys across 50 different vendors. PayAPI Market collapses all of that into a single MCP endpoint and a USDC wallet.
+
+---
+
+## Page: For Developers — https://payapi.market/developers
+
+# For Developers
+
+Build agents, build wrappers, contribute to the ecosystem.
+
+### Quick links
+- x402 protocol spec: https://github.com/coinbase/x402
+- MCP spec: https://modelcontextprotocol.io
+- PayAPI Market open API listing endpoint: https://payapi.market/api/listings
+- MCP SSE endpoint: https://web-production-18a32.up.railway.app/mcp/sse
+
+### SDK availability
+- TypeScript: x402-fetch (npm)
+- Python: x402-httpx (pip)
+- Rust: x402-reqwest (crates.io)
+
+### How to wrap an existing API for x402
+The PayAPI Market team maintains an open-source x402-MCP wrapper template at github.com/payapi-market/wrapper-template. It's a small Express server that:
+1. Sits in front of your existing API
+2. Returns HTTP 402 with payment requirements on each request
+3. Verifies the payment proof (a transaction hash + signature)
+4. Forwards the request to your real API
+5. Returns the response
+
+You can deploy it to Railway, Fly, Vercel, or any Node host in under 10 minutes.
+
+---
+
+## Page: For Enterprises — https://payapi.market/enterprises
+
+# For Enterprises
+
+PayAPI Market is the distribution layer for enterprise data products that want to reach the agent ecosystem without building their own marketplace.
+
+### Use cases
+- **Data vendors** — bring your existing dataset (financial, geospatial, regulatory) to autonomous agents without building a separate billing stack
+- **API monetisation** — turn an internal API into external revenue with on-chain settlement (no AR, no invoicing, no collections)
+- **Compliance APIs** — sell verification and compliance lookups (KYC, sanctions, GDPR) priced per request
+- **Real-time data** — sell streaming or polling endpoints to agents that need live signals
+
+### Enterprise terms
+- Volume discounts on platform fees (negotiable above $50K/month gross)
+- White-label MCP endpoints (your domain, your branding)
+- SLA-backed uptime monitoring
+- Dedicated support
+- Custom contracts (not required — most enterprises just use the standard Featured tier)
+
+### Compliance
+- USDC payments are non-custodial; PayAPI Market never holds your funds
+- All transaction history is on-chain and auditable
+- GDPR-compatible (no PII collected from agents — only wallet addresses)
+- SOC 2 Type II in progress (target: Q3 2026)
+
+Contact: hello@payapi.market
+
+---
+
+## Page: Blog index — https://payapi.market/blog
+
+# Blog
+
+Build-in-public posts and technical deep-dives from PayAPI Market.
+
+- What is the x402 protocol?
+- x402 vs API keys vs OAuth
+- How to list your API in 10 minutes
+- AI agent economics in 2026
+- PayAPI Market vs RapidAPI
+
+(See sitemap.xml for the live list.)
+
+---
+
+## Glossary
+
+- **x402** — HTTP status code 402 ("Payment Required") plus a payment protocol that lets servers demand stablecoin payment per request. Originally defined in HTTP/1.0 (1996), revived in 2024 by Coinbase.
+- **MCP (Model Context Protocol)** — A protocol published by Anthropic in late 2024 that lets LLM applications discover and call tools from any MCP-compliant server. The transport is JSON-RPC over SSE or stdio.
+- **USDC** — A US dollar stablecoin issued by Circle, redeemable 1:1 for USD. Available on multiple chains including Base, Ethereum, Solana, and Polygon.
+- **Base** — An Ethereum L2 built by Coinbase. Sub-second block times, sub-cent fees, used for the bulk of x402 settlement.
+- **Facilitator** — A third-party service that verifies x402 payments on behalf of API providers, so the provider doesn't have to run their own on-chain verifier.
+- **Resource server** — In x402 terminology, the API server demanding payment (as opposed to the agent paying it).
+- **Agent economy** — The hypothesis that autonomous AI agents will become a significant economic actor, transacting with APIs, services, and other agents on behalf of human principals.
+- **A2A** — Agent-to-Agent: a related protocol space for direct agent-to-agent communication and economic exchange.

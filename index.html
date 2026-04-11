@@ -4,11 +4,89 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PayAPI Market — Paid APIs for AI Agents</title>
-    <meta name="description" content="Discover and list x402-powered APIs. AI agents pay per-request with USDC. No API keys needed." />
-    <meta property="og:title" content="PayAPI Market" />
-    <meta property="og:description" content="Discover paid APIs for AI agents — all powered by the x402 protocol" />
+    <meta name="description" content="The marketplace for x402-powered paid APIs. AI agents discover via MCP and pay per request in USDC, no API keys, no subscriptions. Providers list once and keep 97%." />
+    <meta name="author" content="Chet Parker" />
+    <meta name="theme-color" content="#06080D" />
+    <link rel="canonical" href="https://payapi.market/" />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="PayAPI Market" />
+    <meta property="og:title" content="PayAPI Market — Paid APIs for AI Agents" />
+    <meta property="og:description" content="Discover and pay for x402 APIs. Built for the agent economy. Per-request USDC settlement on Base." />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://payapi.market/" />
+    <meta property="og:image" content="https://payapi.market/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PayAPI Market — Paid APIs for AI Agents" />
+    <meta name="twitter:description" content="Discover and pay for x402 APIs. Built for the agent economy. Per-request USDC settlement on Base." />
+    <meta name="twitter:image" content="https://payapi.market/og-image.png" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/llms+text" href="/llms.txt" />
+    <link rel="alternate" type="application/llms-full+text" href="/llms-full.txt" />
+
+    <!-- Organization (root entity, present on every page via the SSR shell) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://payapi.market/#organization",
+      "name": "PayAPI Market",
+      "alternateName": "PayAPI",
+      "url": "https://payapi.market",
+      "logo": "https://payapi.market/logo.png",
+      "description": "Marketplace for x402-powered paid APIs. AI agents pay per request in USDC, no API keys.",
+      "foundingDate": "2026-04",
+      "founder": {
+        "@type": "Person",
+        "@id": "https://payapi.market/#chet-parker",
+        "name": "Chet Parker",
+        "jobTitle": "Founder"
+      },
+      "knowsAbout": [
+        "x402 protocol",
+        "Model Context Protocol",
+        "AI agent payments",
+        "USDC micropayments",
+        "API marketplaces",
+        "Agent economy"
+      ],
+      "areaServed": "Worldwide",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "hello@payapi.market",
+        "availableLanguage": ["English"]
+      }
+    }
+    </script>
+
+    <!-- WebSite + SearchAction -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://payapi.market/#website",
+      "url": "https://payapi.market",
+      "name": "PayAPI Market",
+      "description": "The marketplace for x402-powered APIs built for AI agents.",
+      "publisher": { "@id": "https://payapi.market/#organization" },
+      "inLanguage": "en",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://payapi.market/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
     <script defer data-domain="payapi.market" src="https://plausible.io/js/script.js"></script>
   </head>
   <body>

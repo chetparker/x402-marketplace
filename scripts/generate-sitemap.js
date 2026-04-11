@@ -10,6 +10,9 @@ import { fileURLToPath } from 'node:url';
 const SITE_URL = 'https://payapi.market';
 const TODAY = new Date().toISOString().slice(0, 10);
 
+// Public, prerendered, indexable routes only.
+// /list, /dashboard, /login, /admin are intentionally excluded — they are
+// interactive SPA routes blocked by robots.txt and shouldn't be in the sitemap.
 const STATIC_ROUTES = [
   { path: '/', priority: 1.0, changefreq: 'daily' },
   { path: '/about', priority: 0.7, changefreq: 'monthly' },
@@ -20,7 +23,6 @@ const STATIC_ROUTES = [
   { path: '/agents', priority: 0.9, changefreq: 'weekly' },
   { path: '/developers', priority: 0.9, changefreq: 'weekly' },
   { path: '/enterprises', priority: 0.9, changefreq: 'weekly' },
-  { path: '/list', priority: 0.9, changefreq: 'monthly' },
 ];
 
 const BLOG_POSTS = [

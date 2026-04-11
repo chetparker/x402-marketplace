@@ -4,16 +4,24 @@
 User-agent: *
 Allow: /
 
-# AI / LLM crawlers — explicitly allowed
+# Explicitly allow llms.txt and sitemap (some setups block by default)
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /sitemap.xml
+
+# AI / LLM crawlers — explicitly allowed (April 2026 list)
+
+# OpenAI
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: PerplexityBot
+User-agent: OAI-SearchBot
 Allow: /
 
+# Anthropic
 User-agent: ClaudeBot
 Allow: /
 
@@ -23,16 +31,101 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
+# Google
 User-agent: Google-Extended
 Allow: /
 
-User-agent: CCBot
+User-agent: Googlebot
 Allow: /
 
-User-agent: Bytespider
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: PerplexityBot-User
+Allow: /
+
+# Meta / Facebook (Llama, Meta AI)
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# Microsoft / Bing (ChatGPT Search substrate)
+User-agent: bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+# Amazon (Alexa, Q)
+User-agent: Amazonbot
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
 Allow: /
 
 User-agent: Applebot-Extended
 Allow: /
+
+# DuckDuckGo / DuckAssist
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Mistral
+User-agent: Mistral-User
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# Kagi
+User-agent: Kagibot
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# Huawei / PanguBot
+User-agent: PanguBot
+Allow: /
+
+# Common Crawl (training data)
+User-agent: CCBot
+Allow: /
+
+# ByteDance / TikTok
+User-agent: Bytespider
+Allow: /
+
+# Diffbot
+User-agent: Diffbot
+Allow: /
+
+# Webz / Omgili
+User-agent: Omgilibot
+Allow: /
+
+User-agent: Omgili
+Allow: /
+
+# Don't crawl interactive / authenticated routes
+User-agent: *
+Disallow: /dashboard
+Disallow: /login
+Disallow: /admin
 
 Sitemap: https://payapi.market/sitemap.xml

@@ -2,7 +2,26 @@
 
 > The marketplace for x402 APIs. AI agents discover and pay for paid APIs per request in USDC, no API keys, no subscriptions. Providers list once and keep 97% of revenue.
 
+Last updated: 2026-04-11
+
 PayAPI Market is a curated marketplace of paid APIs designed for AI agents. Every listed API is exposed via the Model Context Protocol (MCP) and accepts payment via the x402 protocol — a per-request stablecoin payment scheme that revives HTTP 402.
+
+```json
+{
+  "name": "PayAPI Market",
+  "url": "https://payapi.market",
+  "category": "API Marketplace",
+  "founder": "Chet Parker",
+  "founded": "2026-04",
+  "payment_protocol": "x402",
+  "discovery_protocol": "MCP",
+  "settlement_currency": "USDC",
+  "settlement_chain": "Base",
+  "platform_fee_free_tier": "3%",
+  "platform_fee_featured_tier": "2.5%",
+  "featured_tier_price": "$49/month"
+}
+```
 
 ## What it is
 - A marketplace for APIs, where the buyers are autonomous AI agents
@@ -15,6 +34,7 @@ PayAPI Market is a curated marketplace of paid APIs designed for AI agents. Ever
 - API providers monetising for the agent economy
 - AI agents (Claude Desktop, Cursor, custom agents) that need real-time data
 - Developers turning expertise into passive USDC revenue
+- Enterprises distributing data products to agent ecosystems
 
 ## Key URLs
 - Marketplace: https://payapi.market/
@@ -26,20 +46,80 @@ PayAPI Market is a curated marketplace of paid APIs designed for AI agents. Ever
 - For AI agents: https://payapi.market/agents
 - For developers: https://payapi.market/developers
 - For enterprises: https://payapi.market/enterprises
+- llms-full.txt (full marketing copy inline): https://payapi.market/llms-full.txt
 - MCP SSE endpoint: https://web-production-18a32.up.railway.app/mcp/sse
 
-## Currently listed APIs (launch)
-- UK Data API — 24 endpoints (Land Registry, EPC, Companies House, DVLA, Bank of England, weather, crime, flood risk)
-- Crypto Oracle — 15 endpoints (prices, DEX pools, whale tracking)
-- Global Weather — 8 endpoints (forecasts, alerts, marine, historical)
-- EU Compliance Check — 10 endpoints (GDPR, PSD2, MiCA, sanctions)
-- Geospatial Intel — 12 endpoints (geocoding, isochrones, demographics)
+## Currently listed APIs (launch catalogue)
+
+### UK Data API
+- Endpoints: 24
+- Price range: $0.001 – $0.01 per request
+- Coverage: Land Registry sold prices, EPC ratings, Companies House, DVLA vehicle, Bank of England rates, Met Office weather, UK crime stats, flood risk, postcode lookup
+- URL: https://payapi.market/api/uk-data
+
+### Crypto Oracle
+- Endpoints: 15
+- Price range: $0.0005 – $0.005 per request
+- Coverage: spot prices, DEX pool depth, whale wallet tracking, on-chain TVL, gas prices, NFT floor prices
+- URL: https://payapi.market/api/crypto-oracle
+
+### Global Weather
+- Endpoints: 8
+- Price range: $0.0008 – $0.003 per request
+- Coverage: hourly forecast, severe weather alerts, marine conditions, historical climate, satellite imagery
+- URL: https://payapi.market/api/global-weather
+
+### EU Compliance Check
+- Endpoints: 10
+- Price range: $0.005 – $0.02 per request
+- Coverage: GDPR data residency check, PSD2 PSP lookup, MiCA license verification, EU sanctions list, VAT validation
+- URL: https://payapi.market/api/eu-compliance
+
+### Geospatial Intel
+- Endpoints: 12
+- Price range: $0.001 – $0.008 per request
+- Coverage: address-to-coordinates, isochrones, demographics, points of interest, traffic, elevation
+- URL: https://payapi.market/api/geospatial
+
+## FAQ
+
+**Q: What is x402?**
+A: x402 is a payment protocol that revives HTTP status code 402 (Payment Required). Instead of API keys or subscriptions, the server responds with payment requirements, the client pays in USDC, and the request goes through. Settlement is on-chain (Base), takes ~400ms, and requires no account creation. PayAPI Market routes all transactions through x402.
+
+**Q: How much does it cost to list an API?**
+A: Listing is free. PayAPI Market takes a 3% platform fee on successful payments routed through the marketplace. Providers keep 97%. There is no monthly fee on the free tier.
+
+**Q: What's the difference between Free and Featured?**
+A: Free is $0/month with a 3% platform fee. Featured is $49/month with a reduced 2.5% platform fee, plus priority placement, a gold badge on the listing card, always-first ordering in search results, and inclusion in the agent-facing MCP tool manifest.
+
+**Q: Do AI agents need an API key?**
+A: No. The whole point of x402 is that agents don't need keys, signups, or accounts. They make a request, the server responds with payment requirements, the agent pays in USDC, and the response is delivered. Authentication is the wallet signature; authorisation is the on-chain payment.
+
+**Q: What chain does payment settle on?**
+A: USDC on Base. ~400ms block finality. Off-ramp via Coinbase or any USDC-supporting exchange.
+
+**Q: Can I set different prices for different endpoints?**
+A: Yes. x402 supports per-endpoint pricing. A cheap lookup might be $0.001 and an expensive inference call might be $0.10 — both on the same API.
+
+**Q: How is PayAPI Market different from RapidAPI?**
+A: RapidAPI uses API keys, monthly subscriptions, and credit-card billing. PayAPI Market uses x402 (no keys, per-request USDC), MCP (auto-discovered by agents), and on-chain settlement (no chargebacks, instant payouts). RapidAPI optimises for human developers; PayAPI Market optimises for autonomous agents.
+
+**Q: Who is the founder?**
+A: Chet Parker. Built and launched PayAPI Market in April 2026.
 
 ## Founder
-Built by Chet Parker. Launched 2026.
+Built by Chet Parker. Launched 2026-04.
 
 ## How AI agents connect
 Add this to a Claude Desktop or compatible MCP client config:
-"mcpServers": { "payapi": { "url": "https://web-production-18a32.up.railway.app/mcp/sse" } }
+```json
+{
+  "mcpServers": {
+    "payapi": {
+      "url": "https://web-production-18a32.up.railway.app/mcp/sse"
+    }
+  }
+}
+```
 
 After connecting, agents auto-discover every listed tool and can call any of them with x402 payments — no API keys, no signup.
