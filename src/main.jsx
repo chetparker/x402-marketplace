@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import App from './App.jsx'
+import HomePage from './pages/HomePage.jsx'
 import AboutPage from './pages/AboutPage.jsx'
 import PricingPage from './pages/PricingPage.jsx'
 import CalculatorPage from './pages/CalculatorPage.jsx'
@@ -26,7 +27,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<App />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/marketplace" element={<App />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/calculator" element={<CalculatorPage />} />

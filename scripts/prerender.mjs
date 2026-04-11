@@ -231,22 +231,35 @@ const ROUTES = [
 <header role="banner">
   <a href="/"><strong>PayAPI Market</strong></a>
   <nav aria-label="Primary">
-    <a href="/">Marketplace</a>
+    <a href="/marketplace">Marketplace</a>
     <a href="/providers">Providers</a>
     <a href="/agents">Agents</a>
-    <a href="/enterprises">Enterprises</a>
-    <a href="/calculator">Calculator</a>
     <a href="/pricing">Pricing</a>
-    <a href="/blog">Blog</a>
     <a href="/about">About</a>
-    <a href="/login">Log in</a>
   </nav>
 </header>
 <main>
-  <h1>Paid APIs for AI Agents</h1>
-  <p>PayAPI Market is the marketplace for <strong>x402-powered APIs</strong> built for the agent economy. AI agents discover tools via the <strong>Model Context Protocol (MCP)</strong> and pay for each request in <strong>USDC on Base</strong>. No API keys, no subscriptions, no signup.</p>
-  <p>Providers list once and keep 97% of revenue. The platform fee is 3% on the free tier, 2.5% on the Featured tier ($49/month).</p>
-  <p><small><em>Last updated: ${TODAY}</em></small></p>
+  <h1>Your expertise. Earning while you sleep. Paid by AI agents.</h1>
+  <p>List your API on PayAPI Market. AI agents discover it via MCP, pay per request in USDC, and you keep 97%. No subscriptions. No support tickets. No code required.</p>
+  <p>x402 protocol — backed by Coinbase, Cloudflare. Moved to Linux Foundation.</p>
+  <p>${API_COUNT} Live APIs · ${ENDPOINT_TOTAL} Endpoints · $3,000+ Monthly revenue · 97% Kept by providers</p>
+
+  <h2>Why PayAPI vs enterprise data providers</h2>
+  <p>Enterprise data providers charge $15,000 per year with annual contracts. PayAPI Market charges $0.002 per request with no commitment. That is 7,500,000 requests before you break even on the enterprise plan. AI agents cannot fill out forms, enter credit cards, or sign contracts. They need x402.</p>
+  <p>USDC on Base: sub-second settlement, less than $0.001 transaction fee. Zero support tickets needed.</p>
+
+  <h2>How it works</h2>
+  <ol>
+    <li><strong>List your API</strong> — Add your endpoint URL, set a price per request (from $0.001), write a description. Free, takes 5 minutes.</li>
+    <li><strong>AI agents discover you</strong> — Your API appears in the Model Context Protocol registry. Claude Desktop, Cursor, LangChain agents, and any MCP-compatible client find you automatically.</li>
+    <li><strong>Agents pay, you keep 97%</strong> — Every request triggers an x402 micropayment. USDC settles on Base in under a second. No invoicing, no chasing, no support needed.</li>
+  </ol>
+
+  <h2>Who is this for</h2>
+  <p>You do not need to be a developer. You need domain expertise. Mortgage brokers, recruiters, accountants, estate agents, solicitors, logistics managers, compliance officers, insurance underwriters, pharmacists, and quantity surveyors can all monetise their specialist knowledge through APIs on PayAPI Market.</p>
+
+  ${trustedByStrip()}
+  ${pressStrip()}
 
   <h2>Live API listings</h2>
   <p>${API_COUNT} APIs at launch (April 2026), ${ENDPOINT_TOTAL} endpoints total across property, weather, companies, vehicles, and finance domains:</p>
@@ -254,36 +267,17 @@ const ROUTES = [
 ${APIS.map(a => `    <li><strong>${a.name}</strong> — ${a.endpoints} endpoints. ${a.desc}. ${a.price} per request.</li>`).join('\n')}
   </ul>
 
-  <h2>How it works</h2>
-  <ol>
-    <li><strong>Discovery</strong> — Agents connect to one MCP SSE endpoint and see every listed tool.</li>
-    <li><strong>Request</strong> — The agent calls a tool. The server responds with HTTP 402 plus x402 payment requirements.</li>
-    <li><strong>Payment</strong> — The agent's wallet signs and broadcasts a USDC transfer on Base. ~400ms finality.</li>
-    <li><strong>Delivery</strong> — Server verifies on-chain, returns the data.</li>
-    <li><strong>Settlement</strong> — Provider receives 97% (or 97.5% on Featured), platform takes 3% (or 2.5%).</li>
-  </ol>
-
-  ${trustedByStrip()}
-
-  <h2>What providers are saying</h2>
-  <p><em>Real customer testimonials are added as providers join. The marketplace launched April 2026 and is in early-traction mode — <a href="/list">be one of the first 10 listings</a> and your case study lands here.</em></p>
-  <blockquote>
-    <p>"Listing my UK property data API on PayAPI Market took an afternoon. Three days later an AI agent was paying me USDC every minute."</p>
-    <footer>— ${CHET_NAME}, founder, PayAPI Market (testing the platform end-to-end before opening to other providers)</footer>
-  </blockquote>
-
-  ${pressStrip()}
-
-  <h2>Why per-request micropayments matter for agents</h2>
-  <p>Subscription pricing breaks for autonomous workloads. An agent might call your API 5 times all month or 50,000 times in an hour. Credit cards and OAuth don't work for agents that have no humans to click buttons. PayAPI Market routes around all of that: discover via MCP, pay via x402, settle in USDC.</p>
-
-  <h2>Get started</h2>
+  <h2>Pricing</h2>
+  <p>Free to list. 3% platform fee, you keep 97%. Featured tier at $49/month with 2% fee, you keep 98%. No subscriptions for buyers — agents pay per request.</p>
   <ul>
-    <li><a href="/list">List your API</a> — free, takes 10 minutes</li>
-    <li><a href="/calculator">Estimate your revenue</a> — calculator</li>
-    <li><a href="/agents">Connect an agent</a> — MCP setup guide</li>
-    <li><a href="/pricing">See pricing</a> — Free vs Featured</li>
+    <li><a href="/list">List your API — free</a></li>
+    <li><a href="/marketplace">Explore the marketplace</a></li>
+    <li><a href="/calculator">Estimate your revenue</a></li>
+    <li><a href="/pricing">See pricing</a></li>
   </ul>
+
+  <h2>The agent economy is here. Your knowledge should be earning.</h2>
+  <p>10 APIs earning $3,000+ a month with zero hours of customer support. Yours could be next. <a href="/list">List your API — free</a>.</p>
 </main>
 <footer>
   <p>PayAPI Market · built by ${CHET_NAME} · launched April 2026 · <a href="/about">About</a> · <a href="/llms.txt">llms.txt</a></p>
@@ -307,7 +301,32 @@ ${APIS.map(a => `    <li><strong>${a.name}</strong> — ${a.endpoints} endpoints
         publisher: { '@id': `${SITE}/#organization` },
         dateModified: TODAY,
       },
-      breadcrumb([{ name: 'Marketplace', path: '/' }]),
+      breadcrumb([{ name: 'Home', path: '/' }]),
+    ],
+  },
+
+  // -----------------------------------------------------------------------
+  // Marketplace — the API listing grid (was previously at /)
+  {
+    path: '/marketplace',
+    title: 'API Marketplace — Browse x402 APIs for AI Agents · PayAPI Market',
+    description: `Browse ${API_COUNT} x402-powered APIs with ${ENDPOINT_TOTAL} endpoints. AI agents discover tools via MCP and pay per request in USDC on Base.`,
+    canonical: '/marketplace',
+    body: `
+<header role="banner"><a href="/"><strong>PayAPI Market</strong></a> · <a href="/marketplace">Marketplace</a></header>
+<main>
+  <nav aria-label="Breadcrumb"><a href="/">Home</a> › Marketplace</nav>
+  <h1>API Marketplace</h1>
+  <p>${API_COUNT} APIs, ${ENDPOINT_TOTAL} endpoints. AI agents discover via MCP and pay per request in USDC on Base.</p>
+  <ul>
+${APIS.map(a => `    <li><strong>${a.name}</strong> — ${a.endpoints} endpoints. ${a.desc}. ${a.price} per request.</li>`).join('\n')}
+  </ul>
+  <p><a href="/list">List your API — free →</a></p>
+</main>
+`,
+    schemas: [
+      webPage({ path: '/marketplace', name: 'API Marketplace — PayAPI Market', description: `Browse ${API_COUNT} x402-powered APIs for AI agents.` }),
+      breadcrumb([{ name: 'Home', path: '/' }, { name: 'Marketplace', path: '/marketplace' }]),
     ],
   },
 
