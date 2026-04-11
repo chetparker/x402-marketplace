@@ -1,17 +1,50 @@
 // Stripe webhook handler for Featured tier lifecycle.
 // POST /api/stripe-webhook
 //
-// TODO:STRIPE — set STRIPE_WEBHOOK_SECRET in Vercel env vars.
-// In Stripe Dashboard → Webhooks → Add endpoint:
+// Stripe Dashboard → Webhooks → Add endpoint:
 //   URL: https://payapi.market/api/stripe-webhook
 //   Events: checkout.session.completed, invoice.payment_failed,
 //           customer.subscription.deleted
 //
-// Until a real database is connected, this just logs events.
-// When Supabase is wired up, add UPDATE providers SET tier='featured'
-// or tier='free' based on the event type.
+// Updates Supabase providers.tier when subscription state changes.
+// Requires SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY (server-side, bypasses RLS).
 
 export const config = { api: { bodyParser: false } };
+
+async function getSupabase() {
+  const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+  if (!url || !key) return null;
+  const { createClient } = await import('@supabase/supabase-js');
+  return createClient(url, key);
+}
+
+async function setTierByProviderId(providerId, tier, customerId) {
+  const supabase = await getSupabase();
+  if (!supabase) {
+    console.log(`[stripe-webhook] Supabase not configured — would set provider=${providerId} tier=${tier}`);
+    return;
+  }
+  const updates = { tier, updated_at: new Date().toISOString() };
+  if (customerId) updates.stripe_customer_id = customerId;
+  const { error } = await supabase.from('providers').update(updates).eq('id', providerId);
+  if (error) console.error(`[stripe-webhook] supabase update by id failed: ${error.message}`);
+  else console.log(`[stripe-webhook] provider=${providerId} → tier=${tier}`);
+}
+
+async function setTierByCustomerId(customerId, tier) {
+  const supabase = await getSupabase();
+  if (!supabase) {
+    console.log(`[stripe-webhook] Supabase not configured — would set customer=${customerId} tier=${tier}`);
+    return;
+  }
+  const { error } = await supabase
+    .from('providers')
+    .update({ tier, updated_at: new Date().toISOString() })
+    .eq('stripe_customer_id', customerId);
+  if (error) console.error(`[stripe-webhook] supabase update by customer failed: ${error.message}`);
+  else console.log(`[stripe-webhook] customer=${customerId} → tier=${tier}`);
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -22,7 +55,6 @@ export default async function handler(req, res) {
 
   if (!webhookSecret) {
     console.log('[stripe-webhook] STRIPE_WEBHOOK_SECRET not set — logging raw event');
-    // Drain the body so Vercel doesn't hang
     const chunks = [];
     for await (const chunk of req) chunks.push(chunk);
     const body = Buffer.concat(chunks).toString();
@@ -44,19 +76,19 @@ export default async function handler(req, res) {
         const session = event.data.object;
         const providerId = session.metadata?.provider_id;
         console.log(`[stripe-webhook] checkout.session.completed — provider=${providerId} customer=${session.customer}`);
-        // TODO:SUPABASE — UPDATE providers SET tier='featured', stripe_customer_id=session.customer WHERE id=providerId
+        if (providerId) await setTierByProviderId(providerId, 'featured', session.customer);
         break;
       }
       case 'invoice.payment_failed': {
         const invoice = event.data.object;
         console.log(`[stripe-webhook] invoice.payment_failed — customer=${invoice.customer}`);
-        // TODO:SUPABASE — UPDATE providers SET tier='free' WHERE stripe_customer_id=invoice.customer
+        if (invoice.customer) await setTierByCustomerId(invoice.customer, 'free');
         break;
       }
       case 'customer.subscription.deleted': {
         const sub = event.data.object;
         console.log(`[stripe-webhook] subscription.deleted — customer=${sub.customer}`);
-        // TODO:SUPABASE — UPDATE providers SET tier='free' WHERE stripe_customer_id=sub.customer
+        if (sub.customer) await setTierByCustomerId(sub.customer, 'free');
         break;
       }
       default:

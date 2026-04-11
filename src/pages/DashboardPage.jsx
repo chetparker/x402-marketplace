@@ -81,9 +81,17 @@ function StatCard({ value, label }) {
 function Dashboard({ provider, onLogout }) {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [upgrading, setUpgrading] = useState(false);
+  const [stripeStatus, setStripeStatus] = useState(null);
 
   useEffect(() => {
     getListingsByProvider(provider.id).then(data => { setListings(data); setLoading(false); });
+    const params = new URLSearchParams(window.location.search);
+    const flag = params.get('stripe');
+    if (flag === 'success' || flag === 'cancelled') {
+      setStripeStatus(flag);
+      window.history.replaceState({}, '', window.location.pathname);
+    }
   }, [provider.id]);
 
   async function togglePause(listing) {
@@ -91,6 +99,27 @@ function Dashboard({ provider, onLogout }) {
     await updateListing(listing.id, { status: newStatus });
     const refreshed = await getListingsByProvider(provider.id);
     setListings(refreshed);
+  }
+
+  async function handleUpgrade() {
+    setUpgrading(true);
+    try {
+      const r = await fetch('/api/stripe-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: provider.email, provider_id: provider.id }),
+      });
+      const data = await r.json();
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        console.error('[upgrade] no checkout url:', data);
+        setUpgrading(false);
+      }
+    } catch (err) {
+      console.error('[upgrade] error:', err);
+      setUpgrading(false);
+    }
   }
 
   const liveCount = listings.filter(l => l.status === 'live').length;
@@ -121,20 +150,33 @@ function Dashboard({ provider, onLogout }) {
         <StatCard value={liveCount} label="Live APIs" />
       </div>
 
+      {stripeStatus === 'success' && (
+        <div style={{
+          background: '#10B98115', border: '1px solid #10B981', borderRadius: 10,
+          padding: '14px 18px', marginBottom: 16, fontSize: 13, color: '#10B981',
+        }}>Payment received. Featured tier is now active. It may take a few seconds for the badge to appear.</div>
+      )}
+      {stripeStatus === 'cancelled' && (
+        <div style={{
+          background: '#F59E0B15', border: '1px solid #F59E0B', borderRadius: 10,
+          padding: '14px 18px', marginBottom: 16, fontSize: 13, color: '#F59E0B',
+        }}>Checkout cancelled. You can try upgrading again any time.</div>
+      )}
+
       {provider.tier === 'free' && (
         <div style={{
           background: C.sf, border: `1px solid ${C.bd}`, borderRadius: 10,
           padding: '18px 22px', marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         }}>
           <div>
-            <div style={{ fontSize: 14, fontWeight: 600, color: C.t }}>Upgrade to Featured</div>
+            <div style={{ fontSize: 14, fontWeight: 600, color: C.t }}>Go Featured</div>
             <div style={{ fontSize: 13, color: C.tM, marginTop: 2 }}>$49/mo — priority placement, reduced 2.5% fee.</div>
           </div>
-          <button style={{
+          <button onClick={handleUpgrade} disabled={upgrading} style={{
             padding: '8px 18px', borderRadius: 8, border: 'none',
             background: '#1D4ED8', color: '#FFFFFF', fontSize: 13, fontWeight: 500,
-            cursor: 'pointer', fontFamily: F,
-          }}>Upgrade</button>
+            cursor: upgrading ? 'wait' : 'pointer', fontFamily: F, opacity: upgrading ? 0.6 : 1,
+          }}>{upgrading ? 'Loading...' : 'Go Featured'}</button>
         </div>
       )}
 
