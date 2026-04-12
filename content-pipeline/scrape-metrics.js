@@ -100,7 +100,8 @@ async function main() {
   // Get all posted rows from Airtable
   const data = await airtableGet({
     filterByFormula: `{Status}='Posted'`,
-    sort: [{ field: 'Day', direction: 'asc' }],
+    'sort[0][field]': 'Date',
+    'sort[0][direction]': 'asc',
   });
 
   const postedRows = data.records || [];

@@ -18,6 +18,7 @@ jobs:
         run: cd content-pipeline && npm install dotenv
 
       - name: Step 1 — Scrape engagement metrics
+        continue-on-error: true
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
