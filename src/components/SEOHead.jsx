@@ -7,10 +7,10 @@ const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;
 // ---- Per-page configs ----
 export const PAGE_SEO = {
   home: {
-    title: 'PayAPI Market — The Marketplace for x402 APIs',
-    description: 'Discover and monetize paid APIs for AI agents. Built on the x402 protocol — agents pay per request in USDC, no API keys, no subscriptions. Keep 97% of revenue.',
+    title: "PayAPI Market | UK's API Marketplace for AI Agents — x402 Protocol",
+    description: 'The UK marketplace for x402 APIs. 10 live APIs for AI agents. Property, companies, weather, vehicles, finance. $4K+ monthly revenue. Free to list, keep 97%. Alternative to RapidAPI and Coinbase Agentic Market for domain experts.',
     path: '/',
-    keywords: 'x402, MCP, AI agents, paid API, API marketplace, USDC payments, agent economy',
+    keywords: 'UK property data API, Companies House API, postcode lookup API, pay per request API, x402 marketplace, AI agent API marketplace, MCP API directory, USDC API payments, micropayment API, x402 protocol, RapidAPI alternative',
   },
   about: {
     title: 'About PayAPI Market — Why We Built the x402 API Marketplace',

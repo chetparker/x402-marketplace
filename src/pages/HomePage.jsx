@@ -168,16 +168,27 @@ export default function HomePage() {
             x402 marketplace · live
           </div>
           <h1 style={{
-            margin: '0 0 22px',
-            fontSize: 'clamp(34px, 5.4vw, 52px)',
+            margin: '0 0 18px',
+            fontSize: 'clamp(32px, 5.1vw, 50px)',
             fontWeight: 800, color: C.t, fontFamily: F,
             lineHeight: 1.08, letterSpacing: '-0.025em',
           }}>
-            Turn your data into a money-making API in 5 minutes.
+            Turn your data into a money-making API
+            <span style={{ display: 'block', color: C.tM, fontSize: '0.58em', fontWeight: 600, marginTop: 10, letterSpacing: '-0.015em' }}>
+              — the UK's x402 marketplace
+            </span>
           </h1>
           <p style={{
+            margin: '0 0 18px',
+            fontSize: 20, color: C.t, lineHeight: 1.4,
+            fontWeight: 500,
+            maxWidth: 640, marginLeft: 'auto', marginRight: 'auto',
+          }}>
+            Turn your data into a money-making API in 5 minutes.
+          </p>
+          <p style={{
             margin: '0 0 14px',
-            fontSize: 18, color: C.tM, lineHeight: 1.55,
+            fontSize: 17, color: C.tM, lineHeight: 1.55,
             maxWidth: 640, marginLeft: 'auto', marginRight: 'auto',
           }}>
             Got specialist knowledge? Property records, legal precedents, medical codes, logistics data? AI agents need it. They'll pay you per lookup. Automatically.
@@ -188,6 +199,9 @@ export default function HomePage() {
             maxWidth: 580, marginLeft: 'auto', marginRight: 'auto',
           }}>
             No code required. We handle payments, hosting, and discovery. You keep 97%.
+          </p>
+          <p aria-hidden="false" style={{ position: 'absolute', left: '-9999px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}>
+            UK property data API, Companies House API, postcode lookup API, pay per request API, x402 marketplace, AI agent API marketplace, MCP API directory, USDC API payments, micropayment API
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link

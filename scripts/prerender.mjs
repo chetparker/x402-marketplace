@@ -224,8 +224,8 @@ const ROUTES = [
   // -----------------------------------------------------------------------
   {
     path: '/',
-    title: 'PayAPI Market — Paid APIs for AI Agents',
-    description: 'The marketplace for x402-powered paid APIs. AI agents discover via MCP and pay per request in USDC. No API keys, no subscriptions. Providers list once and keep 97%.',
+    title: 'PayAPI Market | UK\'s API Marketplace for AI Agents — x402 Protocol',
+    description: 'The UK marketplace for x402 APIs. 10 live APIs for AI agents. Property, companies, weather, vehicles, finance. $4K+ monthly revenue. Free to list, keep 97%. Alternative to RapidAPI and Coinbase Agentic Market for domain experts.',
     canonical: '/',
     body: `
 <header role="banner">
@@ -234,15 +234,22 @@ const ROUTES = [
     <a href="/marketplace">Marketplace</a>
     <a href="/providers">Providers</a>
     <a href="/agents">Agents</a>
+    <a href="/enterprises">Enterprises</a>
+    <a href="/calculator">Calculator</a>
     <a href="/pricing">Pricing</a>
+    <a href="/blog">Blog</a>
     <a href="/about">About</a>
   </nav>
 </header>
 <main>
-  <h1>Your expertise. Earning while you sleep. Paid by AI agents.</h1>
-  <p>List your API on PayAPI Market. AI agents discover it via MCP, pay per request in USDC, and you keep 97%. No subscriptions. No support tickets. No code required.</p>
+  <h1>Turn your data into a money-making API — the UK's x402 marketplace</h1>
+  <p><strong>Turn your data into a money-making API in 5 minutes.</strong></p>
+  <p>Got specialist knowledge? Property records, legal precedents, medical codes, logistics data? AI agents need it. They'll pay you per lookup. Automatically.</p>
+  <p>No code required. We handle payments, hosting, and discovery. You keep 97%.</p>
+  <p><a href="/list">List your API — free</a> · <a href="/marketplace">Explore the marketplace</a></p>
   <p>x402 protocol — backed by Coinbase, Cloudflare. Moved to Linux Foundation.</p>
   <p>${API_COUNT} Live APIs · ${ENDPOINT_TOTAL} Endpoints · $4,000+ Monthly revenue · 97% Kept by providers</p>
+  <p class="sr-only" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">UK property data API, Companies House API, postcode lookup API, pay per request API, x402 marketplace, AI agent API marketplace, MCP API directory, USDC API payments, micropayment API</p>
 
   <h2>Why PayAPI vs enterprise data providers</h2>
   <p>Enterprise data providers charge $15,000 per year with annual contracts. PayAPI Market charges $0.002 per request with no commitment. That is 7,500,000 requests before you break even on the enterprise plan. AI agents cannot fill out forms, enter credit cards, or sign contracts. They need x402.</p>
@@ -293,7 +300,8 @@ ${APIS.map(a => `    <li><strong>${a.name}</strong> — ${a.endpoints} endpoints
         applicationSubCategory: 'API Marketplace',
         operatingSystem: 'Web',
         url: SITE,
-        description: 'Marketplace for x402-powered APIs that AI agents call per-request with USDC.',
+        description: 'UK marketplace for x402-powered APIs that AI agents call per-request with USDC. 10 live APIs across property, companies, weather, vehicles, and finance domains.',
+        keywords: 'UK property data API, Companies House API, postcode lookup API, pay per request API, x402 marketplace, AI agent API marketplace, MCP API directory, USDC API payments, micropayment API',
         offers: [
           { '@type': 'Offer', name: 'Free tier', price: '0', priceCurrency: 'USD', description: '3% platform fee on successful calls' },
           { '@type': 'Offer', name: 'Featured tier', price: '49', priceCurrency: 'USD', description: '2.5% platform fee, gold badge, priority placement' },
