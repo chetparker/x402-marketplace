@@ -58,7 +58,7 @@ The numbers are not close.
 
 ## What this looks like in practice
 
-On PayAPI Market, 10 APIs processed 72,400 requests in the first month. Total revenue: $2,085. Total support tickets: zero.
+On PayAPI Market, 10 APIs processed 72,400 requests in the first month. Total revenue: $2,200. Total support tickets: zero.
 
 The most popular API is a simple postcode lookup. It charges $0.001 per request. It processed 11,400 requests and earned $228 last month. The API took me an afternoon to build. I haven't touched it since.
 

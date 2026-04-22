@@ -72,7 +72,7 @@ export const POSTS = [
   {
     slug: 'why-domain-experts-will-replace-api-developers',
     title: 'Why Domain Experts Will Replace API Developers',
-    description: 'I am not a developer. I built 10 APIs earning $2K a month. AI writes the code now. Domain knowledge is what matters.',
+    description: 'I am not a developer. I built 10 APIs earning $4K a month. AI writes the code now. Domain knowledge is what matters.',
     date: '2026-04-21',
     updated: '2026-04-21',
     author: 'Chet Parker',

@@ -44,7 +44,7 @@ const ENDPOINT_TOTAL = APIS.reduce((s, a) => s + a.endpoints, 0); // 65
 // ---------------------------------------------------------------------------
 const CHET_NAME = 'Chet Parker';
 const CHET_LINKEDIN = 'https://www.linkedin.com/in/chetparker/';
-const CHET_BIO = 'Chet Parker is a UK property data specialist who built 10 APIs earning $2K/month using AI tools. Not a developer. Background in property data.';
+const CHET_BIO = 'Chet Parker is a UK property data specialist who built 10 APIs earning $4K/month using AI tools. Not a developer. Background in property data.';
 
 const CHET_PERSON_SCHEMA = {
   '@context': 'https://schema.org',
@@ -242,7 +242,7 @@ const ROUTES = [
   <h1>Your expertise. Earning while you sleep. Paid by AI agents.</h1>
   <p>List your API on PayAPI Market. AI agents discover it via MCP, pay per request in USDC, and you keep 97%. No subscriptions. No support tickets. No code required.</p>
   <p>x402 protocol — backed by Coinbase, Cloudflare. Moved to Linux Foundation.</p>
-  <p>${API_COUNT} Live APIs · ${ENDPOINT_TOTAL} Endpoints · $3,000+ Monthly revenue · 97% Kept by providers</p>
+  <p>${API_COUNT} Live APIs · ${ENDPOINT_TOTAL} Endpoints · $4,000+ Monthly revenue · 97% Kept by providers</p>
 
   <h2>Why PayAPI vs enterprise data providers</h2>
   <p>Enterprise data providers charge $15,000 per year with annual contracts. PayAPI Market charges $0.002 per request with no commitment. That is 7,500,000 requests before you break even on the enterprise plan. AI agents cannot fill out forms, enter credit cards, or sign contracts. They need x402.</p>
@@ -277,7 +277,7 @@ ${APIS.map(a => `    <li><strong>${a.name}</strong> — ${a.endpoints} endpoints
   </ul>
 
   <h2>The agent economy is here. Your knowledge should be earning.</h2>
-  <p>10 APIs earning $3,000+ a month with zero hours of customer support. Yours could be next. <a href="/list">List your API — free</a>.</p>
+  <p>10 APIs earning $4,000+ a month with zero hours of customer support. Yours could be next. <a href="/list">List your API — free</a>.</p>
 </main>
 <footer>
   <p>PayAPI Market · built by ${CHET_NAME} · launched April 2026 · <a href="/about">About</a> · <a href="/llms.txt">llms.txt</a></p>

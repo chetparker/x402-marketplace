@@ -147,7 +147,7 @@ function TerminalDemo() {
 const STATS = [
   { v: '10', l: 'Live APIs' },
   { v: '65', l: 'Endpoints' },
-  { v: '$3K+', l: 'Monthly revenue' },
+  { v: '$4K+', l: 'Monthly revenue' },
   { v: '97%', l: 'Kept by providers' },
 ];
 

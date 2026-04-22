@@ -1,6 +1,6 @@
 ## Why domain experts will replace API developers
 
-I am not a developer. I am a property data person who learned to package what I know into APIs. Ten APIs, $2,085 last month, zero lines of code written after the initial setup.
+I am not a developer. I am a property data person who learned to package what I know into APIs. Ten APIs, $2,200 last month, zero lines of code written after the initial setup.
 
 The shift is simple: AI can write code now. What AI cannot do is know that UK mortgage affordability calculations changed in Q3 2025, or that EPC ratings use a different methodology for pre-1930 buildings, or that Companies House filings have a 21-day lag that makes real-time company data unreliable without a secondary source.
 
@@ -63,7 +63,7 @@ Total cost: $0. Time commitment: a few evenings. Revenue: depends on demand, but
 After one month with 10 APIs:
 
 - 72,400 total requests
-- $2,085 total revenue
+- $2,200 total revenue
 - 0 support tickets
 - 0 hours of ongoing work
 - 97% profit margin (3% platform fee)
