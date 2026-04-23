@@ -226,6 +226,11 @@ const ROUTES = [
     path: '/',
     title: 'PayAPI Market | UK\'s API Marketplace for AI Agents — x402 Protocol',
     description: 'The UK marketplace for x402 APIs. 10 live APIs for AI agents. Property, companies, weather, vehicles, finance. $4K+ monthly revenue. Free to list, keep 97%. Alternative to RapidAPI and Coinbase Agentic Market for domain experts.',
+    // Short branded copy used for social preview cards (OG + Twitter).
+    // The longer title/description above remain in <title> and <meta description> for SEO.
+    ogTitle: 'PayAPI Market — UK\'s x402 API Marketplace',
+    ogDescription: 'List your data API. AI agents pay per request via x402. Keep 97%. No code required.',
+    ogUrl: 'https://payapi.market',
     canonical: '/',
     body: `
 <header role="banner">
@@ -850,6 +855,9 @@ function escapeAttr(s) {
 function renderRoute(shell, route) {
   let html = shell;
   const absUrl = `${SITE}${route.canonical}`;
+  const ogTitle = route.ogTitle || route.title;
+  const ogDescription = route.ogDescription || route.description;
+  const ogUrl = route.ogUrl || absUrl;
 
   html = html.replace(/<title>[^<]*<\/title>/, `<title>${route.title}</title>`);
   html = html.replace(
@@ -862,23 +870,23 @@ function renderRoute(shell, route) {
   );
   html = html.replace(
     /<meta property="og:title" content="[^"]*"\s*\/?>/,
-    `<meta property="og:title" content="${escapeAttr(route.title)}" />`
+    `<meta property="og:title" content="${escapeAttr(ogTitle)}" />`
   );
   html = html.replace(
     /<meta property="og:description" content="[^"]*"\s*\/?>/,
-    `<meta property="og:description" content="${escapeAttr(route.description)}" />`
+    `<meta property="og:description" content="${escapeAttr(ogDescription)}" />`
   );
   html = html.replace(
     /<meta property="og:url" content="[^"]*"\s*\/?>/,
-    `<meta property="og:url" content="${absUrl}" />`
+    `<meta property="og:url" content="${ogUrl}" />`
   );
   html = html.replace(
     /<meta name="twitter:title" content="[^"]*"\s*\/?>/,
-    `<meta name="twitter:title" content="${escapeAttr(route.title)}" />`
+    `<meta name="twitter:title" content="${escapeAttr(ogTitle)}" />`
   );
   html = html.replace(
     /<meta name="twitter:description" content="[^"]*"\s*\/?>/,
-    `<meta name="twitter:description" content="${escapeAttr(route.description)}" />`
+    `<meta name="twitter:description" content="${escapeAttr(ogDescription)}" />`
   );
 
   if (route.schemas?.length) {
