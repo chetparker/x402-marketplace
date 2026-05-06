@@ -31,6 +31,7 @@ const APIS=[
   {id:"io.github.chetparker/web-scraper-api",name:"Web Scraper & Content Extractor API",by:"chetparker",tag:"Extract clean text, links, metadata, and structured content from any URL. Built for RAG pipelines and research agents.",desc:"4 endpoints for HTML scraping — clean main-content text extraction (boilerplate stripped: nav/footer/sidebar/ads), all links split into internal and external with anchor text, full page metadata (title, OG/Twitter tags, canonical, language, author, dates), and structured extraction (heading hierarchy, lists, tables as 2D arrays, images with alt text). Powered by httpx + BeautifulSoup4 + lxml.",ep:4,pr:"$0.002",net:"Base",cat:"Tools",tags:["scraping","html","rag","content-extraction","metadata","crawling"],st:"live",vf:true,ft:false,tier:"free",url:"https://web-scraper-api-production-bf20.up.railway.app",sse:"https://web-scraper-api-production-bf20.up.railway.app/mcp/sse",c:6300,r:294,up:99.3,ms:198},
   {id:"io.github.chetparker/ip-geo-api",name:"IP Geolocation API",by:"chetparker",tag:"IP address to location, ISP, timezone, and datacenter detection. Batch lookup for up to 20 IPs.",desc:"4 endpoints for IP geolocation — single IP lookup (country, region, city, ISP, ASN, lat/lng, timezone, datacenter heuristic), batch lookup of up to 20 IPs in parallel, caller's-IP introspection (via x-forwarded-for chain), and great-circle distance between two IPs in km/miles. Backed by ip-api.com (primary) with ipapi.co fallback.",ep:4,pr:"$0.001",net:"Base",cat:"Data",tags:["ip","geolocation","geoip","asn","datacenter","timezone"],st:"live",vf:true,ft:false,tier:"free",url:"https://ip-geo-api-production.up.railway.app",sse:"https://ip-geo-api-production.up.railway.app/mcp/sse",c:7600,r:177,up:99.7,ms:67},
   {id:"io.github.chetparker/qr-api",name:"QR Code API",by:"chetparker",tag:"Generate and decode QR codes. Custom colours, sizes, batch generation. Returns base64 PNG.",desc:"4 endpoints for QR code generation and decoding — basic generation with default styling, fully styled generation (custom hex colours, module size, border, error-correction level), batch generation of up to 20 codes per call, and image decoding via libzbar (returns content + bounding boxes for any QR codes detected). Returns base64 PNG to keep the x402 envelope consistent.",ep:4,pr:"$0.001",net:"Base",cat:"Tools",tags:["qr","qrcode","barcode","generation","decoding","libzbar"],st:"live",vf:true,ft:false,tier:"free",url:"https://qr-api-production-1836.up.railway.app",sse:"https://qr-api-production-1836.up.railway.app/mcp/sse",c:2900,r:68,up:99.9,ms:23},
+  {id:"io.github.chetparker/hmo-api",name:"UK HMO Licence API",by:"chetparker",tag:"UK HMO licence checks. Pay-per-call. No API keys.",desc:"3 endpoints covering 86,238 licensed HMOs across 42 UK councils — check a single address for HMO status, search all licences in a postcode, and retrieve full licence details including licensee, expiry date, and max occupancy. Coverage spans London boroughs (Camden, Tower Hamlets, Newham, Barnet, Hounslow, Lewisham, Bexley), Edinburgh, Glasgow, Cardiff, Newport, Brighton, Sheffield, Leeds, Salford, Bath, Cambridge, Oxford, Nottingham, and more. Essential for letting agents, property buyers, and compliance tools.",ep:3,pr:"$0.020–0.040",net:"Base",cat:"Data",tags:["hmo","property","uk","licensing","landlords","compliance"],st:"live",vf:true,ft:false,tier:"free",url:"https://hmo.payapi.market",sse:"https://hmo.payapi.market/mcp/sse",c:1800,r:54,up:99.8,ms:220},
 ];
 
 const CATS=["All","Data","Verification","Intelligence","Tools"];
@@ -72,19 +73,12 @@ const Card=({a,idx=0,onClick})=>{
 
     <p style={{margin:variant==="emphasis"?"4px 0 14px":"6px 0 14px",fontSize:13,color:C.tM,lineHeight:1.55}}>{a.tag}</p>
 
-    <div style={{fontSize:12,color:C.tD,marginBottom:16,display:"flex",gap:10,flexWrap:"wrap",alignItems:"center"}}>
+    <div style={{fontSize:12,color:C.tD,display:"flex",gap:10,flexWrap:"wrap",alignItems:"center"}}>
       <span>{a.ep} tools</span>
       <span style={{color:C.bdH}}>·</span>
       <span>{a.pr}</span>
       <span style={{color:C.bdH}}>·</span>
       <span>{a.net}</span>
-    </div>
-
-    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:12,padding:"14px 0 0",borderTop:`1px solid ${C.bd}`}}>
-      <Mt v={a.c>1000?`${(a.c/1000).toFixed(1)}K`:a.c} l="30d calls"/>
-      <Mt v={`$${a.r}`} l="revenue"/>
-      <Mt v={`${a.up}%`} l="uptime"/>
-      <Mt v={`${a.ms}ms`} l="latency"/>
     </div>
   </div>;
 };
@@ -110,10 +104,11 @@ const Detail=({a,onClose})=>{
         <span style={{fontSize:13,color:C.tD}}>by <span style={{color:C.ac}}>{a.by}</span> · {a.net} · {a.ep} tools</span>
       </div>
       <p style={{fontSize:14,color:C.tM,lineHeight:1.65,margin:"0 0 22px"}}>{a.desc}</p>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:8,marginBottom:24}}>
-        {[{v:a.ep,l:"Tools",c:C.ac},{v:a.c>1000?`${(a.c/1000).toFixed(1)}K`:a.c,l:"Calls",c:C.ac},{v:`$${a.r}`,l:"Revenue",c:C.gn},{v:`${a.up}%`,l:"Uptime",c:a.up>99?C.gn:C.am}].map(m=>
-          <div key={m.l} style={{background:C.sf,borderRadius:10,padding:"14px 8px",textAlign:"center"}}><Mt v={m.v} l={m.l} color={m.c} large/></div>
-        )}
+      <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:24}}>
+        <Bd color={C.ac}>{a.ep} tools</Bd>
+        <Bd color={C.tM} bg={C.sf}>pay-per-call</Bd>
+        <Bd color={C.tM} bg={C.sf}>x402</Bd>
+        <Bd color={C.tM} bg={C.sf}>{a.net}</Bd>
       </div>
       <div style={{fontSize:11,color:C.tD,textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:10,fontWeight:600}}>Connect</div>
       {[{l:"SSE Endpoint",v:a.sse},{l:"Config",v:`${a.url}/mcp/config`},{l:"Registry ID",v:a.id}].map(i=>
@@ -323,27 +318,9 @@ export default function App(){
   const rest=sorted.filter(a=>a.tier!=="featured").sort((a,b)=>sort==="calls"?b.c-a.c:sort==="revenue"?b.r-a.r:b.up-a.up);
   const f=[...featured,...rest];
 
-  // Hero stats with slow auto-increment
-  const baseCalls=APIS.reduce((s,a)=>s+a.c,0); // 72400
-  const baseRev=APIS.reduce((s,a)=>s+a.r,0); // 2199 → displays as $2.2K
-  const[extraCalls,setEC]=useState(0);
-  const[extraRev,setER]=useState(0);
-  useEffect(()=>{
-    // Add 1-3 calls every 30-45s
-    const callInterval=setInterval(()=>{
-      setEC(prev=>prev+1+Math.floor(Math.random()*3));
-    },30000+Math.random()*15000);
-    // Add $0.001-$0.005 every 2-5min
-    const revInterval=setInterval(()=>{
-      setER(prev=>prev+(0.001+Math.random()*0.004));
-    },120000+Math.random()*180000);
-    return()=>{clearInterval(callInterval);clearInterval(revInterval)};
-  },[]);
   const T={
     apis:APIS.length,
     tools:APIS.reduce((s,a)=>s+a.ep,0),
-    calls:baseCalls+extraCalls,
-    rev:baseRev+extraRev,
   };
 
   return <div style={{minHeight:"100vh",background:C.bg,color:C.t,fontFamily:F,position:"relative",overflow:"hidden"}}>
@@ -371,7 +348,7 @@ export default function App(){
           </div>
         </div>
         <div style={{display:"flex",gap:36,marginBottom:18}}>
-          {[{v:T.apis,l:"APIs"},{v:T.tools,l:"Tools"},{v:`${(T.calls/1000).toFixed(1)}K`,l:"30d calls"},{v:`$${(T.rev/1000).toFixed(1)}K`,l:"total revenue"}].map(s=>
+          {[{v:T.apis,l:"APIs"},{v:T.tools,l:"Tools"}].map(s=>
             <div key={s.l} style={{display:"flex",flexDirection:"column",gap:2}}>
               <span style={{fontSize:18,fontWeight:600,color:C.t,fontFamily:F,letterSpacing:"-0.01em",transition:"all 0.8s ease"}}>{s.v}</span>
               <span style={{fontSize:12,color:C.tD}}>{s.l}</span>

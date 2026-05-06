@@ -69,7 +69,7 @@ export default function AboutPage() {
 
         <H2>Current APIs</H2>
         <P>
-          10 APIs at launch, 65 endpoints total, across property, weather, companies, vehicles, and finance:
+          11 APIs, 68 endpoints total, across property, weather, companies, vehicles, finance, and HMO licensing:
         </P>
         <ul style={{ color: C.tM, fontSize: 15, lineHeight: 1.8, paddingLeft: 22 }}>
           <li><strong style={{ color: C.t }}>UK Data API</strong> — 24 endpoints: Land Registry, EPC, Companies House, DVLA, BoE rates, weather, crime, flood risk</li>
@@ -82,6 +82,7 @@ export default function AboutPage() {
           <li><strong style={{ color: C.t }}>Web Scraper & Content Extractor</strong> — 4 endpoints: HTML to structured data, readability, metadata</li>
           <li><strong style={{ color: C.t }}>IP Geolocation API</strong> — 4 endpoints: IP to country, city, ASN, ISP</li>
           <li><strong style={{ color: C.t }}>QR Code API</strong> — 4 endpoints: generation, decoding, styling, batch</li>
+          <li><strong style={{ color: C.t }}>UK HMO Licence API</strong> — 3 endpoints: HMO check by address, search by postcode, full licence details — 86,238 records across 42 UK councils</li>
         </ul>
 
         <H2>Built by a non-developer</H2>

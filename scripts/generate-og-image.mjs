@@ -75,7 +75,7 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
   <g transform="translate(72, 430)">
     <text font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif"
           font-size="26" font-weight="500" fill="#94A3B8" letter-spacing="-0.3">
-      <tspan x="0" y="0"><tspan fill="#FFFFFF" font-weight="700">10 APIs</tspan> · <tspan fill="#FFFFFF" font-weight="700">65 endpoints</tspan> · <tspan fill="#10B981" font-weight="700">$4K+/month</tspan></tspan>
+      <tspan x="0" y="0"><tspan fill="#FFFFFF" font-weight="700">11 APIs</tspan> · <tspan fill="#FFFFFF" font-weight="700">68 endpoints</tspan> · <tspan fill="#10B981" font-weight="700">86,238 records</tspan></tspan>
       <tspan x="0" y="40">Built for AI agents.</tspan>
     </text>
   </g>

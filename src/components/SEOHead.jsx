@@ -8,7 +8,7 @@ const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;
 export const PAGE_SEO = {
   home: {
     title: "PayAPI Market | UK's API Marketplace for AI Agents — x402 Protocol",
-    description: 'The UK marketplace for x402 APIs. 10 live APIs for AI agents. Property, companies, weather, vehicles, finance. $4K+ monthly revenue. Free to list, keep 97%. Alternative to RapidAPI and Coinbase Agentic Market for domain experts.',
+    description: 'The UK marketplace for x402 APIs. 11 live APIs for AI agents. Property, companies, weather, vehicles, finance, HMO licensing. $4K+ monthly revenue. Free to list, keep 97%. Alternative to RapidAPI and Coinbase Agentic Market for domain experts.',
     path: '/',
     keywords: 'UK property data API, Companies House API, postcode lookup API, pay per request API, x402 marketplace, AI agent API marketplace, MCP API directory, USDC API payments, micropayment API, x402 protocol, RapidAPI alternative',
   },
@@ -64,7 +64,7 @@ const FAQ_QUESTIONS = [
   },
   {
     q: 'What APIs are available on PayAPI Market?',
-    a: 'PayAPI Market launched with 10 APIs and 65 endpoints across property, weather, companies, vehicles, and finance: UK Data API (24 endpoints — Land Registry, EPC, Companies House, DVLA, BoE rates, weather, crime, flood risk), Email Verification, Company Enrichment, Postcode & Address Lookup, Currency & Crypto, Screenshot & PDF Capture, DNS & Domain Intelligence, Web Scraper & Content Extractor, IP Geolocation, and QR Code. Every listed API is live, verified and billed per request in USDC.'
+    a: 'PayAPI Market has 11 APIs and 68 endpoints across property, weather, companies, vehicles, finance, and HMO licensing: UK Data API (24 endpoints — Land Registry, EPC, Companies House, DVLA, BoE rates, weather, crime, flood risk), Email Verification, Company Enrichment, Postcode & Address Lookup, Currency & Crypto, Screenshot & PDF Capture, DNS & Domain Intelligence, Web Scraper & Content Extractor, IP Geolocation, QR Code, and UK HMO Licence API (86,238 licensed HMOs across 42 UK councils). Every listed API is live, verified and billed per request in USDC.'
   },
   {
     q: 'How is PayAPI Market different from RapidAPI?',
