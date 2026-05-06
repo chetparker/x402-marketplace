@@ -18,8 +18,8 @@ const SITE = 'https://payapi.market';
 const TODAY = '2026-04-11';
 
 // ---------------------------------------------------------------------------
-// Canonical launch catalogue — 10 APIs, 65 endpoints.
-// Mirrors src/pages/ForEnterprise.jsx (the runtime source of truth).
+// Canonical launch catalogue — 11 APIs, 68 endpoints.
+// Mirrors src/App.jsx (the runtime source of truth).
 // Update both if/when a new API ships.
 // ---------------------------------------------------------------------------
 const APIS = [
@@ -33,9 +33,10 @@ const APIS = [
   { name: 'Web Scraper & Content Extractor',  endpoints: 4,  price: '$0.002',       desc: 'HTML to structured data, readability extraction, metadata' },
   { name: 'IP Geolocation API',               endpoints: 4,  price: '$0.001',       desc: 'IP to country, city, ASN, ISP, timezone' },
   { name: 'QR Code API',                      endpoints: 4,  price: '$0.001',       desc: 'QR generation, decoding, styling, batch' },
+  { name: 'UK HMO Licence API',               endpoints: 3,  price: '$0.020–0.040', desc: 'HMO licence check by address or postcode, full licence details — 86,238 records across 42 UK councils' },
 ];
-const API_COUNT = APIS.length; // 10
-const ENDPOINT_TOTAL = APIS.reduce((s, a) => s + a.endpoints, 0); // 65
+const API_COUNT = APIS.length; // 11
+const ENDPOINT_TOTAL = APIS.reduce((s, a) => s + a.endpoints, 0); // 68
 
 // ---------------------------------------------------------------------------
 // Founder identity — single source of truth for author bio + Person schema.
@@ -44,7 +45,7 @@ const ENDPOINT_TOTAL = APIS.reduce((s, a) => s + a.endpoints, 0); // 65
 // ---------------------------------------------------------------------------
 const CHET_NAME = 'Chet Parker';
 const CHET_LINKEDIN = 'https://www.linkedin.com/in/chetparker/';
-const CHET_BIO = 'Chet Parker is a UK property data specialist who built 10 APIs earning $4K/month using AI tools. Not a developer. Background in property data.';
+const CHET_BIO = 'Chet Parker is a UK property data specialist who built 11 APIs using AI tools. Not a developer. Background in property data.';
 
 const CHET_PERSON_SCHEMA = {
   '@context': 'https://schema.org',
@@ -225,7 +226,7 @@ const ROUTES = [
   {
     path: '/',
     title: 'PayAPI Market | UK\'s API Marketplace for AI Agents — x402 Protocol',
-    description: 'The UK marketplace for x402 APIs. 10 live APIs for AI agents. Property, companies, weather, vehicles, finance. $4K+ monthly revenue. Free to list, keep 97%. Alternative to RapidAPI and Coinbase Agentic Market for domain experts.',
+    description: 'The UK marketplace for x402 APIs. 11 live APIs for AI agents. Property, companies, weather, vehicles, finance, HMO licensing. 86,238+ UK property records. Free to list, keep 97%. Alternative to RapidAPI and Coinbase Agentic Market for domain experts.',
     // Short branded copy used for social preview cards (OG + Twitter).
     // The longer title/description above remain in <title> and <meta description> for SEO.
     ogTitle: 'PayAPI Market — UK\'s x402 API Marketplace',
@@ -253,7 +254,7 @@ const ROUTES = [
   <p>No code required. We handle payments, hosting, and discovery. You keep 97%.</p>
   <p><a href="/list">List your API — free</a> · <a href="/marketplace">Explore the marketplace</a></p>
   <p>x402 protocol — backed by Coinbase, Cloudflare. Moved to Linux Foundation.</p>
-  <p>${API_COUNT} Live APIs · ${ENDPOINT_TOTAL} Endpoints · $4,000+ Monthly revenue · 97% Kept by providers</p>
+  <p>${API_COUNT} Live APIs · ${ENDPOINT_TOTAL} Endpoints · 86,238 UK property records · 97% Kept by providers</p>
   <p class="sr-only" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">UK property data API, Companies House API, postcode lookup API, pay per request API, x402 marketplace, AI agent API marketplace, MCP API directory, USDC API payments, micropayment API</p>
 
   <h2>Why PayAPI vs enterprise data providers</h2>
@@ -274,7 +275,7 @@ const ROUTES = [
   ${pressStrip()}
 
   <h2>Live API listings</h2>
-  <p>${API_COUNT} APIs at launch (April 2026), ${ENDPOINT_TOTAL} endpoints total across property, weather, companies, vehicles, and finance domains:</p>
+  <p>${API_COUNT} APIs at launch (April 2026), ${ENDPOINT_TOTAL} endpoints total across property, weather, companies, vehicles, finance, and HMO licensing:</p>
   <ul>
 ${APIS.map(a => `    <li><strong>${a.name}</strong> — ${a.endpoints} endpoints. ${a.desc}. ${a.price} per request.</li>`).join('\n')}
   </ul>
@@ -289,7 +290,7 @@ ${APIS.map(a => `    <li><strong>${a.name}</strong> — ${a.endpoints} endpoints
   </ul>
 
   <h2>The agent economy is here. Your knowledge should be earning.</h2>
-  <p>10 APIs earning $4,000+ a month with zero hours of customer support. Yours could be next. <a href="/list">List your API — free</a>.</p>
+  <p>${API_COUNT} live APIs with zero hours of customer support. Yours could be next. <a href="/list">List your API — free</a>.</p>
 </main>
 <footer>
   <p>PayAPI Market · built by ${CHET_NAME} · launched April 2026 · <a href="/about">About</a> · <a href="/llms.txt">llms.txt</a></p>
@@ -305,7 +306,7 @@ ${APIS.map(a => `    <li><strong>${a.name}</strong> — ${a.endpoints} endpoints
         applicationSubCategory: 'API Marketplace',
         operatingSystem: 'Web',
         url: SITE,
-        description: 'UK marketplace for x402-powered APIs that AI agents call per-request with USDC. 10 live APIs across property, companies, weather, vehicles, and finance domains.',
+        description: `UK marketplace for x402-powered APIs that AI agents call per-request with USDC. ${API_COUNT} live APIs across property, companies, weather, vehicles, finance, and HMO licensing domains.`,
         keywords: 'UK property data API, Companies House API, postcode lookup API, pay per request API, x402 marketplace, AI agent API marketplace, MCP API directory, USDC API payments, micropayment API',
         offers: [
           { '@type': 'Offer', name: 'Free tier', price: '0', priceCurrency: 'USD', description: '3% platform fee on successful calls' },
