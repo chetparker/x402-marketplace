@@ -1,0 +1,35 @@
+name: Supabase Keepalive
+
+on:
+  schedule:
+    # Every 3 days at 14:00 UTC (0 14 */3 * *)
+    - cron: "0 14 */3 * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    name: Ping Supabase projects
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install psql client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y postgresql-client
+
+      - name: Ping payapi-market
+        env:
+          PGPASSWORD: ""
+        run: |
+          psql "${{ secrets.PAYAPI_MARKET_DB_URL }}" -c "SELECT 1;" -t --no-psqlrc
+          echo "✅ payapi-market ping successful at $(date)"
+
+      - name: Ping uk-pig
+        env:
+          PGPASSWORD: ""
+        run: |
+          psql "${{ secrets.UK_PIG_DB_URL }}" -c "SELECT 1;" -t --no-psqlrc
+          echo "✅ uk-pig ping successful at $(date)"
